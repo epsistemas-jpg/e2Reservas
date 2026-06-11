@@ -1,0 +1,860 @@
+@import url('./variables.css');
+
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body{
+  font-family: var(--font-main);
+  background: var(--background);
+  color: var(--text);
+}
+
+a{
+  text-decoration: none;
+  color: inherit;
+}
+
+button{
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+input{
+  font-family: inherit;
+}
+
+ul{
+  list-style: none;
+}
+/* =========================
+   DARK MODE
+========================= */
+
+body.dark-mode{
+
+    background: #0f172a;
+
+    color: #f8fafc;
+}
+
+/* MAIN */
+
+body.dark-mode .main-content{
+
+    background: #0f172a;
+}
+
+/* SIDEBAR */
+
+body.dark-mode .sidebar{
+
+    background: #0b1120;
+
+    border-right:
+        1px solid rgba(255,255,255,0.05);
+}
+
+/* TOPBAR */
+
+body.dark-mode .topbar{
+
+    background: #111827;
+
+    border:
+        1px solid rgba(255,255,255,0.05);
+}
+
+/* CARDS */
+
+body.dark-mode .stat-card,
+body.dark-mode .calendar-wrapper,
+body.dark-mode .activity-panel,
+body.dark-mode .modal{
+
+    background: #111827;
+
+    border:
+        1px solid rgba(255,255,255,0.05);
+
+    box-shadow: none;
+}
+
+/* TEXT */
+
+body.dark-mode h1,
+body.dark-mode h2,
+body.dark-mode h3,
+body.dark-mode h4,
+body.dark-mode strong{
+
+    color: #f8fafc;
+}
+
+body.dark-mode p,
+body.dark-mode span,
+body.dark-mode label{
+
+    color: #94a3b8;
+}
+
+/* INPUTS */
+
+body.dark-mode input,
+body.dark-mode textarea,
+body.dark-mode select{
+
+    background: #1e293b;
+
+    border:
+        1px solid rgba(255,255,255,0.08);
+
+    color: #f8fafc;
+}
+
+/* PLACEHOLDER */
+
+body.dark-mode input::placeholder,
+body.dark-mode textarea::placeholder{
+
+    color: #64748b;
+}
+
+/* BUTTONS */
+
+body.dark-mode button{
+
+    color: white;
+}
+
+/* SEARCH */
+
+body.dark-mode .search-box input{
+
+    background: #1e293b;
+}
+
+/* CALENDAR */
+
+body.dark-mode .fc{
+
+    color: #f8fafc;
+}
+
+body.dark-mode .fc-theme-standard td,
+body.dark-mode .fc-theme-standard th{
+
+    border-color:
+        rgba(255,255,255,0.08);
+}
+
+body.dark-mode .fc-scrollgrid{
+
+    border-color:
+        rgba(255,255,255,0.08);
+}
+
+body.dark-mode .fc-col-header-cell{
+
+    background: #111827;
+}
+
+body.dark-mode .fc-daygrid-day{
+
+    background: #0f172a;
+}
+
+body.dark-mode .fc-day-today{
+
+    background:
+        rgba(149,193,31,0.08) !important;
+}
+/* =========================
+   FULLCALENDAR TEXT
+========================= */
+
+/* MES */
+
+body.dark-mode .fc-toolbar-title{
+
+    color: #f8fafc;
+
+    font-weight: 700;
+}
+
+/* DÍAS DE SEMANA */
+
+body.dark-mode .fc-col-header-cell-cushion{
+
+    color: #cbd5e1;
+
+    font-weight: 600;
+
+    text-decoration: none;
+}
+
+/* NÚMEROS DÍAS */
+
+body.dark-mode .fc-daygrid-day-number{
+
+    color: #f8fafc;
+
+    font-weight: 500;
+
+    text-decoration: none;
+}
+
+/* BOTONES */
+
+body.dark-mode .fc-button{
+
+    background: #1e293b !important;
+
+    border: none !important;
+
+    color: white !important;
+
+    box-shadow: none !important;
+}
+
+body.dark-mode .fc-button:hover{
+
+    background: #334155 !important;
+}
+
+body.dark-mode .fc-button-active{
+
+    background: #95c11f !important;
+
+    color: #0f172a !important;
+}
+
+/* HOY */
+
+body.dark-mode .fc-day-today
+.fc-daygrid-day-number{
+
+    color: #95c11f;
+}
+
+/* LINKS */
+
+body.dark-mode .fc a{
+
+    color: inherit;
+}
+/* =========================
+   BOTONES DARK MODE
+========================= */
+
+/* NUEVA RESERVA */
+
+body.dark-mode #openModal{
+
+    background:
+        linear-gradient(
+            135deg,
+            #95c11f,
+            #7da61a
+        );
+
+    color: #0f172a;
+
+    border: none;
+
+    font-weight: 700;
+}
+
+body.dark-mode #openModal:hover{
+
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 10px 20px rgba(149,193,31,0.25);
+}
+
+/* BOTÓN TEMA */
+
+body.dark-mode #themeToggle{
+
+    background: #1e293b;
+
+    border:
+        1px solid rgba(255,255,255,0.08);
+
+    color: #f8fafc;
+}
+
+body.dark-mode #themeToggle:hover{
+
+    background: #334155;
+}
+
+/* MODAL */
+
+body.dark-mode .modal-overlay{
+
+    background:
+        rgba(0,0,0,0.6);
+}
+
+/* TOOLTIP */
+
+body.dark-mode .fc-tooltip{
+
+    background: #111827;
+
+    color: white;
+
+    border:
+        1px solid rgba(255,255,255,0.08);
+}
+/* =========================
+   SETTINGS MODAL
+========================= */
+
+.settings-modal{
+
+    max-width: 500px;
+}
+
+.settings-content{
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 30px;
+
+    margin-top: 20px;
+}
+
+.settings-section{
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 15px;
+}
+
+.settings-user{
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 16px;
+}
+
+.settings-avatar{
+
+    width: 65px;
+
+    height: 65px;
+
+    border-radius: 50%;
+
+    background:
+        linear-gradient(
+            135deg,
+            #95c11f,
+            #7da61a
+        );
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    color: white;
+
+    font-size: 24px;
+
+    font-weight: 700;
+}
+
+.settings-btn,
+.logout-btn{
+
+    padding: 14px 18px;
+
+    border: none;
+
+    border-radius: 14px;
+
+    cursor: pointer;
+
+    font-weight: 600;
+
+    transition: 0.3s;
+}
+
+.settings-btn{
+
+    background: #1e293b;
+
+    color: white;
+}
+
+.logout-btn{
+
+    background:
+        linear-gradient(
+            135deg,
+            #dc2626,
+            #ef4444
+        );
+
+    color: white;
+}
+
+.settings-btn:hover,
+.logout-btn:hover{
+
+    transform: translateY(-2px);
+}
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media(max-width:1200px){
+
+    .dashboard-grid{
+
+        grid-template-columns: 1fr;
+    }
+
+    .activity-panel{
+
+        width: 100%;
+    }
+}
+
+/* TABLETS */
+
+@media(max-width:992px){
+
+    .sidebar{
+
+        position: fixed;
+
+        left: -260px;
+
+        top: 0;
+
+        height: 100vh;
+
+        z-index: 9999;
+
+        transition: 0.3s;
+    }
+
+    .sidebar.active{
+
+        left: 0;
+    }
+
+    .main-content{
+
+        margin-left: 0;
+
+        width: 100%;
+    }
+
+    .topbar{
+
+        flex-direction: column;
+
+        align-items: flex-start;
+
+        gap: 20px;
+    }
+
+    .topbar-right{
+
+        width: 100%;
+
+        flex-wrap: wrap;
+    }
+
+    .search-box{
+
+        width: 100%;
+    }
+
+    .search-box input{
+
+        width: 100%;
+    }
+}
+
+/* MÓVILES */
+
+@media(max-width:768px){
+
+    .stats-grid{
+
+        grid-template-columns: 1fr;
+    }
+
+    .topbar-left h1{
+
+        font-size: 26px;
+    }
+
+    .calendar-wrapper{
+
+        padding: 10px;
+    }
+
+    .fc-toolbar{
+
+        flex-direction: column;
+
+        gap: 12px;
+    }
+
+    .fc-toolbar-title{
+
+        font-size: 20px !important;
+    }
+
+    .modal{
+
+        width: 95%;
+
+        padding: 20px;
+    }
+
+    .form-row{
+
+        flex-direction: column;
+    }
+
+    .sidebar{
+
+        width: 240px;
+    }
+
+    .quick-stats{
+
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+/* CELULARES PEQUEÑOS */
+
+@media(max-width:480px){
+
+    .topbar{
+
+        padding: 15px;
+    }
+
+    .topbar-right{
+
+        gap: 10px;
+    }
+
+    #openModal{
+
+        width: 100%;
+    }
+
+    .user-avatar{
+
+        width: 45px;
+
+        height: 45px;
+    }
+
+    .fc .fc-button{
+
+        padding: 6px 10px;
+
+        font-size: 12px;
+    }
+
+    .quick-stats{
+
+        grid-template-columns: 1fr;
+    }
+
+    .toast{
+
+        min-width: auto;
+
+        width: 90vw;
+    }
+}
+/* =========================
+   EVENTOS CALENDARIO
+========================= */
+
+.fc-custom-event{
+
+  display:flex;
+  flex-direction:column;
+
+  gap:2px;
+
+  padding:4px;
+
+  overflow:hidden;
+}
+
+.fc-room{
+
+  font-size:12px;
+  font-weight:700;
+
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+
+.fc-user{
+
+  font-size:11px;
+
+  opacity:.95;
+
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+
+.fc-hour{
+
+  font-size:10px;
+
+  opacity:.8;
+}
+
+/* más altura a eventos */
+
+.fc-daygrid-event{
+
+  border:none !important;
+
+  border-radius:8px !important;
+
+  padding:2px !important;
+}
+
+/* mejorar visual mensual */
+
+.fc-daygrid-event-harness{
+
+  margin-bottom:4px;
+}
+/* =========================
+   BOTONES HEADER
+========================= */
+
+.header-actions button {
+
+    background: #ffffff;
+
+    color: #1e293b;
+
+    border: 1px solid #dbe2ea;
+
+    border-radius: 14px;
+
+    width: 48px;
+
+    height: 48px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    cursor: pointer;
+
+    transition: all .2s ease;
+}
+
+.header-actions button:hover {
+
+    background: #f1f5f9;
+
+    transform: translateY(-2px);
+}
+
+.header-actions button i {
+
+    color: #1e293b;
+
+    font-size: 18px;
+}
+#tooltip {
+
+    position: fixed;
+
+    z-index: 9999;
+
+    pointer-events: none;
+
+    max-width: 260px;
+}
+#tooltip {
+
+    display: none;
+}
+.delete-btn{
+
+    width:100%;
+
+    margin-top:12px;
+
+    padding:14px;
+
+    border:none;
+
+    border-radius:12px;
+
+    background:#ef4444;
+
+    color:white;
+
+    font-size:15px;
+
+    font-weight:600;
+
+    cursor:pointer;
+
+    transition:.2s;
+}
+
+.delete-btn:hover{
+
+    background:#dc2626;
+}
+.confirm-modal{
+
+    position:fixed;
+
+    inset:0;
+
+    background:rgba(0,0,0,.45);
+
+    display:none;
+
+    align-items:center;
+
+    justify-content:center;
+
+    z-index:9999;
+
+    backdrop-filter:blur(4px);
+}
+
+.confirm-modal.active{
+
+    display:flex;
+}
+
+.confirm-box{
+
+    width:90%;
+
+    max-width:380px;
+
+    background:#ffffff;
+
+    border-radius:20px;
+
+    padding:28px;
+
+    box-shadow:0 20px 40px rgba(0,0,0,.2);
+
+    animation:modalShow .2s ease;
+}
+
+.confirm-box h3{
+
+    margin:0 0 10px;
+
+    font-size:22px;
+
+    color:#111827;
+}
+
+.confirm-box p{
+
+    color:#6b7280;
+
+    margin-bottom:24px;
+}
+
+.confirm-actions{
+
+    display:flex;
+
+    gap:12px;
+}
+
+.cancel-btn,
+.confirm-delete-btn{
+
+    flex:1;
+
+    border:none;
+
+    padding:13px;
+
+    border-radius:12px;
+
+    font-weight:600;
+
+    cursor:pointer;
+
+    transition:.2s;
+}
+
+.cancel-btn{
+
+    background:#e5e7eb;
+}
+
+.cancel-btn:hover{
+
+    background:#d1d5db;
+}
+
+.confirm-delete-btn{
+
+    background:#ef4444;
+
+    color:white;
+}
+
+.confirm-delete-btn:hover{
+
+    background:#dc2626;
+}
+
+@keyframes modalShow{
+
+    from{
+
+        opacity:0;
+
+        transform:scale(.9);
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:scale(1);
+    }
+}
