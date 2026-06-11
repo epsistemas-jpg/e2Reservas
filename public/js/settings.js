@@ -123,12 +123,28 @@ document.getElementById(
 
 /* LOGOUT */
 
-document.getElementById(
-    "logoutBtn"
-).addEventListener("click",()=>{
+logoutBtn.addEventListener(
+    "click",
+    async () => {
 
-    localStorage.clear();
+        try {
 
-    window.location.href =
-    "/pages/login.html";
-});
+            await fetch(
+                "/logout",
+                {
+                    method: "POST"
+                }
+            );
+
+        } catch (err) {}
+
+        localStorage.clear();
+
+        sessionStorage.clear();
+
+        window.location.replace(
+            "/pages/login.html"
+        );
+
+    }
+);

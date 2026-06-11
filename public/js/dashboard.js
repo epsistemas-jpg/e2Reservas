@@ -1,34 +1,64 @@
-/* =========================
-   VALIDAR SESION
-========================= */
-
-(async function () {
+(async () => {
 
     try {
 
         const res =
             await fetch(
-                "/api/myreservations"
+                "/api/check-auth"
             );
 
-        if (
-            res.status === 401
-        ) {
+        if (!res.ok) {
+
+            localStorage.clear();
 
             window.location.replace(
                 "/pages/login.html"
             );
+
+            return;
         }
 
-    } catch (err) {
+    } catch {
+
+        localStorage.clear();
 
         window.location.replace(
             "/pages/login.html"
         );
+
+    }
+
+})();(async () => {
+
+    try {
+
+        const res =
+            await fetch(
+                "/api/check-auth"
+            );
+
+        if (!res.ok) {
+
+            localStorage.clear();
+
+            window.location.replace(
+                "/pages/login.html"
+            );
+
+            return;
+        }
+
+    } catch {
+
+        localStorage.clear();
+
+        window.location.replace(
+            "/pages/login.html"
+        );
+
     }
 
 })();
-
 /* =========================
    USER INFO
 ========================= */

@@ -115,8 +115,9 @@ loginForm.addEventListener("submit", async (e) => {
 
             loginForm.reset();
 
-            window.location.href =
-                "/pages/index.html";
+            window.location.replace(
+                "/pages/index.html"
+            );
 
         } else {
 

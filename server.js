@@ -58,18 +58,28 @@ app.use(session({
 }));
 app.use((req, res, next) => {
 
-  // 🔹 Bloquear dashboard sin login
-  if (
-    req.path === "/pages/index.html" &&
-    !req.session.userId
-  ) {
+    const protectedPages = [
 
-    return res.redirect(
-      "/pages/login.html"
-    );
-  }
+        "/pages/index.html",
+        "/pages/dashboard.html"
 
-  next();
+    ];
+
+    if (
+
+        protectedPages.includes(req.path) &&
+        !req.session.userId
+
+    ) {
+
+        return res.redirect(
+            "/pages/login.html"
+        );
+
+    }
+
+    next();
+
 });
 /* =========================
    NO CACHE
@@ -120,28 +130,18 @@ app.get("/", (req, res) => {
 // ---------------------------
 // 🔹 Redirigir raíz al login
 // ---------------------------
-app.get("/logout", (req, res) => {
+app.post("/logout", (req, res) => {
 
-  req.session.destroy(err => {
+    req.session.destroy(() => {
 
-    if (err) {
+        res.clearCookie("connect.sid");
 
-      return res.redirect(
-        "/pages/index.html"
-      );
-    }
+        res.json({
+            success: true
+        });
 
-    res.clearCookie("connect.sid");
+    });
 
-    res.setHeader(
-      "Cache-Control",
-      "no-store"
-    );
-
-    res.redirect(
-      "/pages/login.html"
-    );
-  });
 });
 
 // ---------------------------
@@ -151,6 +151,29 @@ function requireLogin(req, res, next) {
   if (!req.session.userId) return res.status(401).send("No autenticado");
   next();
 }
+app.get("/api/check-auth", (req, res) => {
+
+    if (!req.session.userId) {
+
+        return res.status(401).json({
+            authenticated: false
+        });
+
+    }
+
+    res.json({
+
+        authenticated: true,
+
+        userId: req.session.userId,
+
+        userName: req.session.userName,
+
+        role: req.session.role
+
+    });
+
+});
 /* =========================
    PROTEGER PAGINAS
 ========================= */
@@ -200,7 +223,7 @@ app.post("/login", (req, res) => {
 
       req.session.userId = row.id;
       req.session.userName = row.name;
-      // Enviar el userId al frontend para guardarlo en localStorage
+      req.session.role = row.role;
       res.json({
 
         success: true,
