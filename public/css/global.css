@@ -379,7 +379,7 @@ body.dark-mode .fc-tooltip{
 }
 
 .settings-btn,
-.logout-btn{
+.logout-btn {
 
     padding: 14px 18px;
 
@@ -391,32 +391,41 @@ body.dark-mode .fc-tooltip{
 
     font-weight: 600;
 
-    transition: 0.3s;
+    transition: all .3s ease;
 }
 
-.settings-btn{
+/* CONFIGURACIÓN */
 
-    background: #1e293b;
+.settings-btn {
 
-    color: white;
+    background: var(--settings-bg);
+
+    color: var(--settings-color);
+
+    border: 1px solid rgba(255,255,255,.08);
 }
 
-.logout-btn{
+/* LOGOUT */
+
+.logout-btn {
 
     background:
         linear-gradient(
             135deg,
-            #dc2626,
-            #ef4444
+            var(--logout-bg-1),
+            var(--logout-bg-2)
         );
 
-    color: white;
+    color: var(--logout-color);
 }
 
 .settings-btn:hover,
-.logout-btn:hover{
+.logout-btn:hover {
 
     transform: translateY(-2px);
+
+    box-shadow:
+        0 8px 20px rgba(0,0,0,.15);
 }
 /* =========================
    RESPONSIVE
@@ -857,4 +866,25 @@ body.dark-mode .fc-tooltip{
 
         transform:scale(1);
     }
+}
+:root {
+
+    --settings-bg: #c2d500;
+    --settings-color: #204339;
+
+    --logout-bg-1: #dc2626;
+    --logout-bg-2: #ef4444;
+
+    --logout-color: #ffffff;
+}
+
+body.dark-mode {
+
+    --settings-bg: #c2d500;
+    --settings-color: #204339;
+
+    --logout-bg-1: #991b1b;
+    --logout-bg-2: #dc2626;
+
+    --logout-color: #ffffff;
 }
