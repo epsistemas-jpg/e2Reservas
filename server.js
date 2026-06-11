@@ -60,7 +60,7 @@ app.use((req, res, next) => {
 
   // 🔹 Bloquear dashboard sin login
   if (
-    req.path === "/pages/dashboard.html" &&
+    req.path === "/pages/index.html" &&
     !req.session.userId
   ) {
 
@@ -109,7 +109,7 @@ app.get("/", (req, res) => {
   if (req.session.userId) {
 
     return res.redirect(
-      "/pages/dashboard.html"
+      "/pages/index.html"
     );
   }
 
@@ -127,7 +127,7 @@ app.get("/logout", (req, res) => {
     if (err) {
 
       return res.redirect(
-        "/pages/dashboard.html"
+        "/pages/index.html"
       );
     }
 
@@ -156,14 +156,14 @@ function requireLogin(req, res, next) {
 ========================= */
 
 app.get(
-  "/pages/dashboard.html",
+  "/pages/index.html",
   requireLogin,
   (req, res) => {
 
     res.sendFile(
       path.join(
         __dirname,
-        "public/pages/dashboard.html"
+        "public/pages/index.html"
       )
     );
   }
