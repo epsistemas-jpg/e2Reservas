@@ -1,0 +1,37 @@
+:root {
+
+  --primary: #6b8e23;
+  --primary-dark: #3f5f1d;
+
+  --background: #f5f7fa;
+
+  --sidebar-bg: #163300;
+
+  --text: #1f2937;
+
+  --card-bg: #ffffff;
+
+  --border: #e5e7eb;
+
+  --transition: all 0.3s ease;
+
+  --font-main: 'Inter', sans-serif;
+}
+
+/* =========================
+   DARK MODE
+========================= */
+
+body.dark-mode{
+
+  --background: #0f172a;
+
+  --sidebar-bg: #111827;
+
+  --text: #f9fafb;
+
+  --card-bg: #1e293b;
+
+  --border: #334155;
+
+}

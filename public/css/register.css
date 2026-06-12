@@ -1,0 +1,233 @@
+/* =========================
+   REGISTER CONTAINER
+========================= */
+
+.register-container {
+
+    width: 100%;
+
+    max-width: 420px;
+
+    margin: 60px auto;
+
+    padding: 40px;
+
+    border-radius: 28px;
+
+    background:
+        rgba(255,255,255,0.05);
+
+    border:
+        1px solid rgba(255,255,255,0.08);
+
+    backdrop-filter: blur(24px);
+
+    box-shadow:
+        0 20px 60px rgba(0,0,0,.35);
+
+    font-family: 'Inter', sans-serif;
+
+    position: relative;
+
+    overflow: hidden;
+}
+
+/* GLOW */
+
+.register-container::before {
+
+    content: "";
+
+    position: absolute;
+
+    top: -100px;
+    right: -100px;
+
+    width: 220px;
+    height: 220px;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(194,213,0,.18),
+            transparent 70%
+        );
+
+    pointer-events: none;
+}
+
+/* =========================
+   TITLES
+========================= */
+
+.register-container h1 {
+
+    font-size: 2rem;
+
+    margin-bottom: 12px;
+
+    color: white;
+
+    font-weight: 700;
+}
+
+.register-container p {
+
+    margin-bottom: 28px;
+
+    color:
+        rgba(255,255,255,.65);
+
+    font-size: .95rem;
+
+    line-height: 1.6;
+}
+
+/* =========================
+   INPUTS
+========================= */
+
+.register-container input {
+
+    width: 100%;
+
+    height: 58px;
+
+    padding: 0 18px;
+
+    margin: 10px 0;
+
+    border-radius: 18px;
+
+    border:
+        1px solid rgba(255,255,255,.08);
+
+    background:
+        rgba(255,255,255,.04) !important;
+
+    color: white;
+
+    font-size: .95rem;
+
+    outline: none;
+
+    transition: .3s;
+
+    box-shadow: none !important;
+
+    appearance: none;
+
+    -webkit-appearance: none;
+
+    -moz-appearance: none;
+}
+
+.register-container input:focus {
+
+    border-color:
+        rgba(194,213,0,.45);
+
+    box-shadow:
+        0 0 0 4px rgba(194,213,0,.08);
+}
+
+.register-container input::placeholder {
+
+    color:
+        rgba(255,255,255,.35);
+}
+
+/* =========================
+   AUTOFILL FIX
+========================= */
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+
+    -webkit-box-shadow:
+        0 0 0 1000px transparent inset !important;
+
+    -webkit-text-fill-color:
+        white !important;
+
+    transition:
+        background-color 9999s ease-in-out 0s;
+
+    caret-color: white;
+}
+
+/* =========================
+   BUTTON
+========================= */
+
+.register-container button {
+
+    width: 100%;
+
+    height: 58px;
+
+    margin-top: 18px;
+
+    border: none;
+
+    border-radius: 18px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #a8c814,
+            #c2d500
+        );
+
+    color: #08110d;
+
+    font-size: 1rem;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition: .3s;
+}
+
+.register-container button:hover {
+
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 14px 30px rgba(194,213,0,.25);
+}
+
+/* =========================
+   LOGIN LINK
+========================= */
+
+.register-text {
+
+    margin-top: 22px;
+
+    text-align: center;
+
+    color:
+        rgba(255,255,255,.55);
+
+    font-size: .92rem;
+}
+
+.register-text a {
+
+    color: #c2d500;
+
+    text-decoration: none;
+
+    font-weight: 600;
+
+    transition: .3s;
+}
+
+.register-text a:hover {
+
+    color: white;
+}

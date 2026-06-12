@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Registro</title>
+  <link rel="stylesheet" href="css/register.css">
+  <link rel="stylesheet" href="css/global.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="../css/register.css">
+<html lang="es">
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <p class="register-text">
+  ¿Ya tienes cuenta?
+  <a href="#" id="goLogin">
+    Iniciar sesión
+  </a>
+</p>
+  <div class="register-container">
+    <h1>Registro de Usuario</h1>
+    <form action="/register" method="POST">
+      <input type="text" name="name" placeholder="Nombre completo" required>
+      <input type="email" name="email" placeholder="Correo electrónico" required>
+      <input type="password" name="password" placeholder="Contraseña" required>
+      <button type="submit">Registrar</button>
+    </form>
+    <p class="register-text">
+      ¿Ya tienes cuenta? <a href="pages/login.html">Inicia sesión</a>
+    </p>
+  </div>
+</body>
+</html>

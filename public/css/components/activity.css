@@ -1,0 +1,112 @@
+.activity-panel{
+
+    background: var(--card-bg);
+
+    border-radius: 24px;
+
+    padding: 24px;
+
+    box-shadow: 0 10px 30px rgba(0,0,0,0.06);
+}
+
+.activity-header{
+
+    margin-bottom: 24px;
+}
+
+.activity-header h3{
+
+    font-size: 1.3rem;
+
+    color: var(--text);
+
+    margin-bottom: 6px;
+}
+
+.activity-header p{
+
+    color: #6b7280;
+}
+
+.activity-list{
+
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.activity-item{
+
+    display: flex;
+    gap: 14px;
+
+    align-items: flex-start;
+}
+
+.activity-dot{
+
+    width: 12px;
+    height: 12px;
+
+    border-radius: 50%;
+
+    margin-top: 6px;
+}
+
+.activity-dot.green{
+
+    background: #22c55e;
+}
+
+.activity-dot.orange{
+
+    background: #f59e0b;
+}
+
+.activity-dot.blue{
+
+    background: #3b82f6;
+}
+
+.activity-content h4{
+
+    font-size: 0.95rem;
+
+    margin-bottom: 4px;
+
+    color: var(--text);
+}
+
+.activity-content p{
+
+    font-size: 0.85rem;
+
+    color: #6b7280;
+}
+
+.quick-stats{
+
+    margin-top: 30px;
+
+    display: grid;
+
+    grid-template-columns: repeat(2,1fr);
+
+    gap: 14px;
+}
+
+.quick-card{
+
+    padding: 18px;
+
+    border-radius: 18px;
+
+    background: rgba(107,142,35,0.08);
+}
+
+.quick-card h2{
+
+    color: #6b8e23;
+
+    margin-bottom: 4px;
+}

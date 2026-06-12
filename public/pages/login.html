@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>e2 Energía | Acceso</title>
+
+<link rel="icon" type="image/x-icon" href="/images/icon/e2.ico">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+<link rel="stylesheet" href="../css/login.css">
+
+</head>
+
+<body>
+
+<div class="background-glow glow-1"></div>
+<div class="background-glow glow-2"></div>
+
+<main class="login-wrapper">
+
+    <!-- PANEL IZQUIERDO -->
+
+    <section class="brand-panel">
+
+        <div class="brand-top">
+
+            <div class="logo-box">
+                <img
+                    src="/images/logo-E2.png"
+                    alt="Logo E2"
+                    class="company-logo">
+            </div>
+
+        </div>
+
+        <div class="brand-content">
+
+            <div class="badge">
+                ⚡ Plataforma corporativa energética
+            </div>
+
+            <h2>
+                Gestión inteligente de
+                <span>reservas y espacios</span>
+            </h2>
+
+            <p>
+                Plataforma interna de e2 Energía Eficiente para la administración
+                centralizada de salas, reuniones y recursos corporativos.
+            </p>
+
+            <div class="feature-list">
+
+                <div class="feature-item">
+                    <i class="fa-solid fa-calendar-check"></i>
+                    <span>Reservas en tiempo real</span>
+                </div>
+
+                <div class="feature-item">
+                    <i class="fa-solid fa-users"></i>
+                    <span>Gestión colaborativa</span>
+                </div>
+
+                <div class="feature-item">
+                    <i class="fa-solid fa-chart-line"></i>
+                    <span>Control y trazabilidad</span>
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- PANEL DERECHO -->
+
+    <section class="auth-panel">
+
+        <div class="auth-card">
+
+            <div class="tabs">
+
+                <button
+                    type="button"
+                    class="tab-btn active"
+                    id="loginTab">
+
+                    Iniciar Sesión
+
+                </button>
+
+                <button
+                    type="button"
+                    class="tab-btn"
+                    id="registerTab">
+
+                    Registrarse
+
+                </button>
+
+            </div>
+
+            <!-- LOGIN -->
+
+            <form id="loginForm" class="auth-form active">
+
+                <h3>Bienvenido de nuevo 👋</h3>
+
+                <p class="form-subtitle">
+                    Accede a tu cuenta corporativa
+                </p>
+
+                <div class="input-group">
+
+                    <label>Correo electrónico</label>
+
+                    <div class="input-box">
+
+                        <i class="fa-solid fa-envelope"></i>
+
+                        <input
+                            type="email"
+                            name="email"
+                            placeholder="correo@empresa.com"
+                            required>
+
+                    </div>
+
+                </div>
+
+                <div class="input-group">
+
+                    <label>Contraseña</label>
+
+                    <div class="input-box">
+
+                        <i class="fa-solid fa-lock"></i>
+
+                        <input
+                            type="password"
+                            name="password"
+                            placeholder="••••••••"
+                            required>
+
+                    </div>
+
+                </div>
+
+                <button type="submit" class="main-btn">
+
+                    Ingresar al Sistema
+
+                </button>
+
+            </form>
+
+            <!-- REGISTRO -->
+
+            <form id="registerForm" class="auth-form">
+
+                <h3>Crear Cuenta</h3>
+
+                <p class="form-subtitle">
+                    Registra un nuevo usuario
+                </p>
+
+                <div class="input-group">
+
+                    <label>Nombre completo</label>
+
+                    <div class="input-box">
+
+                        <i class="fa-solid fa-user"></i>
+
+                        <input
+                            type="text"
+                            name="name"
+                            placeholder="Nombre completo"
+                            required>
+
+                    </div>
+
+                </div>
+
+                <div class="input-group">
+
+                    <label>Correo electrónico</label>
+
+                    <div class="input-box">
+
+                        <i class="fa-solid fa-envelope"></i>
+
+                        <input
+                            type="email"
+                            name="email"
+                            placeholder="correo@empresa.com"
+                            required>
+
+                    </div>
+
+                </div>
+
+                <div class="input-group">
+
+                    <label>Contraseña</label>
+
+                    <div class="input-box">
+
+                        <i class="fa-solid fa-lock"></i>
+
+                        <input
+                            type="password"
+                            name="password"
+                            placeholder="••••••••"
+                            required>
+
+                    </div>
+
+                </div>
+
+                <button type="submit" class="main-btn">
+
+                    Crear Cuenta
+
+                </button>
+
+                <p style="margin-top:20px;text-align:center;">
+
+                    ¿Ya tienes cuenta?
+
+                    <a
+                        href="#"
+                        id="goLogin"
+                        style="color:#c2d500;text-decoration:none;font-weight:600;">
+
+                        Iniciar sesión
+
+                    </a>
+
+                </p>
+
+            </form>
+
+        </div>
+
+    </section>
+
+</main>
+
+<script src="../js/login.js"></script>
+
+</body>
+
+</html>
