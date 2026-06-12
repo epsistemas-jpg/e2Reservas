@@ -1,29 +1,47 @@
 /* =========================
-   MOBILE MENU
+SIDEBAR - BOTÓN HAMBURGUESA
 ========================= */
 
-const menuToggle =
-    document.getElementById(
-        "menuToggle"
-    );
-
-const sidebar =
-    document.querySelector(
-        ".sidebar"
-    );
-
-menuToggle.addEventListener(
-    "click",
-    () => {
-
-        sidebar.classList.toggle(
-            "active"
-        );
-    }
+const sidebarToggle =
+document.getElementById(
+    "sidebarToggle"
 );
 
+const sidebar =
+document.querySelector(
+    ".sidebar"
+);
+
+if (sidebarToggle) {
+
+    sidebarToggle.addEventListener(
+        "click",
+        () => {
+
+            // MÓVIL: abrir y cerrar menú
+            if (window.innerWidth <= 900) {
+
+                sidebar.classList.toggle(
+                    "active"
+                );
+
+            } 
+            
+            // PC: contraer y expandir sidebar
+            else {
+
+                sidebar.classList.toggle(
+                    "collapsed"
+                );
+
+            }
+        }
+    );
+}
+
+
 /* =========================
-   DASHBOARD
+DASHBOARD
 ========================= */
 
 document.getElementById(
@@ -44,11 +62,13 @@ document.getElementById(
             "Dashboard",
             "Mostrando todas las reservas"
         );
+
     }
 );
 
+
 /* =========================
-   NUEVA RESERVA
+NUEVA RESERVA
 ========================= */
 
 document.getElementById(
@@ -59,8 +79,7 @@ document.getElementById(
 
         e.preventDefault();
 
-        editingReservationId =
-            null;
+        editingReservationId = null;
 
         document.getElementById(
             "reservationForm"
@@ -75,6 +94,7 @@ document.getElementById(
             ".submit-btn"
         ).innerText =
             "Crear Reserva";
+
         const deleteBtn =
             document.getElementById(
                 "deleteReservation"
@@ -84,17 +104,19 @@ document.getElementById(
 
             deleteBtn.style.display =
                 "none";
+
         }
 
         reservationModal
             .classList
             .add("active");
-    }
 
+    }
 );
 
+
 /* =========================
-   MIS RESERVAS
+MIS RESERVAS
 ========================= */
 
 document.getElementById(
@@ -115,11 +137,13 @@ document.getElementById(
             "Mis Reservas",
             "Mostrando tus reservas activas"
         );
+
     }
 );
 
+
 /* =========================
-   HISTORIAL
+HISTORIAL
 ========================= */
 
 document.getElementById(
@@ -130,11 +154,9 @@ document.getElementById(
 
         e.preventDefault();
 
-        // 🔹 Endpoint historial
         window.currentEndpoint =
             "/api/history";
 
-        // 🔹 Refrescar calendario
         calendar.refetchEvents();
 
         showToast(
@@ -142,6 +164,6 @@ document.getElementById(
             "Historial",
             "Mostrando reservas finalizadas"
         );
+
     }
-    
 );
