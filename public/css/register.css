@@ -71,18 +71,35 @@
     font-weight: 700;
 }
 
-.register-container p {
+.register-container {
 
-    margin-bottom: 28px;
+    width: 100%;
 
-    color:
-        rgba(255,255,255,.65);
+    max-width: 540px; /* mismo ancho que auth-card */
 
-    font-size: .95rem;
+    margin: 0 auto;
 
-    line-height: 1.6;
+    padding: 40px;
+
+    border-radius: 32px; /* mismo radio que auth-card */
+
+    background:
+        rgba(10,16,26,.42);
+
+    border:
+        1px solid rgba(255,255,255,.08);
+
+    backdrop-filter: blur(40px);
+
+    box-shadow:
+        0 20px 80px rgba(0,0,0,.45);
+
+    font-family:'Inter',sans-serif;
+
+    position:relative;
+
+    overflow:hidden;
 }
-
 /* =========================
    INPUTS
 ========================= */
