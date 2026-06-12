@@ -282,15 +282,23 @@ body::before{
 
 .auth-card{
 
-    width:min(720px,95vw);
+    width:min(550px,95vw);
 
-    max-width:720px;
+    max-width:550px;
 
     padding:55px;
 
-    backdrop-filter:blur(40px);
+    position:relative;
+
+    border-radius:32px;
 
     background:rgba(10,16,26,.38);
+
+    border:1px solid rgba(255,255,255,.08);
+
+    backdrop-filter:blur(40px);
+
+    box-shadow:0 20px 80px rgba(0,0,0,.45);
 }
 .login-logo{
 
@@ -303,7 +311,7 @@ body::before{
 
 .login-logo img{
 
-    width:180px;
+    width:140px;
 
     object-fit:contain;
 
@@ -321,7 +329,7 @@ body::before{
 
     inset:0;
 
-    border-radius:32px;
+    border-radius:40px;
 
     padding:1px;
 
@@ -413,9 +421,9 @@ body::before{
 
 .auth-form h3{
 
-    font-size:2.5rem;
+    font-size:2.2rem;
 
-    margin-bottom:12px;
+    margin-bottom:10px;
 }
 
 .form-subtitle{
@@ -454,6 +462,20 @@ body::before{
     height:64px;
 
     border-radius:20px;
+
+    background:
+        rgba(255,255,255,.04);
+
+    border:
+        1px solid rgba(255,255,255,.08);
+
+    display:flex;
+
+    align-items:center;
+
+    padding:0 20px;
+
+    transition:.3s;
 }
 .input-box:focus-within{
 
@@ -516,11 +538,11 @@ input:-webkit-autofill:focus{
 
     width:100%;
 
-    height:60px;
+    height:64px;
 
     border:none;
 
-    border-radius:20px;
+    border-radius:22px;
 
     background:
         linear-gradient(
@@ -531,7 +553,7 @@ input:-webkit-autofill:focus{
 
     color:#08110d;
 
-    font-size:1rem;
+    font-size:1.05rem;
 
     font-weight:800;
 
