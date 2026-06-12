@@ -1,4 +1,6 @@
 // public/js/login.js
+import TubesCursor from
+"https://cdn.jsdelivr.net/npm/threejs-components@0.0.19/build/cursors/tubes1.min.js";
 
 const loginTab = document.getElementById("loginTab");
 const registerTab = document.getElementById("registerTab");
@@ -7,6 +9,38 @@ const loginForm = document.getElementById("loginForm");
 const registerForm = document.getElementById("registerForm");
 
 const goLogin = document.getElementById("goLogin");
+/* =========================
+   FONDO ANIMADO
+========================= */
+
+const canvas = document.getElementById("canvas");
+
+if (canvas) {
+
+    TubesCursor(canvas, {
+
+        tubes: {
+
+            colors: [
+                "#c2d500",
+                "#9db100",
+                "#d4ea1c"
+            ],
+
+            lights: {
+
+                intensity: 200,
+
+                colors: [
+                    "#c2d500",
+                    "#d4ea1c",
+                    "#8ea300",
+                    "#ffffff"
+                ]
+            }
+        }
+    });
+}
 
 /* =========================
    LIMPIAR FORMULARIOS
@@ -197,5 +231,6 @@ registerForm.addEventListener("submit", async (e) => {
         );
 
     }
+    
 
 });
