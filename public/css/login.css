@@ -282,26 +282,15 @@ body::before{
 
 .auth-card{
 
-    width:100%;
+    width:min(720px,95vw);
 
-    max-width:540px;
+    max-width:720px;
 
-   background:
-    rgba(10,16,26,.42);
-
-    border:
-        1px solid rgba(255,255,255,.08);
+    padding:55px;
 
     backdrop-filter:blur(40px);
 
-    border-radius:32px;
-
-    padding:40px;
-
-    box-shadow:
-        0 20px 80px rgba(0,0,0,.45);
-
-    position:relative;
+    background:rgba(10,16,26,.38);
 }
 .login-logo{
 
@@ -424,9 +413,9 @@ body::before{
 
 .auth-form h3{
 
-    font-size:2rem;
+    font-size:2.5rem;
 
-    margin-bottom:8px;
+    margin-bottom:12px;
 }
 
 .form-subtitle{
@@ -460,25 +449,12 @@ body::before{
 
 .input-box{
 
-    height:62px;
+    width:100%;
+
+    height:64px;
 
     border-radius:20px;
-
-    background:
-        rgba(255,255,255,.04);
-
-    border:
-        1px solid rgba(255,255,255,.08);
-
-    display:flex;
-
-    align-items:center;
-
-    padding:0 18px;
-
-    transition:.3s;
 }
-
 .input-box:focus-within{
 
     border-color:
