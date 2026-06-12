@@ -37,17 +37,27 @@ SIDEBAR CONTRAIDO
 /* =========================
 HEADER BLANCO LOGO
 ========================= */
-
 .sidebar-header {
-
-    height: 110px;
     background: white;
 
+    height: 100px;
+
     display: flex;
+
     justify-content: center;
+
     align-items: center;
 
     position: relative;
+
+    overflow: hidden;
+
+    border-bottom: 1px solid #ddd;
+}
+.sidebar.collapsed .sidebar-logo-img {
+
+    width: 55px;
+
 }
 
 
@@ -71,19 +81,40 @@ BOTON HAMBURGUESA
 
     position: absolute;
 
-    top: 15px;
-    left: 15px;
+    top: 10px;
+
+    left: 10px;
+
+    width: 35px;
+
+    height: 35px;
 
     border: none;
-    background: transparent;
+
+    border-radius: 8px;
+
+    background: rgba(32, 67, 57, 0.1);
 
     color: #204339;
 
-    font-size: 22px;
+    font-size: 18px;
 
     cursor: pointer;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    z-index: 10;
 }
 
+#sidebarToggle:hover {
+
+    background: rgba(32, 67, 57, 0.2);
+
+}
 
 /* =========================
 MENU
