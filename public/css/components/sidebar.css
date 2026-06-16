@@ -80,15 +80,18 @@ HEADER LOGO
 }
 
 .sidebar-logo {
-    max-height: 150px;
-    max-width: 180px;
-    width: auto;
-    height: auto;
-    object-fit: contain;
-    display: block;
-    transition: .3s;
-}
 
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    padding:25px 0 15px 0;
+
+    transition: .3s ease;
+
+}
 .sidebar.collapsed .sidebar-logo {
     max-width: 44px;
     max-height: 44px;
@@ -233,11 +236,12 @@ MENU
 
 /* MENU CONTRAIDO */
 
-.sidebar.collapsed .sidebar-menu a {
+.sidebar.collapsed .sidebar-menu {
 
-    justify-content: center;
+    margin-top: 70px;
 
-    padding: 0;
+    padding: 0 10px;
+
 }
 
 
@@ -433,5 +437,35 @@ RESPONSIVE TABLET
 
         width: 100%;
     }
+
+}
+/* =========================
+OCULTAR LOGO AL CONTRAER
+========================= */
+
+.sidebar.collapsed .sidebar-logo {
+
+    opacity: 0;
+
+    height: 0;
+
+    padding: 0;
+
+    margin: 0;
+
+    overflow: hidden;
+
+}
+/* =========================
+BOTON EN SIDEBAR CONTRAIDO
+========================= */
+
+.sidebar.collapsed #sidebarToggle {
+
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    top: 18px;
 
 }
