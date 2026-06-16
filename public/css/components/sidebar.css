@@ -5,20 +5,24 @@ SIDEBAR GENERAL
 .sidebar {
     width: 260px;
     height: 100vh;
-    background: linear-gradient(
+
+    background:
+    linear-gradient(
         180deg,
-       #204339,
-        #162f28
+        #1f4638 0%,
+        #295941 40%,
+        #17352b 100%
     );
 
     position: fixed;
-    left: 0;
     top: 0;
+    left: 0;
 
     display: flex;
     flex-direction: column;
 
-    transition: width .3s ease;
+    transition: .3s ease;
+
     overflow: hidden;
 
     z-index: 1000;
@@ -26,53 +30,16 @@ SIDEBAR GENERAL
 
 
 /* =========================
-SIDEBAR CONTRAIDO
+SIDEBAR CONTRAÍDO
 ========================= */
 
 .sidebar.collapsed {
     width: 85px;
 }
 
-.sidebar.collapsed .sidebar-logo-img {
-
-    width: 55px;
-
-}
-
 
 /* =========================
-LOGO SIDEBAR
-========================= */
-
-.sidebar-logo {
-
-    display: flex;
-
-    justify-content: center;
-
-    align-items: center;
-
-    padding: 25px 0 15px 0;
-
-}
-
-.sidebar-logo-img {
-
-    width: 75px;
-
-    height: auto;
-
-    object-fit: contain;
-
-    transition: .3s;
-
-    filter: drop-shadow(
-        0 4px 12px rgba(194,213,0,.35)
-    );
-
-}
-/* =========================
-BOTON HAMBURGUESA
+BOTÓN HAMBURGUESA
 ========================= */
 
 #sidebarToggle {
@@ -80,7 +47,6 @@ BOTON HAMBURGUESA
     position: absolute;
 
     top: 15px;
-
     left: 15px;
 
     background: transparent;
@@ -89,31 +55,31 @@ BOTON HAMBURGUESA
 
     color: white;
 
-    font-size: 20px;
+    font-size: 22px;
 
     cursor: pointer;
 
+    z-index: 10;
 }
 
-#sidebarToggle:hover {
-
-    background: rgba(32, 67, 57, 0.2);
-
-}
 
 /* =========================
-MENU
+MENÚ CENTRAL
 ========================= */
 
 .sidebar-menu {
 
-    padding: 20px 12px;
+    flex: 1;
 
     display: flex;
 
     flex-direction: column;
 
-    gap: 12px;
+    justify-content: center;
+
+    gap: 15px;
+
+    padding: 0 15px;
 }
 
 
@@ -125,15 +91,17 @@ MENU
 
     align-items: center;
 
-    gap: 15px;
+    gap: 16px;
+
+    padding: 0 20px;
 
     color: white;
 
     text-decoration: none;
 
-    padding: 0 18px;
+    border-radius: 18px;
 
-    border-radius: 16px;
+    font-weight: 600;
 
     transition: .3s;
 }
@@ -141,17 +109,28 @@ MENU
 
 .sidebar-menu a:hover {
 
-    background: rgba(255,255,255,.10);
+    background: rgba(255,255,255,.12);
 
+    transform: translateX(4px);
 }
 
 
+/* BOTÓN ACTIVO E2 */
+
 .sidebar-menu a.active {
 
-    background: #7d9f1b;
+    background:
+    linear-gradient(
+        135deg,
+        #9bc91a,
+        #7ea71a
+    );
+
+    color: white;
 
     box-shadow:
-        0 8px 20px rgba(125,159,27,.4);
+        0 10px 25px
+        rgba(155,201,26,.45);
 }
 
 
@@ -159,34 +138,9 @@ MENU
 
     width: 22px;
 
-    font-size: 18px;
-
     text-align: center;
-}
 
-
-/* TEXTO MENU */
-.sidebar-menu span {
-
-    white-space: nowrap;
-
-    transition: .2s;
-}
-
-
-/* MENU CONTRAIDO */
-
-.sidebar.collapsed .sidebar-menu a {
-
-    justify-content: center;
-
-    padding: 0;
-}
-
-
-.sidebar.collapsed .sidebar-menu span {
-
-    display: none;
+    font-size: 18px;
 }
 
 
@@ -196,21 +150,20 @@ USUARIO ABAJO
 
 .sidebar-user {
 
-    margin-top: auto;
-
-    margin: auto 12px 15px;
+    margin: auto 15px 20px;
 
     padding: 18px;
 
     border-radius: 22px;
 
-    background: rgba(255,255,255,.08);
+    background:
+    rgba(255,255,255,.08);
 
     backdrop-filter: blur(10px);
-
-    transition: .3s;
 }
 
+
+/* INFO USUARIO */
 
 .sidebar-user-top {
 
@@ -220,150 +173,155 @@ USUARIO ABAJO
 
     gap: 12px;
 
-    margin-bottom: 15px;
+    margin-bottom: 18px;
 }
 
 
 .sidebar-avatar {
 
-    width: 50px;
+    width: 52px;
 
-    height: 50px;
+    height: 52px;
 
     border-radius: 16px;
 
     background:
     linear-gradient(
         135deg,
-        #9bc91a,
-        #6b8e23
+        #a4d122,
+        #7ea71a
     );
 
-    color:white;
+    color: white;
 
-    display:flex;
+    display: flex;
 
-    align-items:center;
+    justify-content: center;
 
-    justify-content:center;
+    align-items: center;
 
-    font-weight:700;
+    font-weight: 700;
 }
 
 
 .sidebar-user-info strong {
 
-    color:white;
+    color: white;
 
-    display:block;
+    display: block;
+
+    font-size: .95rem;
 }
 
 
 .sidebar-user-info p {
 
-    color: rgba(255,255,255,.7);
+    color: rgba(255,255,255,.75);
 
-    font-size:.85rem;
-}
-
-
-/* OCULTAR DATOS USUARIO */
-
-.sidebar.collapsed .sidebar-user-info {
-
-    display:none;
-}
-
-
-/* CENTRAR AVATAR */
-
-.sidebar.collapsed .sidebar-user-top {
-
-    justify-content:center;
+    font-size: .82rem;
 }
 
 
 /* =========================
-BOTON LOGOUT
+LOGOUT
 ========================= */
 
 .logout-btn {
 
-    width:100%;
+    width: 100%;
 
-    height:45px;
+    height: 48px;
 
-    border:none;
+    border: none;
 
-    border-radius:15px;
+    border-radius: 16px;
 
-    background: rgba(255,255,255,.1);
+    background:
+    rgba(255,255,255,.12);
 
-    color:white;
+    color: white;
 
-    display:flex;
+    display: flex;
 
-    align-items:center;
+    justify-content: center;
 
-    justify-content:center;
+    align-items: center;
 
-    gap:10px;
+    gap: 10px;
 
-    cursor:pointer;
+    cursor: pointer;
 
-    transition:.3s;
+    font-weight: 600;
+
+    transition: .3s;
 }
 
 
 .logout-btn:hover {
 
-    background: rgba(255,255,255,.2);
+    background:
+    rgba(255,255,255,.22);
+
+    transform: translateY(-2px);
 }
 
 
-/* OCULTAR TEXTO LOGOUT */
+/* =========================
+MODO CONTRAÍDO
+========================= */
 
+.sidebar.collapsed .sidebar-menu a {
+
+    justify-content: center;
+
+    padding: 0;
+}
+
+
+.sidebar.collapsed .sidebar-menu span,
+.sidebar.collapsed .sidebar-user-info,
 .sidebar.collapsed .logout-btn span {
 
-    display:none;
+    display: none;
+}
+
+
+.sidebar.collapsed .sidebar-user-top {
+
+    justify-content: center;
 }
 
 
 .sidebar.collapsed .logout-btn {
 
-    width:50px;
+    width: 50px;
 
-    margin:auto;
+    margin: auto;
 }
 
 
 /* =========================
-MODO MOVIL
+MÓVIL
 ========================= */
 
-@media(max-width:900px) {
+@media(max-width:900px){
+
+    .sidebar {
+
+        left: -260px;
+
+        width: 260px;
+    }
 
 
-.sidebar {
+    .sidebar.active {
 
-    left:-260px;
-
-    width:260px;
-
-    transition:.3s;
-}
+        left: 0;
+    }
 
 
-.sidebar.active {
+    .sidebar.collapsed {
 
-    left:0;
-}
-
-
-.sidebar.collapsed {
-
-    width:260px;
-}
-
-
+        width: 260px;
+    }
 }
