@@ -888,3 +888,20 @@ body.dark-mode {
 
     --logout-color: #ffffff;
 }
+@media(max-width:768px){
+
+    .calendar-container {
+
+        padding: 10px;
+        overflow-x: auto;
+        border-radius: 20px;
+    }
+
+
+    #calendar {
+
+        min-width: 700px;
+
+    }
+
+}
