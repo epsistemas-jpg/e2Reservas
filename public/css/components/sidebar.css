@@ -35,10 +35,11 @@ SIDEBAR CONTRAIDO
 
 
 /* =========================
-HEADER BLANCO LOGO
+HEADER LOGO
 ========================= */
+
 .sidebar-header {
-    background: white;
+    background: #efefef;
 
     height: 100px;
 
@@ -51,23 +52,13 @@ HEADER BLANCO LOGO
     position: relative;
 
     overflow: hidden;
-
-    border-bottom: 1px solid #ddd;
 }
-.sidebar.collapsed .sidebar-logo-img {
-
-    width: 55px;
-
-}
-
 
 .sidebar-logo-img {
-
     width: 70px;
-
     transition: .3s;
-
 }
+
 .sidebar.collapsed .sidebar-logo-img {
     width: 40px;
 }
@@ -93,9 +84,9 @@ BOTON HAMBURGUESA
 
     border-radius: 8px;
 
-    background: rgba(32, 67, 57, 0.1);
+    background: rgba(0, 0, 0, 0.08);
 
-    color: #204339;
+    color: #555;
 
     font-size: 18px;
 
@@ -111,10 +102,9 @@ BOTON HAMBURGUESA
 }
 
 #sidebarToggle:hover {
-
-    background: rgba(32, 67, 57, 0.2);
-
+    background: rgba(0, 0, 0, 0.15);
 }
+
 
 /* =========================
 MENU
@@ -129,6 +119,8 @@ MENU
     flex-direction: column;
 
     gap: 12px;
+
+    flex: 1;
 }
 
 
@@ -155,9 +147,7 @@ MENU
 
 
 .sidebar-menu a:hover {
-
     background: rgba(255,255,255,.10);
-
 }
 
 
@@ -181,6 +171,7 @@ MENU
 
 
 /* TEXTO MENU */
+
 .sidebar-menu span {
 
     white-space: nowrap;
@@ -200,7 +191,6 @@ MENU
 
 
 .sidebar.collapsed .sidebar-menu span {
-
     display: none;
 }
 
@@ -211,9 +201,7 @@ USUARIO ABAJO
 
 .sidebar-user {
 
-    margin-top: auto;
-
-    margin: auto 12px 15px;
+    margin: 0 12px 15px;
 
     padding: 18px;
 
@@ -247,30 +235,29 @@ USUARIO ABAJO
 
     border-radius: 16px;
 
-    background:
-    linear-gradient(
+    background: linear-gradient(
         135deg,
         #9bc91a,
         #6b8e23
     );
 
-    color:white;
+    color: white;
 
-    display:flex;
+    display: flex;
 
-    align-items:center;
+    align-items: center;
 
-    justify-content:center;
+    justify-content: center;
 
-    font-weight:700;
+    font-weight: 700;
 }
 
 
 .sidebar-user-info strong {
 
-    color:white;
+    color: white;
 
-    display:block;
+    display: block;
 }
 
 
@@ -278,23 +265,21 @@ USUARIO ABAJO
 
     color: rgba(255,255,255,.7);
 
-    font-size:.85rem;
+    font-size: .85rem;
 }
 
 
 /* OCULTAR DATOS USUARIO */
 
 .sidebar.collapsed .sidebar-user-info {
-
-    display:none;
+    display: none;
 }
 
 
 /* CENTRAR AVATAR */
 
 .sidebar.collapsed .sidebar-user-top {
-
-    justify-content:center;
+    justify-content: center;
 }
 
 
@@ -304,34 +289,33 @@ BOTON LOGOUT
 
 .logout-btn {
 
-    width:100%;
+    width: 100%;
 
-    height:45px;
+    height: 45px;
 
-    border:none;
+    border: none;
 
-    border-radius:15px;
+    border-radius: 15px;
 
     background: rgba(255,255,255,.1);
 
-    color:white;
+    color: white;
 
-    display:flex;
+    display: flex;
 
-    align-items:center;
+    align-items: center;
 
-    justify-content:center;
+    justify-content: center;
 
-    gap:10px;
+    gap: 10px;
 
-    cursor:pointer;
+    cursor: pointer;
 
-    transition:.3s;
+    transition: .3s;
 }
 
 
 .logout-btn:hover {
-
     background: rgba(255,255,255,.2);
 }
 
@@ -339,16 +323,15 @@ BOTON LOGOUT
 /* OCULTAR TEXTO LOGOUT */
 
 .sidebar.collapsed .logout-btn span {
-
-    display:none;
+    display: none;
 }
 
 
 .sidebar.collapsed .logout-btn {
 
-    width:50px;
+    width: 50px;
 
-    margin:auto;
+    margin: auto;
 }
 
 
@@ -356,29 +339,35 @@ BOTON LOGOUT
 MODO MOVIL
 ========================= */
 
-@media(max-width:900px) {
+@media (max-width: 900px) {
 
+    .sidebar {
+        left: -260px;
+        width: 260px;
+        transition: .3s;
+    }
 
-.sidebar {
+    .sidebar.active {
+        left: 0;
+    }
 
-    left:-260px;
+    .sidebar.collapsed {
+        width: 260px;
+    }
+}
+.main-content {
 
-    width:260px;
+    margin-left: 260px;
 
-    transition:.3s;
+    transition: margin-left .3s ease;
+
 }
 
 
-.sidebar.active {
+/* Cuando el sidebar está contraído */
 
-    left:0;
-}
+.sidebar.collapsed ~ .main-content {
 
-
-.sidebar.collapsed {
-
-    width:260px;
-}
-
+    margin-left: 85px;
 
 }

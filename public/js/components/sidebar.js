@@ -14,29 +14,37 @@ document.querySelector(
 
 if (sidebarToggle) {
 
-    sidebarToggle.addEventListener(
-        "click",
-        () => {
+   sidebarToggle.addEventListener(
+    "click",
+    () => {
 
-            // MÓVIL: abrir y cerrar menú
-            if (window.innerWidth <= 900) {
+        // Móvil
+        if (window.innerWidth <= 900) {
 
-                sidebar.classList.toggle(
-                    "active"
-                );
+            sidebar.classList.toggle("active");
 
-            } 
-            
-            // PC: contraer y expandir sidebar
-            else {
+        } 
+        // Escritorio
+        else {
 
-                sidebar.classList.toggle(
-                    "collapsed"
-                );
+            sidebar.classList.toggle("collapsed");
+
+        }
+
+
+        // Espera que termine la animación
+        setTimeout(() => {
+
+            if (typeof calendar !== "undefined") {
+
+                calendar.updateSize();
 
             }
-        }
-    );
+
+        }, 350);
+    }
+);
+
 }
 
 
