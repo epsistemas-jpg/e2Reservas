@@ -86,7 +86,6 @@ HEADER LOGO
     height: auto;
     object-fit: contain;
     display: block;
-    padding-top: 55px;
     transition: .3s;
 }
 
