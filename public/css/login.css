@@ -66,13 +66,13 @@ body::before{
 
     background-image:
         linear-gradient(
-            rgba(255,255,255,.03) 1px,
+            rgba(255,255,255,.06) 1px,
             transparent 1px
         ),
 
         linear-gradient(
             90deg,
-            rgba(255,255,255,.03) 1px,
+            rgba(255,255,255,.06) 1px,
             transparent 1px
         );
 
@@ -280,26 +280,39 @@ body::before{
 
 /* CARD */
 
-.auth-card{
+.auth-card {
 
-    width:min(550px,95vw);
+    width: min(550px, 95vw);
+    max-width: 550px;
+    padding: 55px;
+    position: relative;
+    border-radius: 32px;
+    background: #ffffff;
 
-    max-width:550px;
+    border: 1px solid rgba(0, 0, 0, 0.08);
 
-    padding:55px;
+    box-shadow: 0 24px 80px rgba(0, 0, 0, 0.35);
 
-    position:relative;
-
-    border-radius:32px;
-
-    background:rgba(10,16,26,.38);
-
-    border:1px solid rgba(255,255,255,.08);
-
-    backdrop-filter:blur(40px);
-
-    box-shadow:0 20px 80px rgba(0,0,0,.45);
+    /* se quita backdrop-filter */
 }
+
+.auth-card::before {
+
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 32px;
+    padding: 1px;
+    background: linear-gradient(135deg, rgba(194,213,0,.5), transparent, rgba(0,0,0,.06));
+
+    -webkit-mask:
+        linear-gradient(#fff 0 0) content-box,
+        linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    pointer-events: none;
+
+}
+
 .login-logo{
 
     display:flex;
@@ -464,7 +477,7 @@ body::before{
     border-radius:20px;
 
     background:
-        rgba(255,255,255,.04);
+        rgba(252, 252, 252, 0.04);
 
     border:
         1px solid rgba(255,255,255,.08);
