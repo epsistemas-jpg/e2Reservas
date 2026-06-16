@@ -188,7 +188,7 @@ body::before {
     position: relative;
     border-radius: 32px;
     background: #ffffff;
-    border: 1px solid rgba(0, 0, 0, .08);
+    border: 1.5px solid rgba(194, 213, 0, .45);
     box-shadow: 0 24px 80px rgba(0, 0, 0, .35);
 }
 
@@ -199,28 +199,13 @@ body::before {
 }
 
 .login-logo img {
-    width: 140px;
+    width: 240px;
     object-fit: contain;
     filter: drop-shadow(0 0 20px rgba(194, 213, 0, .20));
 }
 
 .auth-card::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    border-radius: 32px;
-    padding: 1px;
-    background: linear-gradient(
-        135deg,
-        rgba(194, 213, 0, .50),
-        transparent,
-        rgba(0, 0, 0, .06)
-    );
-    -webkit-mask:
-        linear-gradient(#fff 0 0) content-box,
-        linear-gradient(#fff 0 0);
-    -webkit-mask-composite: xor;
-    pointer-events: none;
+    display: none;
 }
 
 /* =========================
