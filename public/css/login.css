@@ -168,7 +168,7 @@ body::before {
 ========================= */
 
 .auth-card {
-    width: min(620px, 92vw);
+    width: min(580px, 88vw);
     padding: 52px 64px 60px;
     border-radius: 28px;
     background: #ffffff;
