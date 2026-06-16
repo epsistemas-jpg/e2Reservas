@@ -444,7 +444,7 @@ input:-webkit-autofill:focus {
     }
 
     .auth-card {
-    width: min(400px, 100%);   /* ← ancho máximo de la tarjeta */
+    width: min(580px, 100%);   /* ← ancho máximo de la tarjeta */
     padding: 52px 64px 60px;   /* ← espacio interno: arriba | lados | abajo */
 
     .login-logo img {
