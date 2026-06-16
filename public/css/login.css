@@ -168,8 +168,8 @@ body::before {
 ========================= */
 
 .auth-card {
-    width: min(480px, 100%);
-    padding: 48px 52px 52px;
+    width: min(580px, 100%);
+    padding: 52px 64px 60px;
     border-radius: 28px;
     background: #ffffff;
     border: 1.5px solid rgba(194, 213, 0, .40);
@@ -445,7 +445,7 @@ input:-webkit-autofill:focus {
 
     .auth-card {
         width: 100%;
-        padding: 36px 28px 40px;
+        padding: 40px 32px 44px;
         border-radius: 22px;
     }
 
