@@ -44,27 +44,13 @@ if (sidebarToggle) {
 DASHBOARD
 ========================= */
 
-document.getElementById(
-    "dashboardMenu"
-).addEventListener(
-    "click",
-    (e) => {
+const reserveMenu = document.getElementById("reserveMenu");
 
-        e.preventDefault();
-
-        window.currentEndpoint =
-            "/api/reservations";
-
-        calendar.refetchEvents();
-
-        showToast(
-            "success",
-            "Dashboard",
-            "Mostrando todas las reservas"
-        );
-
-    }
-);
+if (reserveMenu) {
+    reserveMenu.addEventListener("click", () => {
+        
+    });
+}
 
 
 /* =========================

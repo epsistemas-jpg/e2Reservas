@@ -1,77 +1,44 @@
+/* =========================
+VALIDAR SESIÓN
+========================= */
+
 (async () => {
 
     try {
 
-        const res =
-            await fetch(
-                "/api/check-auth"
-            );
+        const res = await fetch("/api/check-auth");
 
         if (!res.ok) {
 
             localStorage.clear();
 
-            window.location.replace(
-                "/pages/login.html"
-            );
+            window.location.replace("/pages/login.html");
 
             return;
+
         }
 
     } catch {
 
         localStorage.clear();
 
-        window.location.replace(
-            "/pages/login.html"
-        );
-
-    }
-
-})();(async () => {
-
-    try {
-
-        const res =
-            await fetch(
-                "/api/check-auth"
-            );
-
-        if (!res.ok) {
-
-            localStorage.clear();
-
-            window.location.replace(
-                "/pages/login.html"
-            );
-
-            return;
-        }
-
-    } catch {
-
-        localStorage.clear();
-
-        window.location.replace(
-            "/pages/login.html"
-        );
+        window.location.replace("/pages/login.html");
 
     }
 
 })();
+
+
 /* =========================
-   USER INFO
+USER INFO
 ========================= */
 
 const userName =
-    localStorage.getItem(
-        "userName"
-    ) || "Usuario";
+    localStorage.getItem("userName") || "Usuario";
 
 const userRole =
-    localStorage.getItem(
-        "userRole"
-    ) || "Usuario";
+    localStorage.getItem("userRole") || "Usuario";
+
 
 /* ROL FORMATEADO */
 
@@ -80,46 +47,63 @@ const roleText =
         ? "Administrador"
         : "Usuario";
 
+
 /* =========================
-   NOMBRES
+NOMBRES
 ========================= */
 
-document.getElementById(
-    "topbarUserName"
-).innerText =
-    userName;
+const topbarUserName =
+    document.getElementById("topbarUserName");
 
-document.getElementById(
-    "sidebarUserName"
-).innerText =
-    userName;
+const sidebarUserName =
+    document.getElementById("sidebarUserName");
 
-document.getElementById(
-    "settingsUserName"
-).innerText =
-    userName;
+const settingsUserName =
+    document.getElementById("settingsUserName");
+
+
+if (topbarUserName) {
+    topbarUserName.innerText = userName;
+}
+
+if (sidebarUserName) {
+    sidebarUserName.innerText = userName;
+}
+
+if (settingsUserName) {
+    settingsUserName.innerText = userName;
+}
+
 
 /* =========================
-   ROLES
+ROLES
 ========================= */
 
-document.getElementById(
-    "sidebarUserRole"
-).innerText =
-    roleText;
+const sidebarUserRole =
+    document.getElementById("sidebarUserRole");
 
-document.getElementById(
-    "topbarUserRole"
-).innerText =
-    roleText;
+const topbarUserRole =
+    document.getElementById("topbarUserRole");
 
-document.getElementById(
-    "settingsUserRole"
-).innerText =
-    roleText;
+const settingsUserRole =
+    document.getElementById("settingsUserRole");
+
+
+if (sidebarUserRole) {
+    sidebarUserRole.innerText = roleText;
+}
+
+if (topbarUserRole) {
+    topbarUserRole.innerText = roleText;
+}
+
+if (settingsUserRole) {
+    settingsUserRole.innerText = roleText;
+}
+
 
 /* =========================
-   AVATAR
+AVATARES
 ========================= */
 
 const initials =
@@ -130,96 +114,118 @@ const initials =
         .substring(0, 2)
         .toUpperCase();
 
-document.getElementById(
-    "userAvatar"
-).innerText =
-    initials;
 
-document.getElementById(
-    "sidebarAvatar"
-).innerText =
-    initials;
+const userAvatar =
+    document.getElementById("userAvatar");
 
-document.getElementById(
-    "settingsAvatar"
-).innerText =
-    initials;
+const sidebarAvatar =
+    document.getElementById("sidebarAvatar");
+
+const settingsAvatar =
+    document.getElementById("settingsAvatar");
+
+
+if (userAvatar) {
+    userAvatar.innerText = initials;
+}
+
+if (sidebarAvatar) {
+    sidebarAvatar.innerText = initials;
+}
+
+if (settingsAvatar) {
+    settingsAvatar.innerText = initials;
+}
+
 
 /* =========================
-   DASHBOARD BTN
+DASHBOARD BTN
 ========================= */
 
-document.getElementById(
-    "dashboardMenu"
-).addEventListener("click", (e) => {
+const dashboardMenu =
+    document.getElementById("dashboardMenu");
 
-    e.preventDefault();
 
-    currentView = "all";
+if (dashboardMenu) {
 
-    calendar.refetchEvents();
-});
+    dashboardMenu.addEventListener("click", (e) => {
+
+        e.preventDefault();
+
+        currentView = "all";
+
+        if (calendar) {
+            calendar.refetchEvents();
+        }
+
+    });
+
+}
+
 
 /* =========================
-   WELCOME MESSAGE
+WELCOME MESSAGE
 ========================= */
 
 const currentHour =
     new Date().getHours();
 
-let greeting =
-    "Bienvenido";
+
+let greeting = "Bienvenido";
+
 
 if (currentHour >= 5 && currentHour < 12) {
 
-    greeting =
-        "Buenos días";
+    greeting = "Buenos días";
 
-} else if (
-    currentHour >= 12 &&
-    currentHour < 18
-) {
+} else if (currentHour >= 12 && currentHour < 18) {
 
-    greeting =
-        "Buenas tardes";
+    greeting = "Buenas tardes";
 
 } else {
 
-    greeting =
-        "Buenas noches";
+    greeting = "Buenas noches";
+
 }
 
-document.getElementById(
-    "welcomeMessage"
-).innerText =
-    `${greeting}, ${userName}`;
+
+const welcomeMessage =
+    document.getElementById("welcomeMessage");
+
+
+if (welcomeMessage) {
+
+    welcomeMessage.innerText =
+        `${greeting}, ${userName}`;
+
+}
+
 
 /* =========================
-   BLOQUEAR CACHE BACK
+BLOQUEAR CACHE BACK
 ========================= */
 
 window.addEventListener(
     "pageshow",
     async function (event) {
 
-        if (
-            event.persisted
-        ) {
+        if (event.persisted) {
 
             const res =
-                await fetch(
-                    "/api/myreservations"
-                );
+                await fetch("/api/check-auth");
 
-            if (
-                res.status === 401
-            ) {
+
+            if (res.status === 401) {
+
+                localStorage.clear();
 
                 window.location.replace(
                     "/pages/login.html"
                 );
+
             }
+
         }
+
     }
-    
 );
