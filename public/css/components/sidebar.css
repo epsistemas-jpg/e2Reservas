@@ -6,12 +6,16 @@ SIDEBAR GENERAL
     width: 260px;
     height: 100vh;
 
-    background: linear-gradient(
-        180deg,
-        #204339 0%,
-        #1a382f 40%,
-        #122922 100%
+   background: linear-gradient(
+    180deg,
+    #204339,
+    #10241f,
+    #081814
     );
+    border-right: 1px solid rgba(194, 213, 0, 0.15);
+    box-shadow:
+    inset -1px 0 0 rgba(255,255,255,0.05),
+    10px 0 30px rgba(0,0,0,0.25);
 
 
     position: fixed;
