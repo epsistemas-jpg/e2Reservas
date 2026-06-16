@@ -33,6 +33,18 @@ SIDEBAR CONTRAIDO
     width: 85px;
 }
 
+
+/* =========================
+SIDEBAR TOP (agrupa header + menu)
+========================= */
+
+.sidebar-top {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+
 /* =========================
 HEADER LOGO
 ========================= */
@@ -46,27 +58,38 @@ HEADER LOGO
 
     flex-direction: row;
 
+    align-items: center;
+
+    justify-content: space-between;
+
+    padding: 0 12px;
+
+    flex-shrink: 0;
+}
+
+.logo-container {
+    flex: 1;
+
+    display: flex;
+
     justify-content: center;
 
     align-items: center;
 
-    padding: 0 50px 0 16px;
-
-    position: relative;
-
     overflow: hidden;
 }
 
-.sidebar-logo-img {
-    max-width: 120px;
+.sidebar-logo {
     max-height: 52px;
+    max-width: 140px;
     width: auto;
     height: auto;
     object-fit: contain;
+    display: block;
     transition: .3s;
 }
 
-.sidebar.collapsed .sidebar-logo-img {
+.sidebar.collapsed .sidebar-logo {
     max-width: 44px;
     max-height: 44px;
 }
@@ -78,17 +101,9 @@ BOTON HAMBURGUESA
 
 #sidebarToggle {
 
-    position: absolute;
-
-    top: 50%;
-
-    right: 10px;
-
-    transform: translateY(-50%);
-
-    width: 32px;
-
-    height: 32px;
+    width: 34px;
+    height: 34px;
+    flex-shrink: 0;
 
     border: none;
 
@@ -109,8 +124,6 @@ BOTON HAMBURGUESA
     align-items: center;
 
     z-index: 10;
-
-    flex-shrink: 0;
 }
 
 #sidebarToggle:hover {
@@ -121,6 +134,7 @@ BOTON HAMBURGUESA
     background: #c2d500;
     color: #204339;
 }
+
 
 /* =========================
 MENU
@@ -236,74 +250,6 @@ USUARIO ABAJO
 }
 
 
-.sidebar-user-top {
-
-    display: flex;
-
-    align-items: center;
-
-    gap: 12px;
-
-    margin-bottom: 15px;
-}
-
-
-.sidebar-avatar {
-
-    width: 50px;
-
-    height: 50px;
-
-    border-radius: 16px;
-
-    background: linear-gradient(
-        135deg,
-        #c2d500,
-        #a0b000
-    );
-
-    color: #204339;
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    font-weight: 700;
-}
-
-
-.sidebar-user-info strong {
-
-    color: white;
-
-    display: block;
-}
-
-
-.sidebar-user-info p {
-
-    color: rgba(255, 255, 255, .7);
-
-    font-size: .85rem;
-}
-
-
-/* OCULTAR DATOS USUARIO */
-
-.sidebar.collapsed .sidebar-user-info {
-    display: none;
-}
-
-
-/* CENTRAR AVATAR */
-
-.sidebar.collapsed .sidebar-user-top {
-    justify-content: center;
-}
-
-
 /* =========================
 BOTON LOGOUT
 ========================= */
@@ -333,6 +279,8 @@ BOTON LOGOUT
     cursor: pointer;
 
     transition: .3s;
+
+    font-size: 14px;
 }
 
 
