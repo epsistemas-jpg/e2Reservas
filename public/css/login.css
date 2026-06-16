@@ -2,11 +2,15 @@
    RESET
 ========================= */
 
-* {
+*, *::before, *::after {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
+
+/* =========================
+   BODY & FONDO ANIMADO
+========================= */
 
 body {
     font-family: 'Inter', sans-serif;
@@ -15,17 +19,12 @@ body {
     overflow-y: auto;
     background:
         radial-gradient(circle at top left,
-            rgba(194, 213, 0, .12),
-            transparent 30%),
+            rgba(194, 213, 0, .13) 0%,
+            transparent 32%),
         radial-gradient(circle at bottom right,
-            rgba(32, 67, 57, .25),
-            transparent 35%),
-        linear-gradient(
-            135deg,
-            #050b16 0%,
-            #07111f 40%,
-            #08131d 100%
-        );
+            rgba(32, 67, 57, .28) 0%,
+            transparent 38%),
+        linear-gradient(135deg, #050b16 0%, #07111f 45%, #08131d 100%);
     color: white;
     position: relative;
 }
@@ -36,26 +35,25 @@ body {
     width: 100%;
     height: 100%;
     z-index: 0;
+    pointer-events: none;
 }
 
-/* =========================
-   BACKGROUND GRID
-========================= */
-
+/* Grid de fondo */
 body::before {
     content: "";
-    position: absolute;
+    position: fixed;
     inset: 0;
+    z-index: 1;
     background-image:
-        linear-gradient(rgba(255, 255, 255, .06) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255, 255, 255, .06) 1px, transparent 1px);
-    background-size: 40px 40px;
-    mask-image: radial-gradient(circle at center, black 40%, transparent 100%);
+        linear-gradient(rgba(255, 255, 255, .05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, .05) 1px, transparent 1px);
+    background-size: 44px 44px;
+    mask-image: radial-gradient(ellipse at center, black 30%, transparent 80%);
     pointer-events: none;
 }
 
 /* =========================
-   MAIN LAYOUT
+   LAYOUT PRINCIPAL
 ========================= */
 
 .login-wrapper {
@@ -66,11 +64,12 @@ body::before {
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 30px;
+    padding: 24px;
 }
 
 /* =========================
-   LEFT PANEL
+   PANEL DE MARCA (izquierda)
+   — se activa si el HTML lo incluye
 ========================= */
 
 .brand-panel {
@@ -78,134 +77,122 @@ body::before {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    position: relative;
 }
 
-.brand-content {
-    max-width: 620px;
-}
-
-/* LOGO */
+.brand-content { max-width: 580px; }
 
 .logo-box {
-    width: 180px;
+    width: 160px;
     margin-bottom: 40px;
 }
 
-.company-logo {
+.logo-box img {
     width: 100%;
     object-fit: contain;
-    filter: drop-shadow(0 0 30px rgba(194, 213, 0, .15));
+    filter: drop-shadow(0 0 28px rgba(194, 213, 0, .18));
 }
-
-/* BADGE */
 
 .badge {
     display: inline-flex;
     align-items: center;
-    gap: 10px;
-    padding: 12px 18px;
+    gap: 8px;
+    padding: 10px 18px;
     border-radius: 999px;
     background: rgba(255, 255, 255, .05);
-    border: 1px solid rgba(255, 255, 255, .08);
-    backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, .09);
+    backdrop-filter: blur(14px);
     color: #c2d500;
-    font-size: .92rem;
+    font-size: .88rem;
+    font-weight: 500;
     margin-bottom: 28px;
 }
-
-/* TITLES */
 
 .brand-content h2 {
-    font-size: 4.5rem;
-    line-height: 1.05;
+    font-size: 4rem;
+    line-height: 1.06;
     font-weight: 800;
-    margin-bottom: 28px;
-    letter-spacing: -2px;
+    letter-spacing: -1.5px;
+    margin-bottom: 24px;
 }
 
-.brand-content h2 span {
-    color: #c2d500;
-}
+.brand-content h2 span { color: #c2d500; }
 
-/* TEXT */
-
-.brand-content p {
-    color: rgba(255, 255, 255, .72);
-    line-height: 1.9;
-    font-size: 1.05rem;
+.brand-content > p {
+    color: rgba(255, 255, 255, .68);
+    line-height: 1.85;
+    font-size: 1.02rem;
     margin-bottom: 40px;
 }
-
-/* FEATURES */
 
 .feature-list {
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 18px;
 }
 
 .feature-item {
     display: flex;
     align-items: center;
-    gap: 18px;
-    color: rgba(255, 255, 255, .88);
-    font-size: 1rem;
+    gap: 16px;
+    color: rgba(255, 255, 255, .85);
+    font-size: .98rem;
 }
 
 .feature-item i {
-    width: 54px;
-    height: 54px;
-    border-radius: 18px;
+    width: 50px;
+    height: 50px;
+    border-radius: 16px;
     display: flex;
     align-items: center;
     justify-content: center;
-    background: rgba(194, 213, 0, .12);
+    flex-shrink: 0;
+    background: rgba(194, 213, 0, .10);
     color: #c2d500;
-    font-size: 1.1rem;
-    border: 1px solid rgba(194, 213, 0, .15);
+    font-size: 1.05rem;
+    border: 1px solid rgba(194, 213, 0, .14);
 }
 
 /* =========================
-   AUTH PANEL
+   PANEL AUTH
 ========================= */
 
 .auth-panel {
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 40px;
+    padding: 32px;
 }
 
 /* =========================
-   CARD — FONDO BLANCO
+   TARJETA — BLANCA Y LIMPIA
 ========================= */
 
 .auth-card {
-    width: min(550px, 95vw);
-    max-width: 550px;
-    padding: 55px;
-    position: relative;
-    border-radius: 32px;
+    width: min(480px, 100%);
+    padding: 48px 52px 52px;
+    border-radius: 28px;
     background: #ffffff;
-    border: 1.5px solid rgba(194, 213, 0, .45);
-    box-shadow: 0 24px 80px rgba(0, 0, 0, .35);
+    border: 1.5px solid rgba(194, 213, 0, .40);
+    box-shadow:
+        0 8px 32px rgba(0, 0, 0, .18),
+        0 32px 80px rgba(0, 0, 0, .28);
+    position: relative;
 }
+
+/* =========================
+   LOGO DENTRO DE LA TARJETA
+========================= */
 
 .login-logo {
     display: flex;
     justify-content: center;
-    margin-bottom: 30px;
+    margin-bottom: 32px;
 }
 
 .login-logo img {
-    width: 240px;
+    width: 130px;
+    height: auto;
     object-fit: contain;
-    filter: drop-shadow(0 0 20px rgba(194, 213, 0, .20));
-}
-
-.auth-card::before {
-    display: none;
 }
 
 /* =========================
@@ -214,32 +201,41 @@ body::before {
 
 .tabs {
     display: flex;
-    background: rgba(0, 0, 0, .06);
-    border-radius: 18px;
-    padding: 6px;
-    margin-bottom: 36px;
+    gap: 4px;
+    background: #f0f1f0;
+    border-radius: 14px;
+    padding: 5px;
+    margin-bottom: 32px;
 }
 
 .tab-btn {
     flex: 1;
-    height: 52px;
+    height: 44px;
     border: none;
-    border-radius: 14px;
+    border-radius: 10px;
     background: transparent;
-    color: rgba(0, 0, 0, .45);
+    color: rgba(0, 0, 0, .42);
+    font-family: 'Inter', sans-serif;
+    font-size: .9rem;
     font-weight: 600;
     cursor: pointer;
-    transition: .3s;
+    transition: background .22s, color .22s, box-shadow .22s;
+    letter-spacing: .01em;
+}
+
+.tab-btn:hover:not(.active) {
+    color: rgba(0, 0, 0, .65);
+    background: rgba(0, 0, 0, .04);
 }
 
 .tab-btn.active {
-    background: linear-gradient(135deg, #a8c814, #c2d500);
-    color: #08110d;
-    box-shadow: 0 10px 25px rgba(194, 213, 0, .25);
+    background: linear-gradient(135deg, #a8c814 0%, #c2d500 100%);
+    color: #1a2200;
+    box-shadow: 0 4px 16px rgba(162, 200, 0, .30);
 }
 
 /* =========================
-   FORMS
+   FORMULARIOS
 ========================= */
 
 .auth-form {
@@ -252,125 +248,177 @@ body::before {
 
 .auth-form h2,
 .auth-form h3 {
-    color: #0d1117;
-    margin-bottom: 10px;
-}
-
-.auth-form h2 {
-    font-size: 2.2rem;
-}
-
-.auth-form h3 {
-    font-size: 2.2rem;
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: #111418;
+    letter-spacing: -.4px;
+    margin-bottom: 6px;
+    line-height: 1.2;
 }
 
 .form-subtitle {
-    color: rgba(0, 0, 0, .50);
-    margin-bottom: 32px;
+    font-size: .9rem;
+    color: rgba(0, 0, 0, .45);
+    margin-bottom: 28px;
+    line-height: 1.5;
 }
 
 /* =========================
-   INPUTS
+   GRUPOS DE INPUT
 ========================= */
 
 .input-group {
-    margin-bottom: 24px;
+    margin-bottom: 18px;
 }
 
 .input-group label {
     display: block;
-    margin-bottom: 12px;
-    color: rgba(0, 0, 0, .70);
-    font-size: .92rem;
+    margin-bottom: 8px;
+    color: #2a2f2a;
+    font-size: .84rem;
+    font-weight: 600;
+    letter-spacing: .01em;
 }
 
 .input-box {
     width: 100%;
-    height: 64px;
-    border-radius: 20px;
-    background: rgba(0, 0, 0, .04);
-    border: 1px solid rgba(0, 0, 0, .10);
+    height: 52px;
+    border-radius: 14px;
+    background: #f7f8f5;
+    border: 1.5px solid #e2e5dc;
     display: flex;
     align-items: center;
-    padding: 0 20px;
-    transition: .3s;
+    padding: 0 16px;
+    gap: 12px;
+    transition: border-color .2s, box-shadow .2s, background .2s;
+}
+
+.input-box:hover {
+    border-color: #c8d4a0;
+    background: #f4f6f0;
 }
 
 .input-box:focus-within {
-    border-color: rgba(194, 213, 0, .70);
-    box-shadow: 0 0 0 4px rgba(194, 213, 0, .12);
+    border-color: #9eb800;
+    background: #ffffff;
+    box-shadow: 0 0 0 3px rgba(162, 200, 0, .15);
 }
 
 .input-box i {
     color: #8a9e00;
-    margin-right: 14px;
-    font-size: 1rem;
+    font-size: .95rem;
+    flex-shrink: 0;
+    width: 16px;
+    text-align: center;
 }
 
 .input-box input {
-    width: 100%;
+    flex: 1;
     border: none;
     outline: none;
     background: transparent !important;
-    color: #0d1117;
-    font-size: 1rem;
+    color: #111418;
+    font-family: 'Inter', sans-serif;
+    font-size: .95rem;
+    font-weight: 400;
     box-shadow: none !important;
+    -webkit-appearance: none;
     appearance: none;
 }
 
 .input-box input::placeholder {
-    color: rgba(0, 0, 0, .30);
+    color: rgba(0, 0, 0, .28);
+    font-weight: 400;
 }
 
-/* AUTOFILL */
-
+/* Autofill — evita fondo azul del navegador */
 input:-webkit-autofill,
 input:-webkit-autofill:hover,
 input:-webkit-autofill:focus {
-    -webkit-box-shadow: 0 0 0 1000px #ffffff inset !important;
-    -webkit-text-fill-color: #0d1117 !important;
+    -webkit-box-shadow: 0 0 0 1000px #f7f8f5 inset !important;
+    -webkit-text-fill-color: #111418 !important;
+    caret-color: #111418;
     transition: background-color 9999s ease-in-out 0s;
 }
 
+.input-box:focus-within input:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0 1000px #ffffff inset !important;
+}
+
 /* =========================
-   BUTTON
+   BOTÓN PRINCIPAL
 ========================= */
 
 .main-btn {
     width: 100%;
-    height: 64px;
+    height: 52px;
     border: none;
-    border-radius: 22px;
-    background: linear-gradient(135deg, #a8c814, #c2d500);
-    color: #08110d;
-    font-size: 1.05rem;
-    font-weight: 800;
+    border-radius: 14px;
+    background: linear-gradient(135deg, #a8c814 0%, #c2d500 100%);
+    color: #1a2200;
+    font-family: 'Inter', sans-serif;
+    font-size: .95rem;
+    font-weight: 700;
+    letter-spacing: .01em;
     cursor: pointer;
-    transition: .3s;
-    margin-top: 10px;
+    transition: transform .18s, box-shadow .18s, filter .18s;
+    margin-top: 8px;
 }
 
 .main-btn:hover {
     transform: translateY(-2px);
-    box-shadow: 0 18px 40px rgba(194, 213, 0, .30);
+    box-shadow: 0 8px 28px rgba(162, 200, 0, .35);
+    filter: brightness(1.04);
+}
+
+.main-btn:active {
+    transform: translateY(0);
+    box-shadow: none;
+    filter: brightness(.97);
 }
 
 /* =========================
-   LINK "¿YA TIENES CUENTA?"
+   ENLACE "¿YA TIENES CUENTA?"
 ========================= */
 
+.auth-form > p {
+    margin-top: 22px;
+    text-align: center;
+    font-size: .88rem;
+    color: rgba(0, 0, 0, .48);
+}
+
 #goLogin {
-    color: #6e8500;
+    color: #6b8200;
     text-decoration: none;
     font-weight: 600;
+    transition: color .2s;
 }
 
 #goLogin:hover {
-    color: #8a9e00;
+    color: #4e6000;
+    text-decoration: underline;
 }
 
-form > p {
-    color: rgba(0, 0, 0, .55);
+/* =========================
+   DIVISOR OPCIONAL
+========================= */
+
+.divider {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 22px 0;
+    color: rgba(0, 0, 0, .25);
+    font-size: .8rem;
+}
+
+.divider::before,
+.divider::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: rgba(0, 0, 0, .10);
 }
 
 /* =========================
@@ -378,21 +426,35 @@ form > p {
 ========================= */
 
 @media (max-width: 1100px) {
-    .login-wrapper {
-        grid-template-columns: 1fr;
-    }
-
     .brand-panel {
         display: none;
     }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 600px) {
+    .login-wrapper {
+        padding: 16px;
+        align-items: flex-start;
+        padding-top: 32px;
+    }
+
     .auth-panel {
-        padding: 20px;
+        padding: 0;
+        width: 100%;
     }
 
     .auth-card {
-        padding: 28px;
+        width: 100%;
+        padding: 36px 28px 40px;
+        border-radius: 22px;
+    }
+
+    .login-logo img {
+        width: 110px;
+    }
+
+    .auth-form h2,
+    .auth-form h3 {
+        font-size: 1.5rem;
     }
 }
