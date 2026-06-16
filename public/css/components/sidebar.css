@@ -52,7 +52,7 @@ HEADER LOGO
 .sidebar-header {
     background: #efefef;
 
-    height: 80px;
+    height: 130px;
 
     display: flex;
 
@@ -324,4 +324,20 @@ MODO MOVIL
     .sidebar.collapsed {
         width: 260px;
     }
+}
+.main-content {
+
+    margin-left: 260px;
+
+    transition: margin-left .3s ease;
+
+}
+
+
+/* Cuando el sidebar está contraído */
+
+.sidebar.collapsed ~ .main-content {
+
+    margin-left: 85px;
+
 }
