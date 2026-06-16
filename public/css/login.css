@@ -168,7 +168,7 @@ body::before {
 ========================= */
 
 .auth-card {
-    width: min(580px, 100%);
+    width: min(620px, 92vw);
     padding: 52px 64px 60px;
     border-radius: 28px;
     background: #ffffff;
@@ -422,39 +422,74 @@ input:-webkit-autofill:focus {
 }
 
 /* =========================
-   RESPONSIVE
+RESPONSIVE MOVIL
 ========================= */
 
-@media (max-width: 1100px) {
-    .brand-panel {
-        display: none;
-    }
-}
+@media (max-width: 768px) {
 
-@media (max-width: 600px) {
     .login-wrapper {
-        padding: 16px;
-        align-items: flex-start;
-        padding-top: 32px;
+        padding: 20px;
+        min-height: 100vh;
+        align-items: center;
+        justify-content: center;
     }
 
     .auth-panel {
-        padding: 0;
         width: 100%;
+        padding: 0;
     }
 
     .auth-card {
+
         width: 100%;
-        padding: 40px 32px 44px;
-        border-radius: 22px;
+        max-width: 450px;
+
+        padding: 45px 35px 50px;
+
+        border-radius: 28px;
     }
 
     .login-logo img {
-        width: 110px;
+        width: 140px;
+    }
+
+    .tabs {
+        height: 60px;
+    }
+
+    .tab-btn {
+        font-size: 1rem;
+        height: 50px;
     }
 
     .auth-form h2,
     .auth-form h3 {
-        font-size: 1.5rem;
+        font-size: 2rem;
+        margin-bottom: 10px;
     }
+
+    .form-subtitle {
+        font-size: 1rem;
+        margin-bottom: 35px;
+    }
+
+    .input-group label {
+        font-size: .95rem;
+    }
+
+    .input-box {
+        height: 58px;
+        border-radius: 16px;
+    }
+
+    .input-box input {
+        font-size: 1rem;
+    }
+
+    .main-btn {
+        height: 58px;
+        font-size: 1rem;
+        margin-top: 15px;
+    }
+
 }
