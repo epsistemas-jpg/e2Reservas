@@ -3,14 +3,15 @@ SIDEBAR GENERAL
 ========================= */
 
 .sidebar {
-    background:
-    linear-gradient(
+    width: 260px;
+    height: 100vh;
+
+    background: linear-gradient(
         180deg,
         #204339 0%,
-        #10241f 55%,
-        #081814 100%
+        #1a382f 40%,
+        #122922 100%
     );
-
 
 
     position: fixed;
