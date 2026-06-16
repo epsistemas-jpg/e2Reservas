@@ -7,8 +7,8 @@ SIDEBAR GENERAL
     height: 100vh;
     background: linear-gradient(
         180deg,
-        #0b2e14,
-        #133d1f
+       #204339,
+        #162f28
     );
 
     position: fixed;
@@ -33,27 +33,6 @@ SIDEBAR CONTRAIDO
     width: 85px;
 }
 
-
-/* =========================
-HEADER BLANCO LOGO
-========================= */
-.sidebar-header {
-    background: white;
-
-    height: 100px;
-
-    display: flex;
-
-    justify-content: center;
-
-    align-items: center;
-
-    position: relative;
-
-    overflow: hidden;
-
-    border-bottom: 1px solid #ddd;
-}
 .sidebar.collapsed .sidebar-logo-img {
 
     width: 55px;
@@ -61,18 +40,37 @@ HEADER BLANCO LOGO
 }
 
 
+/* =========================
+LOGO SIDEBAR
+========================= */
+
+.sidebar-logo {
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    padding: 25px 0 15px 0;
+
+}
+
 .sidebar-logo-img {
 
-    width: 70px;
+    width: 75px;
+
+    height: auto;
+
+    object-fit: contain;
 
     transition: .3s;
 
-}
-.sidebar.collapsed .sidebar-logo-img {
-    width: 40px;
-}
+    filter: drop-shadow(
+        0 4px 12px rgba(194,213,0,.35)
+    );
 
-
+}
 /* =========================
 BOTON HAMBURGUESA
 ========================= */
@@ -81,33 +79,20 @@ BOTON HAMBURGUESA
 
     position: absolute;
 
-    top: 10px;
+    top: 15px;
 
-    left: 10px;
+    left: 15px;
 
-    width: 35px;
-
-    height: 35px;
+    background: transparent;
 
     border: none;
 
-    border-radius: 8px;
+    color: white;
 
-    background: rgba(32, 67, 57, 0.1);
-
-    color: #204339;
-
-    font-size: 18px;
+    font-size: 20px;
 
     cursor: pointer;
 
-    display: flex;
-
-    justify-content: center;
-
-    align-items: center;
-
-    z-index: 10;
 }
 
 #sidebarToggle:hover {
