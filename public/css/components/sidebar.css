@@ -80,18 +80,15 @@ HEADER LOGO
 }
 
 .sidebar-logo {
-
-    display:flex;
-
-    justify-content:center;
-
-    align-items:center;
-
-    padding:25px 0 15px 0;
-
-    transition: .3s ease;
-
+    max-height: 150px;
+    max-width: 180px;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    display: block;
+    transition: .3s;
 }
+
 .sidebar.collapsed .sidebar-logo {
     max-width: 44px;
     max-height: 44px;
