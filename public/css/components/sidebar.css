@@ -6,31 +6,28 @@ SIDEBAR GENERAL
     width: 260px;
     height: 100vh;
 
-    background:
-    linear-gradient(
+    background: linear-gradient(
         180deg,
-        #1f4638 0%,
-        #295941 40%,
-        #17352b 100%
+        #2d6a3f,
+        #204339,
+        #162f28
     );
 
     position: fixed;
-    top: 0;
     left: 0;
+    top: 0;
 
     display: flex;
     flex-direction: column;
 
-    transition: .3s ease;
-
+    transition: .3s;
     overflow: hidden;
-
     z-index: 1000;
 }
 
 
 /* =========================
-SIDEBAR CONTRAÍDO
+SIDEBAR CONTRAÍDA
 ========================= */
 
 .sidebar.collapsed {
@@ -45,41 +42,34 @@ BOTÓN HAMBURGUESA
 #sidebarToggle {
 
     position: absolute;
-
     top: 15px;
     left: 15px;
 
     background: transparent;
-
     border: none;
 
     color: white;
-
     font-size: 22px;
 
     cursor: pointer;
-
-    z-index: 10;
+    z-index: 5;
 }
 
 
 /* =========================
-MENÚ CENTRAL
+MENÚ PRINCIPAL
 ========================= */
 
 .sidebar-menu {
 
-    flex: 1;
+    margin-top: 55px;
 
     display: flex;
-
     flex-direction: column;
 
-    justify-content: center;
+    gap: 18px;
 
-    gap: 15px;
-
-    padding: 0 15px;
+    padding: 0 18px;
 }
 
 
@@ -88,19 +78,18 @@ MENÚ CENTRAL
     height: 52px;
 
     display: flex;
-
     align-items: center;
 
-    gap: 16px;
+    gap: 15px;
 
     padding: 0 20px;
 
-    color: white;
-
-    text-decoration: none;
-
     border-radius: 18px;
 
+    color: white;
+    text-decoration: none;
+
+    font-size: 18px;
     font-weight: 600;
 
     transition: .3s;
@@ -111,26 +100,20 @@ MENÚ CENTRAL
 
     background: rgba(255,255,255,.12);
 
-    transform: translateX(4px);
+    transform: translateX(5px);
 }
 
 
-/* BOTÓN ACTIVO E2 */
+/* BOTÓN ACTIVO */
 
 .sidebar-menu a.active {
 
-    background:
-    linear-gradient(
-        135deg,
-        #9bc91a,
-        #7ea71a
-    );
-
-    color: white;
+    background: #95c11f;
 
     box-shadow:
-        0 10px 25px
-        rgba(155,201,26,.45);
+        0 0 25px rgba(149,193,31,.6);
+
+    color: white;
 }
 
 
@@ -145,25 +128,28 @@ MENÚ CENTRAL
 
 
 /* =========================
-USUARIO ABAJO
+USUARIO + LOGOUT AL FINAL
 ========================= */
 
 .sidebar-user {
 
-    margin: auto 15px 20px;
+    margin-top: auto;
+
+    margin-left: 15px;
+    margin-right: 15px;
+    margin-bottom: 20px;
 
     padding: 18px;
 
-    border-radius: 22px;
+    background: rgba(255,255,255,.08);
 
-    background:
-    rgba(255,255,255,.08);
+    border-radius: 24px;
 
     backdrop-filter: blur(10px);
 }
 
 
-/* INFO USUARIO */
+/* Información usuario */
 
 .sidebar-user-top {
 
@@ -171,34 +157,30 @@ USUARIO ABAJO
 
     align-items: center;
 
-    gap: 12px;
+    gap: 14px;
 
-    margin-bottom: 18px;
+    margin-bottom: 20px;
 }
 
 
 .sidebar-avatar {
 
     width: 52px;
-
     height: 52px;
 
-    border-radius: 16px;
+    border-radius: 18px;
 
-    background:
-    linear-gradient(
+    background: linear-gradient(
         135deg,
-        #a4d122,
-        #7ea71a
+        #95c11f,
+        #6b8e23
     );
 
-    color: white;
-
     display: flex;
-
+    align-items: center;
     justify-content: center;
 
-    align-items: center;
+    color: white;
 
     font-weight: 700;
 }
@@ -209,8 +191,6 @@ USUARIO ABAJO
     color: white;
 
     display: block;
-
-    font-size: .95rem;
 }
 
 
@@ -218,12 +198,12 @@ USUARIO ABAJO
 
     color: rgba(255,255,255,.75);
 
-    font-size: .82rem;
+    font-size: .85rem;
 }
 
 
 /* =========================
-LOGOUT
+BOTÓN LOGOUT
 ========================= */
 
 .logout-btn {
@@ -234,24 +214,23 @@ LOGOUT
 
     border: none;
 
-    border-radius: 16px;
+    border-radius: 18px;
 
-    background:
-    rgba(255,255,255,.12);
+    background: rgba(255,255,255,.12);
 
     color: white;
 
+    font-weight: 600;
+
     display: flex;
 
-    justify-content: center;
-
     align-items: center;
+
+    justify-content: center;
 
     gap: 10px;
 
     cursor: pointer;
-
-    font-weight: 600;
 
     transition: .3s;
 }
@@ -259,8 +238,7 @@ LOGOUT
 
 .logout-btn:hover {
 
-    background:
-    rgba(255,255,255,.22);
+    background: #b91c1c;
 
     transform: translateY(-2px);
 }
@@ -269,6 +247,7 @@ LOGOUT
 /* =========================
 MODO CONTRAÍDO
 ========================= */
+
 
 .sidebar.collapsed .sidebar-menu a {
 
@@ -286,11 +265,15 @@ MODO CONTRAÍDO
 }
 
 
+/* Avatar centrado */
+
 .sidebar.collapsed .sidebar-user-top {
 
     justify-content: center;
 }
 
+
+/* Logout pequeño */
 
 .sidebar.collapsed .logout-btn {
 
@@ -301,10 +284,10 @@ MODO CONTRAÍDO
 
 
 /* =========================
-MÓVIL
+RESPONSIVE
 ========================= */
 
-@media(max-width:900px){
+@media(max-width: 900px) {
 
     .sidebar {
 
@@ -324,4 +307,5 @@ MÓVIL
 
         width: 260px;
     }
+
 }
