@@ -457,8 +457,8 @@ document.addEventListener("DOMContentLoaded", function () {
                     reservation.extendedProps.room,
 
                     ` ${reservation.extendedProps.userName}
- ${reservation.extendedProps.horaInicio} - ${reservation.extendedProps.horaFin}
-  ${reservation.extendedProps.motivo || "Sin motivo"}`
+                    ${reservation.extendedProps.horaInicio} - ${reservation.extendedProps.horaFin}
+                        ${reservation.extendedProps.motivo || "Sin motivo"}`
                 );
 
                 return;
@@ -508,7 +508,84 @@ document.addEventListener("DOMContentLoaded", function () {
 
             document.getElementById("motivo").value =
                 reservation.extendedProps.motivo || "";
-        }
+        },
+
+/* =========================
+   CLICK EN DIA VACÍO
+========================= */
+
+dateClick: function(info) {
+
+    // Solo permitir fechas de hoy en adelante
+    const hoy = new Date();
+    hoy.setHours(0,0,0,0);
+
+    const fechaSeleccionada =
+        new Date(info.dateStr);
+
+    if (fechaSeleccionada < hoy) {
+
+        showToast(
+            "warning",
+            "Fecha inválida",
+            "No puedes reservar días anteriores"
+        );
+
+        return;
+    }
+
+
+    // Limpiar modo edición
+    editingReservationId = null;
+
+
+    // Limpiar formulario
+    reservationForm.reset();
+
+
+    // Cambiar título del modal
+    document.querySelector(
+        ".modal-header h2"
+    ).innerText =
+        "Nueva Reserva";
+
+
+    // Cambiar botón guardar
+    document.querySelector(
+        ".submit-btn"
+    ).innerText =
+        "Crear Reserva";
+
+
+    // Ocultar botón eliminar
+    if(deleteReservationBtn) {
+
+        deleteReservationBtn.style.display =
+            "none";
+
+    }
+
+
+    // Colocar fecha seleccionada
+    document.getElementById(
+        "date"
+    ).value =
+        info.dateStr;
+
+
+    // Abrir modal
+    reservationModal.classList.add(
+        "active"
+    );
+
+
+    showToast(
+        "info",
+        "Nueva Reserva",
+        "Selecciona la hora y sala"
+    );
+
+}
     });
 
     calendar.render();
