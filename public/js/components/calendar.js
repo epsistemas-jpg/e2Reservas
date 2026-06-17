@@ -517,23 +517,25 @@ document.addEventListener("DOMContentLoaded", function () {
 dateClick: function(info) {
 
     // Solo permitir fechas de hoy en adelante
-    const hoy = new Date();
-    hoy.setHours(0,0,0,0);
+    const fechaActual = new Date();
 
-    const fechaSeleccionada =
-        new Date(info.dateStr);
+const hoy =
+    `${fechaActual.getFullYear()}-${
+        String(fechaActual.getMonth() + 1).padStart(2,"0")
+    }-${
+        String(fechaActual.getDate()).padStart(2,"0")
+    }`;
 
-    if (fechaSeleccionada < hoy) {
+if (info.dateStr < hoy) {
 
-        showToast(
-            "warning",
-            "Fecha inválida",
-            "No puedes reservar días anteriores"
-        );
+    showToast(
+        "warning",
+        "Fecha inválida",
+        "No puedes reservar días anteriores"
+    );
 
-        return;
-    }
-
+    return;
+}
 
     // Limpiar modo edición
     editingReservationId = null;
