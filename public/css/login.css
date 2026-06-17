@@ -187,7 +187,7 @@ body::before {
 }
 
 .login-logo img {
-    width: 200px;
+    width: 250px;
     height: auto;
     object-fit: contain;
 }
