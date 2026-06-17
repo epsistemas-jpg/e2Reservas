@@ -52,10 +52,6 @@ if (sidebarToggle) {
 DASHBOARD
 ========================= */
 
-/* =========================
-DASHBOARD
-========================= */
-
 const dashboardMenu =
 document.getElementById(
     "dashboardMenu"
@@ -86,8 +82,6 @@ if (dashboardMenu) {
     );
 
 }
-
-
 
 /* =========================
 NUEVA RESERVA
