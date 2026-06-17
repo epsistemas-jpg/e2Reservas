@@ -57,24 +57,36 @@ DASHBOARD
 ========================= */
 
 const dashboardMenu =
-document.getElementById("dashboardMenu");
+document.getElementById(
+    "dashboardMenu"
+);
 
 if (dashboardMenu) {
-    dashboardMenu.addEventListener("click", (e) => {
-        e.preventDefault();
 
-        window.currentEndpoint =
-            "/api/reservations";
+    dashboardMenu.addEventListener(
+        "click",
+        (e) => {
 
-        calendar.refetchEvents();
+            e.preventDefault();
 
-        showToast(
-            "success",
-            "Dashboard",
-            "Mostrando todas las reservas"
-        );
-    });
+            // Mostrar todas las reservas activas
+            window.currentEndpoint =
+                "/api/reservations";
+
+            // Recargar calendario
+            calendar.refetchEvents();
+
+            showToast(
+                "success",
+                "Dashboard",
+                "Mostrando todas las reservas"
+            );
+
+        }
+    );
+
 }
+
 
 
 /* =========================
