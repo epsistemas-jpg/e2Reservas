@@ -1,16 +1,8 @@
-/* =========================
-SIDEBAR GENERAL
-========================= */
-
 .sidebar {
     width: 260px;
     height: 100vh;
 
-   background:  linear-gradient(
-        135deg,
-        #95c11f,
-        #6b8e23
-    );
+    background: #0f172a;
     border-right: 1px solid rgba(194, 213, 0, 0.15);
     box-shadow:
     inset -1px 0 0 rgba(255,255,255,0.05),
@@ -30,19 +22,10 @@ SIDEBAR GENERAL
     z-index: 1000;
 }
 
-
-/* =========================
-SIDEBAR CONTRAIDO
-========================= */
-
 .sidebar.collapsed {
     width: 85px;
 }
 
-
-/* =========================
-SIDEBAR TOP (agrupa header + menu)
-========================= */
 
 .sidebar-top {
     display: flex;
@@ -50,10 +33,6 @@ SIDEBAR TOP (agrupa header + menu)
     flex: 1;
 }
 
-
-/* =========================
-HEADER LOGO
-========================= */
 
 .sidebar-header {
     background: #ffffff;
@@ -101,9 +80,6 @@ HEADER LOGO
 }
 
 
-/* =========================
-BOTON HAMBURGUESA
-========================= */
 #sidebarToggle {
 
     position: absolute;
@@ -157,10 +133,6 @@ BOTON HAMBURGUESA
     color: #204339;
 }
 
-
-/* =========================
-MENU
-========================= */
 
 .sidebar-menu {
 
@@ -227,8 +199,6 @@ MENU
 }
 
 
-/* TEXTO MENU */
-
 .sidebar-menu span {
 
     white-space: nowrap;
@@ -237,7 +207,6 @@ MENU
 }
 
 
-/* MENU CONTRAIDO */
 
 .sidebar.collapsed .sidebar-menu {
 
@@ -252,10 +221,6 @@ MENU
     display: none;
 }
 
-
-/* =========================
-USUARIO ABAJO
-========================= */
 
 .sidebar-user {
 
@@ -273,9 +238,6 @@ USUARIO ABAJO
 }
 
 
-/* =========================
-BOTON LOGOUT
-========================= */
 
 .logout-btn {
 
@@ -313,8 +275,6 @@ BOTON LOGOUT
 }
 
 
-/* OCULTAR TEXTO LOGOUT */
-
 .sidebar.collapsed .logout-btn span {
     display: none;
 }
@@ -328,9 +288,6 @@ BOTON LOGOUT
 }
 
 
-/* =========================
-MODO MOVIL
-========================= */
 
 @media (max-width: 900px) {
 
@@ -355,9 +312,7 @@ MODO MOVIL
     transition: margin-left .3s ease;
 
 }
-/* =========================
-RESPONSIVE TABLET
-========================= */
+
 @media (max-width: 1100px) {
 
     .sidebar {
@@ -389,7 +344,6 @@ RESPONSIVE TABLET
 
 }
 
-/* Cuando el sidebar está contraído */
 
 .sidebar.collapsed ~ .main-content {
 
@@ -442,9 +396,7 @@ RESPONSIVE TABLET
     }
 
 }
-/* =========================
-OCULTAR LOGO AL CONTRAER
-========================= */
+
 
 .sidebar.collapsed .sidebar-logo {
 
@@ -459,9 +411,6 @@ OCULTAR LOGO AL CONTRAER
     overflow: hidden;
 
 }
-/* =========================
-BOTON EN SIDEBAR CONTRAIDO
-========================= */
 
 .sidebar.collapsed #sidebarToggle {
 
