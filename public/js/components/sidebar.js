@@ -52,36 +52,14 @@ if (sidebarToggle) {
 DASHBOARD
 ========================= */
 
-const dashboardMenu =
-document.getElementById(
-    "dashboardMenu"
-);
+const reserveMenu = document.getElementById("reserveMenu");
 
-if (dashboardMenu) {
-
-    dashboardMenu.addEventListener(
-        "click",
-        (e) => {
-
-            e.preventDefault();
-
-            // Mostrar todas las reservas activas
-            window.currentEndpoint =
-                "/api/reservations";
-
-            // Recargar calendario
-            calendar.refetchEvents();
-
-            showToast(
-                "success",
-                "Dashboard",
-                "Mostrando todas las reservas"
-            );
-
-        }
-    );
-
+if (reserveMenu) {
+    reserveMenu.addEventListener("click", () => {
+        
+    });
 }
+
 
 /* =========================
 NUEVA RESERVA
