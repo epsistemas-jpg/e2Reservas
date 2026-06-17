@@ -163,9 +163,6 @@ body::before {
     padding: 32px;
 }
 
-/* =========================
-   TARJETA — BLANCA Y LIMPIA
-========================= */
 
 .auth-card {
     width: min(580px, 88vw);
@@ -190,7 +187,7 @@ body::before {
 }
 
 .login-logo img {
-    width: 130px;
+    width: 160px;
     height: auto;
     object-fit: contain;
 }
