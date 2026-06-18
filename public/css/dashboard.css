@@ -765,8 +765,8 @@ header h1{
 }
 #welcomeMessage {
     font-size: 1.3rem;
-    font-weight: 600;
+    font-weight: 500;
     color: var(--text-primary);
-    margin: 0 0 1rem 0;
+    margin: -0.5rem 0 0.5rem 0;
     padding: 0;
 }
