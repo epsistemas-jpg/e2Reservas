@@ -59,16 +59,7 @@ function setActiveLink(el) {
     el.classList.add("active");
 }
 
-const dashboardMenu = document.getElementById("dashboardMenu");
 
-if (dashboardMenu) {
-    dashboardMenu.addEventListener("click", (e) => {
-        e.preventDefault();
-        setActiveLink(dashboardMenu);
-        window.currentEndpoint = "/api/reservations";
-        calendar.refetchEvents();
-    });
-}
 /* =========================
 NUEVA RESERVA
 ========================= */
