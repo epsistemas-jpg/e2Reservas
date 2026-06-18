@@ -138,30 +138,6 @@ if (settingsAvatar) {
 }
 
 
-/* =========================
-DASHBOARD BTN
-========================= */
-
-const dashboardMenu =
-    document.getElementById("dashboardMenu");
-
-
-if (dashboardMenu) {
-
-    dashboardMenu.addEventListener("click", (e) => {
-
-        e.preventDefault();
-
-        currentView = "all";
-
-        if (calendar) {
-            calendar.refetchEvents();
-        }
-
-    });
-
-}
-
 
 /* =========================
 WELCOME MESSAGE
