@@ -3,47 +3,47 @@ SIDEBAR - BOTÓN HAMBURGUESA
 ========================= */
 
 const sidebarToggle =
-document.getElementById(
-    "sidebarToggle"
-);
+    document.getElementById(
+        "sidebarToggle"
+    );
 
 const sidebar =
-document.querySelector(
-    ".sidebar"
-);
+    document.querySelector(
+        ".sidebar"
+    );
 
 if (sidebarToggle) {
 
-   sidebarToggle.addEventListener(
-    "click",
-    () => {
+    sidebarToggle.addEventListener(
+        "click",
+        () => {
 
-        // Móvil
-        if (window.innerWidth <= 900) {
+            // Móvil
+            if (window.innerWidth <= 900) {
 
-            sidebar.classList.toggle("active");
+                sidebar.classList.toggle("active");
 
-        } 
-        // Escritorio
-        else {
+            }
+            // Escritorio
+            else {
 
-            sidebar.classList.toggle("collapsed");
-
-        }
-
-
-        // Espera que termine la animación
-        setTimeout(() => {
-
-            if (typeof calendar !== "undefined") {
-
-                calendar.updateSize();
+                sidebar.classList.toggle("collapsed");
 
             }
 
-        }, 350);
-    }
-);
+
+            // Espera que termine la animación
+            setTimeout(() => {
+
+                if (typeof calendar !== "undefined") {
+
+                    calendar.updateSize();
+
+                }
+
+            }, 350);
+        }
+    );
 
 }
 
@@ -52,15 +52,23 @@ if (sidebarToggle) {
 DASHBOARD
 ========================= */
 
-const reserveMenu = document.getElementById("reserveMenu");
+const navLinks = document.querySelectorAll(".sidebar-menu a");
 
-if (reserveMenu) {
-    reserveMenu.addEventListener("click", () => {
-        
-    });
+function setActiveLink(el) {
+    navLinks.forEach(link => link.classList.remove("active"));
+    el.classList.add("active");
 }
 
+const dashboardMenu = document.getElementById("dashboardMenu");
 
+if (dashboardMenu) {
+    dashboardMenu.addEventListener("click", (e) => {
+        e.preventDefault();
+        setActiveLink(dashboardMenu);
+        window.currentEndpoint = "/api/reservations";
+        calendar.refetchEvents();
+    });
+}
 /* =========================
 NUEVA RESERVA
 ========================= */
@@ -113,51 +121,27 @@ document.getElementById(
 MIS RESERVAS
 ========================= */
 
-document.getElementById(
-    "myReservationsMenu"
-).addEventListener(
-    "click",
-    (e) => {
+document.getElementById("myReservationsMenu").addEventListener("click", (e) => {
+    e.preventDefault();
+    setActiveLink(document.getElementById("myReservationsMenu"));
 
-        e.preventDefault();
+    window.currentEndpoint = "/api/myreservations";
+    calendar.refetchEvents();
 
-        window.currentEndpoint =
-            "/api/myreservations";
-
-        calendar.refetchEvents();
-
-        showToast(
-            "success",
-            "Mis Reservas",
-            "Mostrando tus reservas activas"
-        );
-
-    }
-);
+    showToast("success", "Mis Reservas", "Mostrando tus reservas activas");
+});
 
 
 /* =========================
 HISTORIAL
 ========================= */
 
-document.getElementById(
-    "historyMenu"
-).addEventListener(
-    "click",
-    (e) => {
+document.getElementById("historyMenu").addEventListener("click", (e) => {
+    e.preventDefault();
+    setActiveLink(document.getElementById("historyMenu"));
 
-        e.preventDefault();
+    window.currentEndpoint = "/api/history";
+    calendar.refetchEvents();
 
-        window.currentEndpoint =
-            "/api/history";
-
-        calendar.refetchEvents();
-
-        showToast(
-            "info",
-            "Historial",
-            "Mostrando reservas finalizadas"
-        );
-
-    }
-);
+    showToast("info", "Historial", "Mostrando reservas finalizadas");
+});
