@@ -763,3 +763,10 @@ header h1{
 .expanded-calendar .fc-daygrid-event{
     margin-bottom:6px;
 }
+#welcomeMessage {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin: 0 0 1rem 0;
+    padding: 0;
+}
