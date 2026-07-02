@@ -589,17 +589,16 @@ app.post("/forgot-password", async (req, res) => {
     try {
 
         const userResult = await pool.query(
-
             "SELECT id, name, email FROM users WHERE email = $1",
-
             [email]
-
         );
 
+        // Por seguridad nunca decir si el correo existe o no
         if (userResult.rows.length === 0) {
 
             return res.json({
-                success: true
+                success: true,
+                message: "Si el correo existe, recibirás un enlace para restablecer tu contraseña."
             });
 
         }
@@ -608,61 +607,48 @@ app.post("/forgot-password", async (req, res) => {
 
         const token = uuidv4();
 
-        const expiresAt = new Date(
-            Date.now() + 15 * 60 * 1000
-        );
+        const expiresAt = new Date(Date.now() + 15 * 60 * 1000);
 
+        // Eliminar tokens anteriores
         await pool.query(
-
             "DELETE FROM password_resets1 WHERE user_id = $1",
-
             [user.id]
-
         );
 
+        // Guardar nuevo token
         await pool.query(
-
             `INSERT INTO password_resets1
-            (user_id, token, expires_at)
-            VALUES ($1,$2,$3)`,
-
+             (user_id, token, expires_at)
+             VALUES ($1,$2,$3)`,
             [
                 user.id,
                 token,
                 expiresAt
             ]
-
         );
 
         const resetLink =
             `${process.env.FRONTEND_URL}/pages/reset-password.html?token=${token}`;
 
+        // Enviar correo
         await sendResetEmail(
-
             user.email,
-
             user.name,
-
             resetLink
-
         );
 
-        res.json({
-
-            success: true
-
+        return res.json({
+            success: true,
+            message: "Se ha enviado un enlace de recuperación a tu correo."
         });
 
     } catch (err) {
 
-        console.error(err);
+        console.error("ERROR FORGOT PASSWORD:", err);
 
-        res.status(500).json({
-
+        return res.status(500).json({
             success: false,
-
-            message: "Error interno"
-
+            message: "No fue posible enviar el correo."
         });
 
     }
