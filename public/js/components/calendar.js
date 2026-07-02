@@ -25,6 +25,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
     const deleteReservationBtn =
         document.getElementById("deleteReservation");
+    const openModalBtn =
+        document.getElementById("openModal");
 
     /* =========================
        CALENDARIO
@@ -510,85 +512,117 @@ document.addEventListener("DOMContentLoaded", function () {
                 reservation.extendedProps.motivo || "";
         },
 
-/* =========================
-   CLICK EN DIA VACÍO
+        /* =========================
+           CLICK EN DIA VACÍO
+        ========================= */
+
+        dateClick: function (info) {
+
+            // Solo permitir fechas de hoy en adelante
+            const fechaActual = new Date();
+
+            const hoy =
+                `${fechaActual.getFullYear()}-${String(fechaActual.getMonth() + 1).padStart(2, "0")
+                }-${String(fechaActual.getDate()).padStart(2, "0")
+                }`;
+
+            if (info.dateStr < hoy) {
+
+                showToast(
+                    "warning",
+                    "Fecha inválida",
+                    "No puedes reservar días anteriores"
+                );
+
+                return;
+            }
+
+            // Limpiar modo edición
+            editingReservationId = null;
+
+
+            // Limpiar formulario
+            reservationForm.reset();
+
+
+            // Cambiar título del modal
+            document.querySelector(
+                ".modal-header h2"
+            ).innerText =
+                "Nueva Reserva";
+
+
+            // Cambiar botón guardar
+            document.querySelector(
+                ".submit-btn"
+            ).innerText =
+                "Crear Reserva";
+
+
+            // Ocultar botón eliminar
+            if (deleteReservationBtn) {
+
+                deleteReservationBtn.style.display =
+                    "none";
+
+            }
+
+
+            // Colocar fecha seleccionada
+            document.getElementById(
+                "date"
+            ).value =
+                info.dateStr;
+
+
+            // Abrir modal
+            reservationModal.classList.add(
+                "active"
+            );
+
+
+            showToast(
+                "info",
+                "Nueva Reserva",
+                "Selecciona la hora y sala"
+            );
+
+        }
+    });
+    /* =========================
+   NUEVA RESERVA
 ========================= */
 
-dateClick: function(info) {
+if (openModalBtn) {
 
-    // Solo permitir fechas de hoy en adelante
-    const fechaActual = new Date();
+    openModalBtn.addEventListener("click", () => {
 
-const hoy =
-    `${fechaActual.getFullYear()}-${
-        String(fechaActual.getMonth() + 1).padStart(2,"0")
-    }-${
-        String(fechaActual.getDate()).padStart(2,"0")
-    }`;
+        // Salir del modo edición
+        editingReservationId = null;
 
-if (info.dateStr < hoy) {
+        // Limpiar formulario
+        reservationForm.reset();
 
-    showToast(
-        "warning",
-        "Fecha inválida",
-        "No puedes reservar días anteriores"
-    );
+        // Restaurar título
+        document.querySelector(".modal-header h2").innerText =
+            "Nueva Reserva";
 
-    return;
-}
+        // Restaurar botón
+        document.querySelector(".submit-btn").innerText =
+            "Crear Reserva";
 
-    // Limpiar modo edición
-    editingReservationId = null;
+        // Ocultar botón eliminar
+        deleteReservationBtn.style.display = "none";
 
+        // Limpiar fecha
+        document.getElementById("date").value = "";
 
-    // Limpiar formulario
-    reservationForm.reset();
+        // Abrir modal
+        reservationModal.classList.add("active");
 
-
-    // Cambiar título del modal
-    document.querySelector(
-        ".modal-header h2"
-    ).innerText =
-        "Nueva Reserva";
-
-
-    // Cambiar botón guardar
-    document.querySelector(
-        ".submit-btn"
-    ).innerText =
-        "Crear Reserva";
-
-
-    // Ocultar botón eliminar
-    if(deleteReservationBtn) {
-
-        deleteReservationBtn.style.display =
-            "none";
-
-    }
-
-
-    // Colocar fecha seleccionada
-    document.getElementById(
-        "date"
-    ).value =
-        info.dateStr;
-
-
-    // Abrir modal
-    reservationModal.classList.add(
-        "active"
-    );
-
-
-    showToast(
-        "info",
-        "Nueva Reserva",
-        "Selecciona la hora y sala"
-    );
-
-}
     });
+
+}
 
     calendar.render();
 
@@ -854,18 +888,27 @@ if (info.dateStr < hoy) {
     ========================= */
 
     window.addEventListener(
-        "click",
-        (e) => {
+    "click",
+    (e) => {
 
-            if (
-                e.target ===
-                reservationModal
-            ) {
+        if (e.target === reservationModal) {
 
-                reservationModal
-                    .classList
-                    .remove("active");
-            }
+            reservationModal.classList.remove("active");
+
+            editingReservationId = null;
+
+            reservationForm.reset();
+
+            document.querySelector(".modal-header h2").innerText =
+                "Nueva Reserva";
+
+            document.querySelector(".submit-btn").innerText =
+                "Crear Reserva";
+
+            deleteReservationBtn.style.display = "none";
+
         }
-    );
+
+    }
+);
 });
