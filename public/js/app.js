@@ -832,7 +832,21 @@ function editarReserva(reserva) {
 
 function cerrarFormulario() {
 
-  document.getElementById(
-    "reservationModal"
-  ).classList.remove("active");
+  // Cerrar el modal
+  document.getElementById("reservationModal")
+    .classList.remove("active");
+
+  // Limpiar el modo edición
+  editingReservationId = null;
+
+  // Limpiar formulario
+  document.getElementById("reservationForm").reset();
+
+  // Restaurar textos
+  document.querySelector(".modal-header h2").innerText =
+    "Nueva Reserva";
+
+  document.querySelector(".submit-btn").innerText =
+    "Crear Reserva";
+
 }
