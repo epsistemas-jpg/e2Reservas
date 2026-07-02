@@ -582,6 +582,92 @@ app.get("/api/history", requireLogin, (req, res) => {
         .send(err.message);
     });
 });
+app.post("/forgot-password", async (req, res) => {
+
+    const { email } = req.body;
+
+    try {
+
+        const userResult = await pool.query(
+
+            "SELECT id, name, email FROM users WHERE email = $1",
+
+            [email]
+
+        );
+
+        if (userResult.rows.length === 0) {
+
+            return res.json({
+                success: true
+            });
+
+        }
+
+        const user = userResult.rows[0];
+
+        const token = uuidv4();
+
+        const expiresAt = new Date(
+            Date.now() + 15 * 60 * 1000
+        );
+
+        await pool.query(
+
+            "DELETE FROM password_resets1 WHERE user_id = $1",
+
+            [user.id]
+
+        );
+
+        await pool.query(
+
+            `INSERT INTO password_resets1
+            (user_id, token, expires_at)
+            VALUES ($1,$2,$3)`,
+
+            [
+                user.id,
+                token,
+                expiresAt
+            ]
+
+        );
+
+        const resetLink =
+            `${process.env.FRONTEND_URL}/pages/reset-password.html?token=${token}`;
+
+        await sendResetEmail(
+
+            user.email,
+
+            user.name,
+
+            resetLink
+
+        );
+
+        res.json({
+
+            success: true
+
+        });
+
+    } catch (err) {
+
+        console.error(err);
+
+        res.status(500).json({
+
+            success: false,
+
+            message: "Error interno"
+
+        });
+
+    }
+
+});
 app.post("/reset-password", async (req, res) => {
 
     const { token, password } = req.body;
@@ -591,7 +677,7 @@ app.post("/reset-password", async (req, res) => {
         const result = await pool.query(
 
             `SELECT *
-             FROM password_resets
+             FROM password_resets1
              WHERE token = $1`,
 
             [token]
@@ -617,7 +703,7 @@ app.post("/reset-password", async (req, res) => {
 
             await pool.query(
 
-                "DELETE FROM password_resets WHERE id = $1",
+                "DELETE FROM password_resets1 WHERE id = $1",
 
                 [reset.id]
 
@@ -656,7 +742,7 @@ app.post("/reset-password", async (req, res) => {
         // Eliminar token usado
         await pool.query(
 
-            "DELETE FROM password_resets WHERE id = $1",
+            "DELETE FROM password_resets1 WHERE id = $1",
 
             [reset.id]
 
