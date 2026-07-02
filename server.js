@@ -1,6 +1,7 @@
 require("dotenv").config();
 const express = require("express");
 const session = require("express-session");
+const pgSession = require("connect-pg-simple")(session);
 const bodyParser = require("body-parser");
 const bcrypt = require("bcryptjs");
 const { Pool } = require("pg");
@@ -32,9 +33,18 @@ pool.connect()
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(session({
+  name: "reservas.sid",
+  store: new pgSession({
 
-  secret:
-    process.env.SESSION_SECRET,
+    pool: pool,
+
+    tableName: "user_sessions",
+
+    createTableIfMissing: true
+
+  }),
+
+  secret: process.env.SESSION_SECRET,
 
   resave: false,
 
@@ -42,43 +52,44 @@ app.use(session({
 
   proxy: true,
 
+  rolling: true,
+
   cookie: {
 
-    secure:
-      process.env.NODE_ENV ===
-      "production",
+    secure: process.env.NODE_ENV === "production",
 
     httpOnly: true,
 
     sameSite: "lax",
 
-    maxAge:
-      1000 * 60 * 60 * 8
+    maxAge: 1000 * 60 * 60 * 8 // 8 horas
+
   }
+
 }));
 app.use((req, res, next) => {
 
-    const protectedPages = [
+  const protectedPages = [
 
-        "/pages/index.html",
-        "/pages/dashboard.html"
+    "/pages/index.html",
+    "/pages/dashboard.html"
 
-    ];
+  ];
 
-    if (
+  if (
 
-        protectedPages.includes(req.path) &&
-        !req.session.userId
+    protectedPages.includes(req.path) &&
+    !req.session.userId
 
-    ) {
+  ) {
 
-        return res.redirect(
-            "/pages/login.html"
-        );
+    return res.redirect(
+      "/pages/login.html"
+    );
 
-    }
+  }
 
-    next();
+  next();
 
 });
 /* =========================
@@ -132,15 +143,15 @@ app.get("/", (req, res) => {
 // ---------------------------
 app.post("/logout", (req, res) => {
 
-    req.session.destroy(() => {
+  req.session.destroy(() => {
 
-        res.clearCookie("connect.sid");
+    res.clearCookie("connect.sid");
 
-        res.json({
-            success: true
-        });
-
+    res.json({
+      success: true
     });
+
+  });
 
 });
 
@@ -153,25 +164,25 @@ function requireLogin(req, res, next) {
 }
 app.get("/api/check-auth", (req, res) => {
 
-    if (!req.session.userId) {
+  if (!req.session.userId) {
 
-        return res.status(401).json({
-            authenticated: false
-        });
-
-    }
-
-    res.json({
-
-        authenticated: true,
-
-        userId: req.session.userId,
-
-        userName: req.session.userName,
-
-        role: req.session.role
-
+    return res.status(401).json({
+      authenticated: false
     });
+
+  }
+
+  res.json({
+
+    authenticated: true,
+
+    userId: req.session.userId,
+
+    userName: req.session.userName,
+
+    role: req.session.role
+
+  });
 
 });
 /* =========================
@@ -215,28 +226,56 @@ app.post("/login", (req, res) => {
 
   pool.query("SELECT * FROM users WHERE email = $1", [email])
     .then(async result => {
-      if (result.rows.length === 0) return res.status(400).send("Usuario no encontrado");
+
+      if (result.rows.length === 0) {
+        return res.status(400).send("Usuario no encontrado");
+      }
 
       const row = result.rows[0];
+
       const match = await bcrypt.compare(password, row.password);
-      if (!match) return res.status(400).send("Contraseña incorrecta");
 
-      req.session.userId = row.id;
-      req.session.userName = row.name;
-      req.session.role = row.role;
-      res.json({
+      if (!match) {
+        return res.status(400).send("Contraseña incorrecta");
+      }
 
-        success: true,
+      // Regenerar la sesión por seguridad
+      req.session.regenerate(err => {
 
-        userId: row.id,
+        if (err) {
+          console.error(err);
+          return res.status(500).send("Error al iniciar sesión");
+        }
 
-        userName: row.name,
+        // Guardar datos del usuario en la sesión
+        req.session.userId = row.id;
+        req.session.userName = row.name;
+        req.session.role = row.role;
 
-        userRole: row.role
+        // Guardar la sesión en PostgreSQL
+        req.session.save(err => {
+
+          if (err) {
+            console.error(err);
+            return res.status(500).send("Error al guardar la sesión");
+          }
+
+          res.json({
+            success: true,
+            userId: row.id,
+            userName: row.name,
+            userRole: row.role
+          });
+
+        });
 
       });
+
     })
-    .catch(err => res.status(500).send(err.message));
+    .catch(err => {
+      console.error(err);
+      res.status(500).send(err.message);
+    });
 });
 
 
