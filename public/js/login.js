@@ -9,6 +9,15 @@ const loginForm = document.getElementById("loginForm");
 const registerForm = document.getElementById("registerForm");
 
 const goLogin = document.getElementById("goLogin");
+const forgotPasswordLink = document.getElementById("forgotPasswordLink");
+
+const forgotPasswordModal = document.getElementById("forgotPasswordModal");
+
+const closeResetModal = document.getElementById("closeResetModal");
+
+const sendResetBtn = document.getElementById("sendResetBtn");
+
+const resetEmail = document.getElementById("resetEmail");
 /* =========================
    FONDO ANIMADO
 ========================= */
@@ -232,5 +241,87 @@ registerForm.addEventListener("submit", async (e) => {
 
     }
     
+
+});
+/* =========================
+RECUPERAR CONTRASEÑA
+========================= */
+
+forgotPasswordLink.addEventListener("click",(e)=>{
+
+    e.preventDefault();
+
+    resetEmail.value="";
+
+    forgotPasswordModal.classList.add("active");
+
+});
+
+
+closeResetModal.addEventListener("click",()=>{
+
+    forgotPasswordModal.classList.remove("active");
+
+});
+
+
+window.addEventListener("click",(e)=>{
+
+    if(e.target===forgotPasswordModal){
+
+        forgotPasswordModal.classList.remove("active");
+
+    }
+
+});
+
+
+sendResetBtn.addEventListener("click",async()=>{
+
+    const email=resetEmail.value.trim();
+
+    if(!email){
+
+        alert("Ingrese un correo.");
+
+        return;
+
+    }
+
+    sendResetBtn.disabled=true;
+
+    sendResetBtn.innerText="Enviando...";
+
+    try{
+
+        const response=await fetch("/forgot-password",{
+
+            method:"POST",
+
+            headers:{
+                "Content-Type":"application/json"
+            },
+
+            body:JSON.stringify({email})
+
+        });
+
+        const result=await response.json();
+
+        alert(result.message);
+
+        forgotPasswordModal.classList.remove("active");
+
+    }catch(err){
+
+        console.error(err);
+
+        alert("No fue posible enviar el correo.");
+
+    }
+
+    sendResetBtn.disabled=false;
+
+    sendResetBtn.innerText="Enviar enlace";
 
 });

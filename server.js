@@ -6,7 +6,8 @@ const bodyParser = require("body-parser");
 const bcrypt = require("bcryptjs");
 const { Pool } = require("pg");
 const path = require("path");
-const transporter = require("./utils/mail");
+const { v4: uuidv4 } = require("uuid");
+const { sendResetEmail } = require("./utils/mail");
 
 const app = express();
 app.set("trust proxy", 1);
@@ -581,32 +582,105 @@ app.get("/api/history", requireLogin, (req, res) => {
         .send(err.message);
     });
 });
-app.get("/test-email", async (req, res) => {
+app.post("/reset-password", async (req, res) => {
+
+    const { token, password } = req.body;
 
     try {
 
-        await transporter.sendMail({
+        const result = await pool.query(
 
-            from: `"Sistema de Reservas" <${process.env.EMAIL_USER}>`,
+            `SELECT *
+             FROM password_resets
+             WHERE token = $1`,
 
-            to: process.env.EMAIL_USER,
+            [token]
 
-            subject: "Prueba de correo",
+        );
 
-            html: `
-                <h2>Correo de prueba</h2>
-                <p>Si recibiste este correo significa que Gmail está configurado correctamente.</p>
-            `
+        if (result.rows.length === 0) {
+
+            return res.status(400).json({
+
+                success: false,
+
+                message: "El enlace no es válido."
+
+            });
+
+        }
+
+        const reset = result.rows[0];
+
+        // Verificar expiración
+        if (new Date(reset.expires_at) < new Date()) {
+
+            await pool.query(
+
+                "DELETE FROM password_resets WHERE id = $1",
+
+                [reset.id]
+
+            );
+
+            return res.status(400).json({
+
+                success: false,
+
+                message: "El enlace ha expirado."
+
+            });
+
+        }
+
+        // Encriptar contraseña
+        const hashedPassword = await bcrypt.hash(password, 10);
+
+        // Actualizar contraseña
+        await pool.query(
+
+            `UPDATE users
+             SET password = $1
+             WHERE id = $2`,
+
+            [
+
+                hashedPassword,
+
+                reset.user_id
+
+            ]
+
+        );
+
+        // Eliminar token usado
+        await pool.query(
+
+            "DELETE FROM password_resets WHERE id = $1",
+
+            [reset.id]
+
+        );
+
+        res.json({
+
+            success: true,
+
+            message: "Contraseña actualizada correctamente."
 
         });
-
-        res.send("Correo enviado correctamente.");
 
     } catch (err) {
 
         console.error(err);
 
-        res.status(500).send(err.message);
+        res.status(500).json({
+
+            success: false,
+
+            message: "Error interno del servidor."
+
+        });
 
     }
 

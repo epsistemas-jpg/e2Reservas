@@ -48,6 +48,7 @@
                         Iniciar Sesión
 
                     </button>
+                   
 
                     <button type="button" class="tab-btn" id="registerTab">
 
@@ -94,6 +95,13 @@
                         Ingresar al Sistema
 
                     </button>
+                     <div class="forgot-password">
+
+                        <a href="#" id="forgotPasswordLink">
+                            ¿Olvidaste tu contraseña?
+                        </a>
+
+                    </div>
 
                 </form>
 
@@ -168,8 +176,53 @@
         </section>
 
     </main>
+    <!-- Modal Recuperar Contraseña -->
 
-   <script type="module" src="../js/login.js"></script>
+<div id="forgotPasswordModal" class="modal">
+
+    <div class="modal-content">
+
+        <h2>Recuperar contraseña</h2>
+
+        <p>
+
+            Ingresa el correo asociado a tu cuenta.
+
+        </p>
+
+        <input
+            type="email"
+            id="resetEmail"
+            placeholder="correo@empresa.com"
+        >
+
+        <div class="modal-buttons">
+
+            <button
+                id="sendResetBtn"
+                class="main-btn"
+            >
+
+                Enviar enlace
+
+            </button>
+
+            <button
+                id="closeResetModal"
+                class="secondary-btn"
+            >
+
+                Cancelar
+
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+    <script type="module" src="../js/login.js"></script>
 
 </body>
 
