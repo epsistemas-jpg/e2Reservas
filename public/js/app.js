@@ -2,6 +2,35 @@ let calendar;
 
 let editingReservationId = null;
 
+// =========================
+// FETCH CON REINTENTO
+// =========================
+async function fetchWithRetry(url, options = {}, retries = 2) {
+
+  for (let intento = 0; intento <= retries; intento++) {
+
+    try {
+
+      const response = await fetch(url, options);
+
+      // Si el servidor respondió, devolver inmediatamente
+      return response;
+
+    } catch (err) {
+
+      if (intento === retries) {
+        throw err;
+      }
+
+      // Esperar antes de volver a intentar
+      await new Promise(resolve => setTimeout(resolve, 4000));
+
+    }
+
+  }
+
+}
+
 document.addEventListener("DOMContentLoaded", function () {
 
   const tooltip =
@@ -48,8 +77,14 @@ document.addEventListener("DOMContentLoaded", function () {
       try {
 
         let res =
-          await fetch("/api/reservations");
+          await fetchWithRetry("/api/reservations");
+        if (res.status === 401) {
 
+          window.location.href = "/pages/login.html";
+
+          return;
+
+        }
         let data =
           await res.json();
 
@@ -439,20 +474,25 @@ document.addEventListener("DOMContentLoaded", function () {
           method =
             "PUT";
         }
+        if (response.status === 401) {
 
-        let response =
-          await fetch(url, {
+          window.location.href = "/pages/login.html";
+          return;
 
-            method: method,
+        }
 
-            headers: {
-              "Content-Type":
-                "application/json"
-            },
+        let response = await fetchWithRetry(url, {
 
-            body:
-              JSON.stringify(data)
-          });
+          method: method,
+
+          headers: {
+            "Content-Type":
+              "application/json"
+          },
+
+          body:
+            JSON.stringify(data)
+        });
 
         if (response.ok) {
 
@@ -531,7 +571,14 @@ document.addEventListener("DOMContentLoaded", function () {
 async function mostrarMisReservas() {
 
   const res =
-    await fetch("/api/myreservations");
+    await fetchWithRetry("/api/myreservations");
+
+  if (res.status === 401) {
+
+    window.location.href = "/pages/login.html";
+    return;
+
+  }
 
   const data =
     await res.json();
@@ -654,14 +701,18 @@ async function mostrarMisReservas() {
 
           if (result.isConfirmed) {
 
-            let resp =
-              await fetch(
-                `/api/reservations/${r.id}`,
-                {
-                  method: "DELETE"
-                }
-              );
+            let resp = await fetchWithRetry(
+              `/api/reservations/${r.id}`,
+              {
+                method: "DELETE"
+              }
+            );
+            if (response.status === 401) {
 
+              window.location.href = "/pages/login.html";
+              return;
+
+            }
             if (resp.ok) {
 
               Swal.fire({
