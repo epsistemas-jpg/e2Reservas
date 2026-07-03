@@ -876,6 +876,19 @@ document.addEventListener("DOMContentLoaded", function () {
                         }
 
                     }
+                    reservationCalendarData = {
+
+                        room: data.room,
+
+                        date: data.date,
+
+                        start: data.start_time,
+
+                        end: data.end_time,
+
+                        reason: data.motivo || ""
+
+                    };
 
                 } catch (err) {
 
@@ -933,4 +946,63 @@ document.addEventListener("DOMContentLoaded", function () {
         });
 
     }
+    let reservationCalendarData = null;
+
+    const googleCalendarBtn =
+        document.getElementById("googleCalendarBtn");
+
+    const downloadICSBtn =
+        document.getElementById("downloadICSBtn");
 });
+if (googleCalendarBtn) {
+
+    googleCalendarBtn.addEventListener("click", () => {
+
+        if (!reservationCalendarData) return;
+
+        const start =
+            reservationCalendarData.date.replace(/-/g, "") +
+            "T" +
+            reservationCalendarData.start.replace(":", "") +
+            "00";
+
+        const end =
+            reservationCalendarData.date.replace(/-/g, "") +
+            "T" +
+            reservationCalendarData.end.replace(":", "") +
+            "00";
+
+        const title =
+            encodeURIComponent(
+                "Reserva " +
+                reservationCalendarData.room
+            );
+
+        const details =
+            encodeURIComponent(
+
+`Sala: ${reservationCalendarData.room}
+
+Motivo: ${reservationCalendarData.reason}
+
+Creado desde Sistema de Reservas E2`
+
+            );
+
+        const location =
+            encodeURIComponent(
+                "E2 Energía Eficiente"
+            );
+
+        const url =
+
+`https://calendar.google.com/calendar/render?action=TEMPLATE&text=${title}&dates=${start}/${end}&details=${details}&location=${location}`;
+
+        window.open(
+            url,
+            "_blank"
+        );
+
+    });
+
+}
