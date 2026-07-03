@@ -786,209 +786,209 @@ document.addEventListener("DOMContentLoaded", function () {
    GUARDAR RESERVA
 ========================= */
 
-let reservationCalendarData = null;
+    let reservationCalendarData = null;
 
-const googleCalendarBtn =
-    document.getElementById("googleCalendarBtn");
+    const googleCalendarBtn =
+        document.getElementById("googleCalendarBtn");
 
-const downloadICSBtn =
-    document.getElementById("downloadICSBtn");
+    const downloadICSBtn =
+        document.getElementById("downloadICSBtn");
 
-const closeReservationModal =
-    document.getElementById("closeReservationModal");
+    const closeReservationModal =
+        document.getElementById("closeReservationModal");
 
-if (reservationForm) {
+    if (reservationForm) {
 
-    reservationForm.addEventListener(
-        "submit",
-        async (e) => {
+        reservationForm.addEventListener(
+            "submit",
+            async (e) => {
 
-            e.preventDefault();
+                e.preventDefault();
 
-            const formData = new FormData(reservationForm);
+                const formData = new FormData(reservationForm);
 
-            const data = Object.fromEntries(formData);
+                const data = Object.fromEntries(formData);
 
-            try {
+                try {
 
-                let url = "/api/reservations";
-                let method = "POST";
+                    let url = "/api/reservations";
+                    let method = "POST";
 
-                if (editingReservationId) {
+                    if (editingReservationId) {
 
-                    url = `/api/reservations/${editingReservationId}`;
-                    method = "PUT";
+                        url = `/api/reservations/${editingReservationId}`;
+                        method = "PUT";
 
-                }
+                    }
 
-                const response = await fetch(url, {
+                    const response = await fetch(url, {
 
-                    method,
+                        method,
 
-                    headers: {
-                        "Content-Type": "application/json"
-                    },
+                        headers: {
+                            "Content-Type": "application/json"
+                        },
 
-                    body: JSON.stringify(data)
+                        body: JSON.stringify(data)
 
-                });
+                    });
 
-                if (response.ok) {
+                    if (response.ok) {
 
-                    reservationModal.classList.remove("active");
+                        reservationModal.classList.remove("active");
 
-                    reservationForm.reset();
+                        reservationForm.reset();
 
-                    editingReservationId = null;
+                        editingReservationId = null;
 
-                    calendar.refetchEvents();
+                        calendar.refetchEvents();
 
-                    if (method === "POST") {
+                        if (method === "POST") {
 
-                        reservationCalendarData = {
+                            reservationCalendarData = {
 
-                            room: data.room,
-                            date: data.date,
-                            start: data.start_time,
-                            end: data.end_time,
-                            reason: data.motivo || ""
+                                room: data.room,
+                                date: data.date,
+                                start: data.start_time,
+                                end: data.end_time,
+                                reason: data.motivo || ""
 
-                        };
+                            };
 
-                        document.getElementById("successRoom").innerText =
-                            data.room;
+                            document.getElementById("successRoom").innerText =
+                                data.room;
 
-                        document.getElementById("successDate").innerText =
-                            data.date;
+                            document.getElementById("successDate").innerText =
+                                data.date;
 
-                        document.getElementById("successTime").innerText =
-                            `${data.start_time} - ${data.end_time}`;
+                            document.getElementById("successTime").innerText =
+                                `${data.start_time} - ${data.end_time}`;
 
-                        document.getElementById("successReason").innerText =
-                            data.motivo || "Sin motivo";
+                            document.getElementById("successReason").innerText =
+                                data.motivo || "Sin motivo";
 
-                        document
-                            .getElementById("reservationSuccessModal")
-                            .classList.add("active");
+                            document
+                                .getElementById("reservationSuccessModal")
+                                .classList.add("active");
+
+                        } else {
+
+                            showToast(
+                                "success",
+                                "Reserva",
+                                "Reserva actualizada correctamente"
+                            );
+
+                        }
 
                     } else {
 
+                        const errorText = await response.text();
+
                         showToast(
-                            "success",
-                            "Reserva",
-                            "Reserva actualizada correctamente"
+                            "error",
+                            "Error",
+                            errorText
                         );
 
                     }
 
-                } else {
+                } catch (err) {
 
-                    const errorText = await response.text();
+                    console.error(err);
 
                     showToast(
                         "error",
-                        "Error",
-                        errorText
+                        "Servidor",
+                        "Error interno"
                     );
 
                 }
 
-            } catch (err) {
-
-                console.error(err);
-
-                showToast(
-                    "error",
-                    "Servidor",
-                    "Error interno"
-                );
-
             }
 
-        }
-
-    );
-
-}
-
-/* =========================
-   CERRAR MODAL EXTERIOR
-========================= */
-
-window.addEventListener("click", (e) => {
-
-    if (e.target === reservationModal) {
-
-        reservationModal.classList.remove("active");
-
-        editingReservationId = null;
-
-        reservationForm.reset();
-
-        document.querySelector(".modal-header h2").innerText =
-            "Nueva Reserva";
-
-        document.querySelector(".submit-btn").innerText =
-            "Crear Reserva";
-
-        deleteReservationBtn.style.display = "none";
+        );
 
     }
 
-});
+    /* =========================
+       CERRAR MODAL EXTERIOR
+    ========================= */
 
-/* =========================
-   MODAL ÉXITO
-========================= */
+    window.addEventListener("click", (e) => {
 
-if (closeReservationModal) {
+        if (e.target === reservationModal) {
 
-    closeReservationModal.addEventListener("click", () => {
+            reservationModal.classList.remove("active");
 
-        document
-            .getElementById("reservationSuccessModal")
-            .classList.remove("active");
+            editingReservationId = null;
+
+            reservationForm.reset();
+
+            document.querySelector(".modal-header h2").innerText =
+                "Nueva Reserva";
+
+            document.querySelector(".submit-btn").innerText =
+                "Crear Reserva";
+
+            deleteReservationBtn.style.display = "none";
+
+        }
 
     });
 
-}
+    /* =========================
+       MODAL ÉXITO
+    ========================= */
 
-/* =========================
-   GOOGLE CALENDAR
-========================= */
+    if (closeReservationModal) {
 
-if (googleCalendarBtn) {
+        closeReservationModal.addEventListener("click", () => {
 
-    googleCalendarBtn.addEventListener("click", () => {
+            document
+                .getElementById("reservationSuccessModal")
+                .classList.remove("active");
 
-        if (!reservationCalendarData) return;
+        });
 
-        const fecha =
-            reservationCalendarData.date.replace(/-/g, "");
+    }
 
-        const start =
-            fecha +
-            "T" +
-            reservationCalendarData.start.replace(":", "") +
-            "00";
+    /* =========================
+       GOOGLE CALENDAR
+    ========================= */
 
-        const end =
-            fecha +
-            "T" +
-            reservationCalendarData.end.replace(":", "") +
-            "00";
+    if (googleCalendarBtn) {
 
-        const title = encodeURIComponent(
-            `Reserva - ${reservationCalendarData.room}`
-        );
+        googleCalendarBtn.addEventListener("click", () => {
 
-        const details = encodeURIComponent(
-`Sala: ${reservationCalendarData.room}
+            if (!reservationCalendarData) return;
 
-Motivo: ${reservationCalendarData.reason}
+            const fecha =
+                reservationCalendarData.date.replace(/-/g, "");
 
-Reserva creada desde el Sistema de Reservas E2.`
-        );
+            const start =
+                fecha +
+                "T" +
+                reservationCalendarData.start.replace(":", "") +
+                "00";
+
+            const end =
+                fecha +
+                "T" +
+                reservationCalendarData.end.replace(":", "") +
+                "00";
+
+            const title = encodeURIComponent(
+                reservationCalendarData.reason || `Reserva - ${reservationCalendarData.room}`
+            );
+            const details = encodeURIComponent(
+                `Sala: ${reservationCalendarData.room}
+
+Motivo: ${reservationCalendarData.reason || "Sin motivo"}
+
+Reserva realizada desde el Sistema de Reservas E2 Energía Eficiente.`
+            );
+            
 
         const location = encodeURIComponent(
             "E2 Energía Eficiente"
@@ -1001,7 +1001,7 @@ Reserva creada desde el Sistema de Reservas E2.`
 
     });
 
-}
+    }
 
 /* =========================
    DESCARGAR ICS
@@ -1025,8 +1025,8 @@ if (downloadICSBtn) {
         const ics = `BEGIN:VCALENDAR
 VERSION:2.0
 BEGIN:VEVENT
-SUMMARY:Reserva ${reservationCalendarData.room}
-DESCRIPTION:Motivo: ${reservationCalendarData.reason}
+SUMMARY:${reservationCalendarData.reason || `Reserva ${reservationCalendarData.room}`}
+DESCRIPTION:Sala: ${reservationCalendarData.room}\nMotivo: ${reservationCalendarData.reason || "Sin motivo"}\nCreado desde el Sistema de Reservas E2
 LOCATION:E2 Energía Eficiente
 DTSTART:${formatDate(reservationCalendarData.date, reservationCalendarData.start)}
 DTEND:${formatDate(reservationCalendarData.date, reservationCalendarData.end)}
