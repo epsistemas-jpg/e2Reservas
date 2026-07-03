@@ -82,26 +82,6 @@ style="display:block;">
 align="center"
 style="padding-top:45px;">
 
-<td align="center" style="padding-top:45px;">
-
-    <div style="
-        width:90px;
-        height:90px;
-        border-radius:50%;
-        background:#eef8c4;
-        text-align:center;
-        line-height:90px;
-        font-size:42px;
-    ">
-
-        🔒
-
-    </div>
-
-</td>
-
-</td>
-
 </tr>
 
 <!-- TITULO -->
