@@ -324,7 +324,7 @@ padding:35px;
 ">
 
 <img
-src="https://e2reservas.e2academy.com.co/images/logo-E2.png"
+src="https://e2reservas.e2academy.com.co/images/logo-E2t.png"
 width="130">
 
 <p style="
