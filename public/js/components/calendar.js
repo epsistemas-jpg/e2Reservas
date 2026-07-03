@@ -593,36 +593,36 @@ document.addEventListener("DOMContentLoaded", function () {
    NUEVA RESERVA
 ========================= */
 
-if (openModalBtn) {
+    if (openModalBtn) {
 
-    openModalBtn.addEventListener("click", () => {
+        openModalBtn.addEventListener("click", () => {
 
-        // Salir del modo edición
-        editingReservationId = null;
+            // Salir del modo edición
+            editingReservationId = null;
 
-        // Limpiar formulario
-        reservationForm.reset();
+            // Limpiar formulario
+            reservationForm.reset();
 
-        // Restaurar título
-        document.querySelector(".modal-header h2").innerText =
-            "Nueva Reserva";
+            // Restaurar título
+            document.querySelector(".modal-header h2").innerText =
+                "Nueva Reserva";
 
-        // Restaurar botón
-        document.querySelector(".submit-btn").innerText =
-            "Crear Reserva";
+            // Restaurar botón
+            document.querySelector(".submit-btn").innerText =
+                "Crear Reserva";
 
-        // Ocultar botón eliminar
-        deleteReservationBtn.style.display = "none";
+            // Ocultar botón eliminar
+            deleteReservationBtn.style.display = "none";
 
-        // Limpiar fecha
-        document.getElementById("date").value = "";
+            // Limpiar fecha
+            document.getElementById("date").value = "";
 
-        // Abrir modal
-        reservationModal.classList.add("active");
+            // Abrir modal
+            reservationModal.classList.add("active");
 
-    });
+        });
 
-}
+    }
 
     calendar.render();
 
@@ -838,35 +838,43 @@ if (openModalBtn) {
 
                     if (response.ok) {
 
-                        showToast(
-                            "success",
-                            "Reserva",
-                            editingReservationId
-                                ? "Reserva actualizada"
-                                : "Reserva creada"
-                        );
-
-                        reservationModal
-                            .classList
-                            .remove("active");
+                        reservationModal.classList.remove("active");
 
                         reservationForm.reset();
 
-                        editingReservationId =
-                            null;
+                        editingReservationId = null;
 
                         calendar.refetchEvents();
 
-                    } else {
+                        // Si fue una reserva nueva mostramos el modal
+                        if (method === "POST") {
 
-                        const errorText =
-                            await response.text();
+                            document.getElementById("successRoom").innerText =
+                                data.room;
 
-                        showToast(
-                            "error",
-                            "Error",
-                            errorText
-                        );
+                            document.getElementById("successDate").innerText =
+                                data.date;
+
+                            document.getElementById("successTime").innerText =
+                                `${data.start_time} - ${data.end_time}`;
+
+                            document.getElementById("successReason").innerText =
+                                data.motivo || "Sin motivo";
+
+                            document
+                                .getElementById("reservationSuccessModal")
+                                .classList.add("active");
+
+                        } else {
+
+                            showToast(
+                                "success",
+                                "Reserva",
+                                "Reserva actualizada correctamente"
+                            );
+
+                        }
+
                     }
 
                 } catch (err) {
@@ -888,27 +896,41 @@ if (openModalBtn) {
     ========================= */
 
     window.addEventListener(
-    "click",
-    (e) => {
+        "click",
+        (e) => {
 
-        if (e.target === reservationModal) {
+            if (e.target === reservationModal) {
 
-            reservationModal.classList.remove("active");
+                reservationModal.classList.remove("active");
 
-            editingReservationId = null;
+                editingReservationId = null;
 
-            reservationForm.reset();
+                reservationForm.reset();
 
-            document.querySelector(".modal-header h2").innerText =
-                "Nueva Reserva";
+                document.querySelector(".modal-header h2").innerText =
+                    "Nueva Reserva";
 
-            document.querySelector(".submit-btn").innerText =
-                "Crear Reserva";
+                document.querySelector(".submit-btn").innerText =
+                    "Crear Reserva";
 
-            deleteReservationBtn.style.display = "none";
+                deleteReservationBtn.style.display = "none";
+
+            }
 
         }
+    );
+    const closeReservationModal =
+        document.getElementById("closeReservationModal");
+
+    if (closeReservationModal) {
+
+        closeReservationModal.addEventListener("click", () => {
+
+            document
+                .getElementById("reservationSuccessModal")
+                .classList.remove("active");
+
+        });
 
     }
-);
 });

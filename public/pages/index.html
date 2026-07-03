@@ -190,11 +190,11 @@
             </option>
 
             <option value="Rio Magdalena">
-              Rio Magdalena
+              Rio Magdalena(Sala Pequeña)
             </option>
 
             <option value="Bocas de ceniza">
-              Bocas de ceniza
+              Bocas de ceniza(Sala Grande)
             </option>
 
             <option value="Piso 1109">
@@ -476,6 +476,63 @@
     </div>
 
   </div>
+  <!-- =========================
+MODAL RESERVA CREADA
+========================= -->
+
+<div id="reservationSuccessModal" class="reservation-modal">
+
+    <div class="reservation-modal-content">
+
+        <div class="reservation-icon">
+            ✅
+        </div>
+
+        <h2>Reserva creada correctamente</h2>
+
+        <div class="reservation-details">
+
+            <p><strong>Sala:</strong> <span id="successRoom"></span></p>
+
+            <p><strong>Fecha:</strong> <span id="successDate"></span></p>
+
+            <p><strong>Horario:</strong> <span id="successTime"></span></p>
+
+            <p><strong>Motivo:</strong> <span id="successReason"></span></p>
+
+        </div>
+
+        <div class="reservation-buttons">
+
+            <button
+                id="googleCalendarBtn"
+                class="calendar-btn">
+
+                📅 Agregar a Google Calendar
+
+            </button>
+
+            <button
+                id="downloadICSBtn"
+                class="calendar-btn secondary">
+
+                📥 Descargar evento (.ics)
+
+            </button>
+
+        </div>
+
+        <button
+            id="closeReservationModal"
+            class="main-btn">
+
+            Aceptar
+
+        </button>
+
+    </div>
+
+</div>
 
   <script src="../js/ui.js"></script>
 
