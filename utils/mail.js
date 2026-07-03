@@ -82,21 +82,23 @@ style="display:block;">
 align="center"
 style="padding-top:45px;">
 
-<div
-style="
-width:90px;
-height:90px;
-border-radius:50%;
-background:#eef8c4;
-display:inline-flex;
-align-items:center;
-justify-content:center;
-font-size:42px;
-">
+<td align="center" style="padding-top:45px;">
 
-🔒
+    <div style="
+        width:90px;
+        height:90px;
+        border-radius:50%;
+        background:#eef8c4;
+        text-align:center;
+        line-height:90px;
+        font-size:42px;
+    ">
 
-</div>
+        🔒
+
+    </div>
+
+</td>
 
 </td>
 
@@ -322,10 +324,6 @@ style="
 background:#111827;
 padding:35px;
 ">
-
-<img
-src="https://e2reservas.e2academy.com.co/images/logo-E2t.png"
-width="130">
 
 <p style="
 margin-top:20px;
