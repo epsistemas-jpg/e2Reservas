@@ -9,7 +9,7 @@ async function sendResetEmail(to, name, resetLink) {
             {
                 sender: {
                     name: "Sistema de Reservas",
-                    email: "epsistemas@energiaeficiente.com"
+                    email: "epsistemas@e2energiaeficiente.com"
                 },
 
                 to: [
