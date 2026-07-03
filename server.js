@@ -584,177 +584,179 @@ app.get("/api/history", requireLogin, (req, res) => {
 });
 app.post("/forgot-password", async (req, res) => {
 
-    const { email } = req.body;
+  const { email } = req.body;
 
-    try {
+  try {
 
-        const userResult = await pool.query(
-            "SELECT id, name, email FROM users WHERE email = $1",
-            [email]
-        );
+    const userResult = await pool.query(
+      "SELECT id, name, email FROM users WHERE email = $1",
+      [email]
+    );
 
-        // Por seguridad nunca decir si el correo existe o no
-        if (userResult.rows.length === 0) {
+    // Por seguridad nunca decir si el correo existe o no
+    if (userResult.rows.length === 0) {
 
-            return res.json({
-                success: true,
-                message: "Si el correo existe, recibirás un enlace para restablecer tu contraseña."
-            });
-
-        }
-
-        const user = userResult.rows[0];
-
-        const token = uuidv4();
-
-        const expiresAt = new Date(Date.now() + 15 * 60 * 1000);
-
-        // Eliminar tokens anteriores
-        await pool.query(
-            "DELETE FROM password_resets1 WHERE user_id = $1",
-            [user.id]
-        );
-
-        // Guardar nuevo token
-        await pool.query(
-            `INSERT INTO password_resets1
-             (user_id, token, expires_at)
-             VALUES ($1,$2,$3)`,
-            [
-                user.id,
-                token,
-                expiresAt
-            ]
-        );
-
-        const resetLink =
-            `${process.env.FRONTEND_URL}/pages/reset-password.html?token=${token}`;
-
-        // Enviar correo
-        await sendResetEmail(
-            user.email,
-            user.name,
-            resetLink
-        );
-
-        return res.json({
-            success: true,
-            message: "Se ha enviado un enlace de recuperación a tu correo."
-        });
-
-    } catch (err) {
-
-        console.error("ERROR FORGOT PASSWORD:", err);
-
-        return res.status(500).json({
-            success: false,
-            message: "No fue posible enviar el correo."
-        });
+      return res.json({
+        success: true,
+        message: "Si el correo existe, recibirás un enlace para restablecer tu contraseña."
+      });
 
     }
+
+    const user = userResult.rows[0];
+
+    const token = uuidv4();
+
+    const expiresAt = new Date(Date.now() + 15 * 60 * 1000);
+
+    // Eliminar tokens anteriores
+    await pool.query(
+      "DELETE FROM password_resets1 WHERE user_id = $1",
+      [user.id]
+    );
+
+    // Guardar nuevo token
+    await pool.query(
+      `INSERT INTO password_resets1
+             (user_id, token, expires_at)
+             VALUES ($1,$2,$3)`,
+      [
+        user.id,
+        token,
+        expiresAt
+      ]
+    );
+
+    const resetLink =
+      `${process.env.FRONTEND_URL}/pages/reset-password.html?token=${token}`;
+
+    // Enviar correo
+    const responseBrevo = await sendResetEmail(
+      user.email,
+      user.name,
+      resetLink
+    );
+
+    console.log("BREVO RESPONSE:");
+    console.dir(responseBrevo, { depth: null });
+    return res.json({
+      success: true,
+      message: "Se ha enviado un enlace de recuperación a tu correo."
+    });
+
+  } catch (err) {
+
+    console.error("ERROR FORGOT PASSWORD:", err);
+
+    return res.status(500).json({
+      success: false,
+      message: "No fue posible enviar el correo."
+    });
+
+  }
 
 });
 app.post("/reset-password", async (req, res) => {
 
-    const { token, password } = req.body;
+  const { token, password } = req.body;
 
-    try {
+  try {
 
-        const result = await pool.query(
+    const result = await pool.query(
 
-            `SELECT *
+      `SELECT *
              FROM password_resets1
              WHERE token = $1`,
 
-            [token]
+      [token]
 
-        );
+    );
 
-        if (result.rows.length === 0) {
+    if (result.rows.length === 0) {
 
-            return res.status(400).json({
+      return res.status(400).json({
 
-                success: false,
+        success: false,
 
-                message: "El enlace no es válido."
+        message: "El enlace no es válido."
 
-            });
+      });
 
-        }
+    }
 
-        const reset = result.rows[0];
+    const reset = result.rows[0];
 
-        // Verificar expiración
-        if (new Date(reset.expires_at) < new Date()) {
+    // Verificar expiración
+    if (new Date(reset.expires_at) < new Date()) {
 
-            await pool.query(
+      await pool.query(
 
-                "DELETE FROM password_resets1 WHERE id = $1",
+        "DELETE FROM password_resets1 WHERE id = $1",
 
-                [reset.id]
+        [reset.id]
 
-            );
+      );
 
-            return res.status(400).json({
+      return res.status(400).json({
 
-                success: false,
+        success: false,
 
-                message: "El enlace ha expirado."
+        message: "El enlace ha expirado."
 
-            });
+      });
 
-        }
+    }
 
-        // Encriptar contraseña
-        const hashedPassword = await bcrypt.hash(password, 10);
+    // Encriptar contraseña
+    const hashedPassword = await bcrypt.hash(password, 10);
 
-        // Actualizar contraseña
-        await pool.query(
+    // Actualizar contraseña
+    await pool.query(
 
-            `UPDATE users
+      `UPDATE users
              SET password = $1
              WHERE id = $2`,
 
-            [
+      [
 
-                hashedPassword,
+        hashedPassword,
 
-                reset.user_id
+        reset.user_id
 
-            ]
+      ]
 
-        );
+    );
 
-        // Eliminar token usado
-        await pool.query(
+    // Eliminar token usado
+    await pool.query(
 
-            "DELETE FROM password_resets1 WHERE id = $1",
+      "DELETE FROM password_resets1 WHERE id = $1",
 
-            [reset.id]
+      [reset.id]
 
-        );
+    );
 
-        res.json({
+    res.json({
 
-            success: true,
+      success: true,
 
-            message: "Contraseña actualizada correctamente."
+      message: "Contraseña actualizada correctamente."
 
-        });
+    });
 
-    } catch (err) {
+  } catch (err) {
 
-        console.error(err);
+    console.error(err);
 
-        res.status(500).json({
+    res.status(500).json({
 
-            success: false,
+      success: false,
 
-            message: "Error interno del servidor."
+      message: "Error interno del servidor."
 
-        });
+    });
 
-    }
+  }
 
 });
 
