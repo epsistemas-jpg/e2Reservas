@@ -380,19 +380,7 @@ app.post("/api/reservations", requireLogin, (req, res) => {
   if (endDateTime.isSameOrBefore(startDateTime)) {
     return res.status(400).send("La hora de fin debe ser después de la hora de inicio.");
   }
-  const duracionHoras =
-    endDateTime.diff(
-      startDateTime,
-      "hours",
-      true
-    );
 
-  if (duracionHoras > 4) {
-
-    return res.status(400).send(
-      "La reserva no puede superar 4 horas."
-    );
-  }
 
   // 🔹 Verificar choque de horarios
   pool.query(
