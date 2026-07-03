@@ -783,226 +783,274 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     /* =========================
-       GUARDAR RESERVA
-    ========================= */
+   GUARDAR RESERVA
+========================= */
 
-    if (reservationForm) {
+let reservationCalendarData = null;
 
-        reservationForm.addEventListener(
-            "submit",
-            async (e) => {
+const googleCalendarBtn =
+    document.getElementById("googleCalendarBtn");
 
-                e.preventDefault();
+const downloadICSBtn =
+    document.getElementById("downloadICSBtn");
 
-                const formData =
-                    new FormData(
-                        reservationForm
-                    );
+const closeReservationModal =
+    document.getElementById("closeReservationModal");
 
-                const data =
-                    Object.fromEntries(
-                        formData
-                    );
+if (reservationForm) {
 
-                try {
+    reservationForm.addEventListener(
+        "submit",
+        async (e) => {
 
-                    let url =
-                        "/api/reservations";
+            e.preventDefault();
 
-                    let method =
-                        "POST";
+            const formData = new FormData(reservationForm);
 
-                    if (editingReservationId) {
+            const data = Object.fromEntries(formData);
 
-                        url =
-                            `/api/reservations/${editingReservationId}`;
+            try {
 
-                        method =
-                            "PUT";
+                let url = "/api/reservations";
+                let method = "POST";
+
+                if (editingReservationId) {
+
+                    url = `/api/reservations/${editingReservationId}`;
+                    method = "PUT";
+
+                }
+
+                const response = await fetch(url, {
+
+                    method,
+
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+
+                    body: JSON.stringify(data)
+
+                });
+
+                if (response.ok) {
+
+                    reservationModal.classList.remove("active");
+
+                    reservationForm.reset();
+
+                    editingReservationId = null;
+
+                    calendar.refetchEvents();
+
+                    if (method === "POST") {
+
+                        reservationCalendarData = {
+
+                            room: data.room,
+                            date: data.date,
+                            start: data.start_time,
+                            end: data.end_time,
+                            reason: data.motivo || ""
+
+                        };
+
+                        document.getElementById("successRoom").innerText =
+                            data.room;
+
+                        document.getElementById("successDate").innerText =
+                            data.date;
+
+                        document.getElementById("successTime").innerText =
+                            `${data.start_time} - ${data.end_time}`;
+
+                        document.getElementById("successReason").innerText =
+                            data.motivo || "Sin motivo";
+
+                        document
+                            .getElementById("reservationSuccessModal")
+                            .classList.add("active");
+
+                    } else {
+
+                        showToast(
+                            "success",
+                            "Reserva",
+                            "Reserva actualizada correctamente"
+                        );
+
                     }
 
-                    const response =
-                        await fetch(url, {
+                } else {
 
-                            method: method,
-
-                            headers: {
-
-                                "Content-Type":
-                                    "application/json"
-                            },
-
-                            body:
-                                JSON.stringify(data)
-                        });
-
-                    if (response.ok) {
-
-                        reservationModal.classList.remove("active");
-
-                        reservationForm.reset();
-
-                        editingReservationId = null;
-
-                        calendar.refetchEvents();
-
-                        // Si fue una reserva nueva mostramos el modal
-                        if (method === "POST") {
-
-                            document.getElementById("successRoom").innerText =
-                                data.room;
-
-                            document.getElementById("successDate").innerText =
-                                data.date;
-
-                            document.getElementById("successTime").innerText =
-                                `${data.start_time} - ${data.end_time}`;
-
-                            document.getElementById("successReason").innerText =
-                                data.motivo || "Sin motivo";
-
-                            document
-                                .getElementById("reservationSuccessModal")
-                                .classList.add("active");
-
-                        } else {
-
-                            showToast(
-                                "success",
-                                "Reserva",
-                                "Reserva actualizada correctamente"
-                            );
-
-                        }
-
-                    }
-                    reservationCalendarData = {
-
-                        room: data.room,
-
-                        date: data.date,
-
-                        start: data.start_time,
-
-                        end: data.end_time,
-
-                        reason: data.motivo || ""
-
-                    };
-
-                } catch (err) {
-
-                    console.error(err);
+                    const errorText = await response.text();
 
                     showToast(
                         "error",
-                        "Servidor",
-                        "Error interno"
+                        "Error",
+                        errorText
                     );
+
                 }
-            }
-        );
-    }
 
-    /* =========================
-       CERRAR MODAL AFUERA
-    ========================= */
+            } catch (err) {
 
-    window.addEventListener(
-        "click",
-        (e) => {
+                console.error(err);
 
-            if (e.target === reservationModal) {
-
-                reservationModal.classList.remove("active");
-
-                editingReservationId = null;
-
-                reservationForm.reset();
-
-                document.querySelector(".modal-header h2").innerText =
-                    "Nueva Reserva";
-
-                document.querySelector(".submit-btn").innerText =
-                    "Crear Reserva";
-
-                deleteReservationBtn.style.display = "none";
+                showToast(
+                    "error",
+                    "Servidor",
+                    "Error interno"
+                );
 
             }
 
         }
+
     );
-    const closeReservationModal =
-        document.getElementById("closeReservationModal");
 
-    if (closeReservationModal) {
+}
 
-        closeReservationModal.addEventListener("click", () => {
+/* =========================
+   CERRAR MODAL EXTERIOR
+========================= */
 
-            document
-                .getElementById("reservationSuccessModal")
-                .classList.remove("active");
+window.addEventListener("click", (e) => {
 
-        });
+    if (e.target === reservationModal) {
+
+        reservationModal.classList.remove("active");
+
+        editingReservationId = null;
+
+        reservationForm.reset();
+
+        document.querySelector(".modal-header h2").innerText =
+            "Nueva Reserva";
+
+        document.querySelector(".submit-btn").innerText =
+            "Crear Reserva";
+
+        deleteReservationBtn.style.display = "none";
 
     }
-    let reservationCalendarData = null;
 
-    const googleCalendarBtn =
-        document.getElementById("googleCalendarBtn");
-
-    const downloadICSBtn =
-        document.getElementById("downloadICSBtn");
 });
+
+/* =========================
+   MODAL ÉXITO
+========================= */
+
+if (closeReservationModal) {
+
+    closeReservationModal.addEventListener("click", () => {
+
+        document
+            .getElementById("reservationSuccessModal")
+            .classList.remove("active");
+
+    });
+
+}
+
+/* =========================
+   GOOGLE CALENDAR
+========================= */
+
 if (googleCalendarBtn) {
 
     googleCalendarBtn.addEventListener("click", () => {
 
         if (!reservationCalendarData) return;
 
+        const fecha =
+            reservationCalendarData.date.replace(/-/g, "");
+
         const start =
-            reservationCalendarData.date.replace(/-/g, "") +
+            fecha +
             "T" +
             reservationCalendarData.start.replace(":", "") +
             "00";
 
         const end =
-            reservationCalendarData.date.replace(/-/g, "") +
+            fecha +
             "T" +
             reservationCalendarData.end.replace(":", "") +
             "00";
 
-        const title =
-            encodeURIComponent(
-                "Reserva " +
-                reservationCalendarData.room
-            );
+        const title = encodeURIComponent(
+            `Reserva - ${reservationCalendarData.room}`
+        );
 
-        const details =
-            encodeURIComponent(
-
+        const details = encodeURIComponent(
 `Sala: ${reservationCalendarData.room}
 
 Motivo: ${reservationCalendarData.reason}
 
-Creado desde Sistema de Reservas E2`
-
-            );
-
-        const location =
-            encodeURIComponent(
-                "E2 Energía Eficiente"
-            );
-
-        const url =
-
-`https://calendar.google.com/calendar/render?action=TEMPLATE&text=${title}&dates=${start}/${end}&details=${details}&location=${location}`;
-
-        window.open(
-            url,
-            "_blank"
+Reserva creada desde el Sistema de Reservas E2.`
         );
+
+        const location = encodeURIComponent(
+            "E2 Energía Eficiente"
+        );
+
+        const calendarUrl =
+            `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${title}&dates=${start}/${end}&details=${details}&location=${location}`;
+
+        window.open(calendarUrl, "_blank");
 
     });
 
 }
+
+/* =========================
+   DESCARGAR ICS
+========================= */
+
+if (downloadICSBtn) {
+
+    downloadICSBtn.addEventListener("click", () => {
+
+        if (!reservationCalendarData) return;
+
+        const formatDate = (date, time) => {
+
+            return date.replace(/-/g, "") +
+                "T" +
+                time.replace(":", "") +
+                "00";
+
+        };
+
+        const ics = `BEGIN:VCALENDAR
+VERSION:2.0
+BEGIN:VEVENT
+SUMMARY:Reserva ${reservationCalendarData.room}
+DESCRIPTION:Motivo: ${reservationCalendarData.reason}
+LOCATION:E2 Energía Eficiente
+DTSTART:${formatDate(reservationCalendarData.date, reservationCalendarData.start)}
+DTEND:${formatDate(reservationCalendarData.date, reservationCalendarData.end)}
+END:VEVENT
+END:VCALENDAR`;
+
+        const blob = new Blob([ics], {
+            type: "text/calendar"
+        });
+
+        const url = URL.createObjectURL(blob);
+
+        const a = document.createElement("a");
+
+        a.href = url;
+
+        a.download = "Reserva.ics";
+
+        a.click();
+
+        URL.revokeObjectURL(url);
+
+    });
+
+}
+
+});
