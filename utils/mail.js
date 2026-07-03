@@ -17,25 +17,29 @@ async function sendResetEmail(to, name, resetLink) {
                 }
             ],
 
-            subject: "🔒 Recuperación de contraseña - e2 Reservas",
+            subject: "Recuperación de contraseña - e2 Reservas",
 
-            htmlContent: `
+   htmlContent: `
 <!DOCTYPE html>
 <html lang="es">
 
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Recuperar contraseña</title>
-</head>
-
 <body style="
 margin:0;
-padding:40px 0;
-background:#edf2f7;
+padding:0;
+background:#eef2f5;
 font-family:Arial,Helvetica,sans-serif;">
 
-<table align="center"
+<table
+width="100%"
+cellpadding="0"
+cellspacing="0"
+style="padding:40px 15px;">
+
+<tr>
+
+<td align="center">
+
+<table
 width="650"
 cellpadding="0"
 cellspacing="0"
@@ -43,31 +47,40 @@ style="
 background:#ffffff;
 border-radius:18px;
 overflow:hidden;
-box-shadow:0 15px 40px rgba(0,0,0,.12);">
+box-shadow:0 15px 45px rgba(0,0,0,.12);">
 
 <!-- CABECERA -->
+
 <tr>
 
 <td
+align="center"
 style="
-background:linear-gradient(135deg,#c2d500,#9bb600);
-padding:45px;
-text-align:center;">
+background:linear-gradient(135deg,#c2d500,#9eb800);
+padding:45px 20px;">
+
+<img
+src="https://e2reservas.e2academy.com.co/images/logo-E2.png"
+alt="e2 Energía"
+style="
+width:220px;
+display:block;
+margin:auto;
+margin-bottom:20px;">
 
 <h1 style="
 margin:0;
 font-size:34px;
-color:#1b1b1b;
-font-weight:bold;">
+color:#1b1b1b;">
 
-e2 Reservas
+Recuperación de contraseña
 
 </h1>
 
 <p style="
-margin-top:10px;
+margin-top:12px;
 font-size:17px;
-color:#253000;">
+color:#334155;">
 
 Sistema de Reservas de Salas
 
@@ -81,12 +94,12 @@ Sistema de Reservas de Salas
 
 <tr>
 
-<td style="padding:45px;">
+<td style="padding:50px;">
 
 <h2 style="
 margin-top:0;
-color:#1f2937;
-font-size:28px;">
+font-size:28px;
+color:#111827;">
 
 Hola ${name},
 
@@ -94,20 +107,20 @@ Hola ${name},
 
 <p style="
 font-size:16px;
-color:#4b5563;
-line-height:1.8;">
+line-height:1.8;
+color:#4b5563;">
 
-Recibimos una solicitud para restablecer la contraseña de tu cuenta de
-<b>e2 Reservas</b>.
+Recibimos una solicitud para restablecer la contraseña de tu cuenta en
+<strong>e2 Reservas</strong>.
 
 </p>
 
 <p style="
 font-size:16px;
-color:#4b5563;
-line-height:1.8;">
+line-height:1.8;
+color:#4b5563;">
 
-Si realizaste esta solicitud, presiona el siguiente botón para crear una nueva contraseña.
+Si realizaste esta solicitud, presiona el botón de abajo para crear una nueva contraseña.
 
 </p>
 
@@ -120,46 +133,55 @@ href="${resetLink}"
 
 style="
 display:inline-block;
+padding:18px 42px;
 background:#c2d500;
-color:#1b1b1b;
-font-weight:bold;
-padding:18px 38px;
-font-size:18px;
 border-radius:10px;
-text-decoration:none;">
+text-decoration:none;
+font-size:18px;
+font-weight:bold;
+color:#1b1b1b;">
 
-🔑 Restablecer contraseña
+🔒 Restablecer contraseña
 
 </a>
 
 </div>
 
+<div style="
+background:#f8fafc;
+border-left:5px solid #c2d500;
+padding:18px;
+border-radius:8px;
+margin:35px 0;">
+
 <p style="
+margin:0;
 font-size:15px;
-color:#6b7280;
+color:#475569;
 line-height:1.7;">
 
-Este enlace tendrá una validez de
-<b>15 minutos</b>.
+⏳ Este enlace expirará en <strong>15 minutos</strong>.
 
 </p>
 
+</div>
+
 <p style="
 font-size:15px;
-color:#6b7280;
-line-height:1.7;">
+color:#475569;
+line-height:1.8;">
 
 Si el botón no funciona, copia y pega el siguiente enlace en tu navegador:
 
 </p>
 
 <div style="
-background:#f4f4f4;
-padding:15px;
+background:#f3f4f6;
+padding:18px;
 border-radius:8px;
-word-break:break-word;
-font-size:14px;
-color:#374151;">
+word-break:break-all;
+font-size:13px;
+color:#2563eb;">
 
 ${resetLink}
 
@@ -168,25 +190,25 @@ ${resetLink}
 <p style="
 margin-top:35px;
 font-size:15px;
-color:#6b7280;
-line-height:1.8;">
+line-height:1.8;
+color:#6b7280;">
 
-Si no solicitaste este cambio puedes ignorar este correo.
-Tu contraseña permanecerá sin modificaciones.
+Si no solicitaste este cambio, puedes ignorar este mensaje.
+Tu contraseña seguirá siendo la misma.
 
 </p>
 
 <hr style="
-margin:40px 0;
+margin:45px 0;
 border:none;
 border-top:1px solid #e5e7eb;">
 
 <p style="
-text-align:center;
 font-size:13px;
-color:#9ca3af;">
+text-align:center;
+color:#94a3b8;">
 
-Este correo fue generado automáticamente por el sistema.
+Este correo fue enviado automáticamente por el Sistema de Reservas.
 
 <br><br>
 
@@ -202,36 +224,43 @@ Por favor no respondas este mensaje.
 
 <tr>
 
-<td style="
+<td
+align="center"
+style="
 background:#111827;
-padding:30px;
-text-align:center;">
+padding:35px;">
 
-<h3 style="
-margin:0;
-color:#ffffff;">
-
-e2 Energía Eficiente
-
-</h3>
+<img
+src="https://e2reservas.e2academy.com.co/images/logo-E2.png"
+style="
+width:140px;
+margin-bottom:20px;
+filter:brightness(0) invert(1);">
 
 <p style="
-margin-top:10px;
-color:#cbd5e1;
-font-size:14px;">
+margin:0;
+font-size:15px;
+color:#ffffff;">
+
+<strong>e2 Energía Eficiente</strong>
+
+</p>
+
+<p style="
+margin-top:8px;
+font-size:14px;
+color:#cbd5e1;">
 
 Sistema de Reservas de Salas
 
 </p>
 
 <p style="
-margin-top:20px;
+margin-top:25px;
 font-size:12px;
 color:#94a3b8;">
 
-© ${new Date().getFullYear()} e2 Energía Eficiente.
-
-Todos los derechos reservados.
+© ${new Date().getFullYear()} e2 Energía Eficiente
 
 </p>
 
@@ -241,7 +270,14 @@ Todos los derechos reservados.
 
 </table>
 
+</td>
+
+</tr>
+
+</table>
+
 </body>
+
 </html>
 `
         },
