@@ -40,6 +40,8 @@
 
   <link rel="stylesheet" href="../css/components/toast.css">
 
+  <link rel="stylesheet" href="../css/chatbot.css">
+
 
   <!-- FULLCALENDAR -->
 
@@ -480,59 +482,124 @@
 MODAL RESERVA CREADA
 ========================= -->
 
-<div id="reservationSuccessModal" class="reservation-modal">
+  <div id="reservationSuccessModal" class="reservation-modal">
 
     <div class="reservation-modal-content">
 
-        <div class="reservation-icon">
-            ✅
-        </div>
+      <div class="reservation-icon">
+        ✅
+      </div>
 
-        <h2>Reserva creada correctamente</h2>
+      <h2>Reserva creada correctamente</h2>
 
-        <div class="reservation-details">
+      <div class="reservation-details">
 
-            <p><strong>Sala:</strong> <span id="successRoom"></span></p>
+        <p><strong>Sala:</strong> <span id="successRoom"></span></p>
 
-            <p><strong>Fecha:</strong> <span id="successDate"></span></p>
+        <p><strong>Fecha:</strong> <span id="successDate"></span></p>
 
-            <p><strong>Horario:</strong> <span id="successTime"></span></p>
+        <p><strong>Horario:</strong> <span id="successTime"></span></p>
 
-            <p><strong>Motivo:</strong> <span id="successReason"></span></p>
+        <p><strong>Motivo:</strong> <span id="successReason"></span></p>
 
-        </div>
+      </div>
 
-        <div class="reservation-buttons">
+      <div class="reservation-buttons">
 
-            <button
-                id="googleCalendarBtn"
-                class="calendar-btn">
+        <button id="googleCalendarBtn" class="calendar-btn">
 
-                📅 Agregar a Google Calendar
-
-            </button>
-
-            <button
-                id="downloadICSBtn"
-                class="calendar-btn secondary">
-
-                📥 Descargar evento (.ics PARA OUTLOOK) 
-
-            </button>
-
-        </div>
-
-        <button
-            id="closeReservationModal"
-            class="main-btn">
-
-            Aceptar
+          📅 Agregar a Google Calendar
 
         </button>
 
+        <button id="downloadICSBtn" class="calendar-btn secondary">
+
+          📥 Descargar evento (.ics PARA OUTLOOK)
+
+        </button>
+
+      </div>
+
+      <button id="closeReservationModal" class="main-btn">
+
+        Aceptar
+
+      </button>
+
     </div>
 
-</div>
+    <!-- ==========================
+CHATBOT E2
+========================== -->
+
+    <button id="chatToggle" class="chat-toggle">
+      🤖
+    </button>
+
+    <div id="chatContainer" class="chat-container">
+
+      <div class="chat-header">
+
+        <div>
+          <h3>Asistente E2</h3>
+          <span>En línea</span>
+        </div>
+
+        <button id="closeChat">
+          ✕
+        </button>
+
+      </div>
+
+      <div id="chatMessages" class="chat-messages">
+
+        <div class="bot-message">
+
+          👋 Hola <strong id="chatUser"></strong>
+
+          <br><br>
+
+          Soy el asistente del Sistema de Reservas.
+
+          <br><br>
+
+          Puedes preguntarme por ejemplo:
+
+          <br>
+
+          • Crear una reserva
+
+          <br>
+
+          • Mis reservas
+
+          <br>
+
+          • Historial
+
+          <br>
+
+          • Google Calendar
+
+        </div>
+
+      </div>
+
+      <div class="chat-input">
+
+        <input id="chatInput" type="text" placeholder="Escribe un mensaje...">
+
+        <button id="sendChat">
+
+          ➜
+
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
 
   <script src="../js/ui.js"></script>
 
@@ -543,6 +610,8 @@ MODAL RESERVA CREADA
   <script src="../js/components/calendar.js"></script>
 
   <script src="../js/dashboard.js"></script>
+
+  <script type="module" src="../js/chatbot.js"></script>
 
 </body>
 
