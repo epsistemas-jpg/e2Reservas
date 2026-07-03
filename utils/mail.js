@@ -2,30 +2,24 @@ const axios = require("axios");
 
 async function sendResetEmail(to, name, resetLink) {
 
-    try {
+    const response = await axios.post(
+        "https://api.brevo.com/v3/smtp/email",
+        {
+            sender: {
+                name: "e2 Reservas",
+                email: "epsistemas@e2energiaeficiente.com"
+            },
 
-        const axios = require("axios");
-
-        async function sendResetEmail(to, name, resetLink) {
-
-            const response = await axios.post(
-                "https://api.brevo.com/v3/smtp/email",
+            to: [
                 {
-                    sender: {
-                        name: "e2 Reservas",
-                        email: "epsistemas@e2energiaeficiente.com"
-                    },
+                    email: to,
+                    name: name
+                }
+            ],
 
-                    to: [
-                        {
-                            email: to,
-                            name: name
-                        }
-                    ],
+            subject: "🔒 Recuperación de contraseña - e2 Reservas",
 
-                    subject: "🔒 Recuperación de contraseña - e2 Reservas",
-
-                    htmlContent: `
+            htmlContent: `
 <!DOCTYPE html>
 <html lang="es">
 
@@ -250,44 +244,19 @@ Todos los derechos reservados.
 </body>
 </html>
 `
-                },
-                {
-                    headers: {
-                        "api-key": process.env.BREVO_API_KEY,
-                        "Content-Type": "application/json"
-                    }
-                }
-            );
-
-            console.log("====== BREVO OK ======");
-            console.log(response.data);
-
-            return response.data;
-
+        },
+        {
+            headers: {
+                "api-key": process.env.BREVO_API_KEY,
+                "Content-Type": "application/json"
+            }
         }
+    );
 
-        module.exports = {
-            sendResetEmail
-        };
+    console.log("====== BREVO OK ======");
+    console.log(response.data);
 
-        console.log("====== BREVO OK ======");
-        console.log(response.data);
-
-        return response.data;
-
-    } catch (error) {
-
-        console.log("====== BREVO ERROR ======");
-
-        if (error.response) {
-            console.log(error.response.status);
-            console.log(error.response.data);
-        } else {
-            console.log(error.message);
-        }
-
-        throw error;
-    }
+    return response.data;
 
 }
 
