@@ -260,8 +260,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
             const usuario =
                 arg.event.extendedProps.userName;
-            const motivo =
-                arg.event.extendedProps.motivo || "Sin motivo";
 
             return {
 
@@ -279,9 +277,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
                     <div class="evento-usuario">
                         ${usuario}
-                    </div>
-                    <div class="evento-usuario">
-                        ${motivo}
                     </div>
                     
 
