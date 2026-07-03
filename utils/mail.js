@@ -18,22 +18,26 @@ async function sendResetEmail(to, name, resetLink) {
             ],
 
             subject: "Recuperación de contraseña - e2 Reservas",
-
-   htmlContent: `
+htmlContent: `
 <!DOCTYPE html>
 <html lang="es">
 
+<head>
+
+<meta charset="UTF-8">
+
+</head>
+
 <body style="
 margin:0;
-padding:0;
-background:#eef2f5;
-font-family:Arial,Helvetica,sans-serif;">
+padding:40px;
+background:#edf2f7;
+font-family:Segoe UI,Arial,sans-serif;">
 
 <table
 width="100%"
 cellpadding="0"
-cellspacing="0"
-style="padding:40px 15px;">
+cellspacing="0">
 
 <tr>
 
@@ -44,43 +48,90 @@ width="650"
 cellpadding="0"
 cellspacing="0"
 style="
-background:#ffffff;
+background:white;
 border-radius:18px;
 overflow:hidden;
-box-shadow:0 15px 45px rgba(0,0,0,.12);">
+box-shadow:0 12px 35px rgba(0,0,0,.10);
+">
 
-<!-- CABECERA -->
+<!-- LOGO -->
 
 <tr>
 
 <td
 align="center"
 style="
-background:linear-gradient(135deg,#c2d500,#9eb800);
-padding:45px 20px;">
+padding:45px 30px 25px;
+border-bottom:5px solid #c2d500;
+">
 
 <img
-src="https://e2reservas.e2academy.com.co/images/logo-E2.png"
-alt="e2 Energía"
+src="https://e2reservas.e2academy.com.co/images/logo-E2T.png"
+width="220"
+style="display:block;">
+
+</td>
+
+</tr>
+
+<!-- ICONO -->
+
+<tr>
+
+<td
+align="center"
+style="padding-top:45px;">
+
+<div
 style="
-width:220px;
-display:block;
-margin:auto;
-margin-bottom:20px;">
+width:90px;
+height:90px;
+border-radius:50%;
+background:#eef8c4;
+display:inline-flex;
+align-items:center;
+justify-content:center;
+font-size:42px;
+">
+
+🔒
+
+</div>
+
+</td>
+
+</tr>
+
+<!-- TITULO -->
+
+<tr>
+
+<td
+align="center"
+style="padding:25px 50px 10px;">
 
 <h1 style="
 margin:0;
 font-size:34px;
-color:#1b1b1b;">
+color:#1f2937;">
 
 Recuperación de contraseña
 
 </h1>
 
+</td>
+
+</tr>
+
+<tr>
+
+<td
+align="center">
+
 <p style="
-margin-top:12px;
-font-size:17px;
-color:#334155;">
+margin-top:0;
+font-size:18px;
+color:#64748b;">
 
 Sistema de Reservas de Salas
 
@@ -94,125 +145,166 @@ Sistema de Reservas de Salas
 
 <tr>
 
-<td style="padding:50px;">
-
-<h2 style="
-margin-top:0;
-font-size:28px;
-color:#111827;">
-
-Hola ${name},
-
-</h2>
+<td
+style="
+padding:20px 60px 10px;
+">
 
 <p style="
-font-size:16px;
-line-height:1.8;
-color:#4b5563;">
+font-size:18px;
+color:#111827;
+">
 
-Recibimos una solicitud para restablecer la contraseña de tu cuenta en
-<strong>e2 Reservas</strong>.
+Hola <strong>${name}</strong>,
 
 </p>
 
 <p style="
 font-size:16px;
 line-height:1.8;
-color:#4b5563;">
+color:#4b5563;
+">
 
-Si realizaste esta solicitud, presiona el botón de abajo para crear una nueva contraseña.
+Recibimos una solicitud para cambiar la contraseña de tu cuenta del Sistema de Reservas.
 
 </p>
 
-<div style="
-text-align:center;
-margin:45px 0;">
+<p style="
+font-size:16px;
+line-height:1.8;
+color:#4b5563;
+">
+
+Para continuar presiona el siguiente botón.
+
+</p>
+
+</td>
+
+</tr>
+
+<!-- BOTON -->
+
+<tr>
+
+<td
+align="center"
+style="
+padding:35px;
+">
 
 <a
 href="${resetLink}"
 
 style="
-display:inline-block;
-padding:18px 42px;
 background:#c2d500;
+padding:18px 40px;
+display:inline-block;
 border-radius:10px;
-text-decoration:none;
+color:#1f2937;
 font-size:18px;
 font-weight:bold;
-color:#1b1b1b;">
+text-decoration:none;
+">
 
-🔒 Restablecer contraseña
+Restablecer contraseña
 
 </a>
 
-</div>
+</td>
+
+</tr>
+
+<!-- TARJETA -->
+
+<tr>
+
+<td
+style="
+padding:0 55px 25px;
+">
 
 <div style="
 background:#f8fafc;
 border-left:5px solid #c2d500;
-padding:18px;
-border-radius:8px;
-margin:35px 0;">
+padding:20px;
+border-radius:10px;
+">
 
 <p style="
 margin:0;
 font-size:15px;
+line-height:1.8;
 color:#475569;
-line-height:1.7;">
+">
 
-⏳ Este enlace expirará en <strong>15 minutos</strong>.
+⏳ Este enlace tendrá una validez de <strong>15 minutos.</strong>
+
+<br><br>
+
+🔐 Solo puede utilizarse una única vez.
 
 </p>
 
 </div>
 
+</td>
+
+</tr>
+
+<!-- LINK -->
+
+<tr>
+
+<td
+style="
+padding:0 55px;
+">
+
 <p style="
 font-size:15px;
 color:#475569;
-line-height:1.8;">
+">
 
-Si el botón no funciona, copia y pega el siguiente enlace en tu navegador:
+Si el botón no funciona, copia este enlace:
 
 </p>
 
 <div style="
-background:#f3f4f6;
+background:#f1f5f9;
 padding:18px;
 border-radius:8px;
-word-break:break-all;
 font-size:13px;
-color:#2563eb;">
+word-break:break-all;
+color:#2563eb;
+">
 
 ${resetLink}
 
 </div>
 
+</td>
+
+</tr>
+
+<!-- MENSAJE -->
+
+<tr>
+
+<td
+style="
+padding:35px 55px;
+">
+
 <p style="
-margin-top:35px;
 font-size:15px;
 line-height:1.8;
-color:#6b7280;">
+color:#6b7280;
+">
 
-Si no solicitaste este cambio, puedes ignorar este mensaje.
-Tu contraseña seguirá siendo la misma.
+Si no solicitaste este cambio puedes ignorar este mensaje.
 
-</p>
-
-<hr style="
-margin:45px 0;
-border:none;
-border-top:1px solid #e5e7eb;">
-
-<p style="
-font-size:13px;
-text-align:center;
-color:#94a3b8;">
-
-Este correo fue enviado automáticamente por el Sistema de Reservas.
-
-<br><br>
-
-Por favor no respondas este mensaje.
+Nadie podrá acceder a tu cuenta sin confirmar esta acción.
 
 </p>
 
@@ -228,37 +320,50 @@ Por favor no respondas este mensaje.
 align="center"
 style="
 background:#111827;
-padding:35px;">
+padding:35px;
+">
 
 <img
 src="https://e2reservas.e2academy.com.co/images/logo-E2.png"
-style="
-width:140px;
-margin-bottom:20px;
-filter:brightness(0) invert(1);">
+width="130">
 
 <p style="
-margin:0;
-font-size:15px;
-color:#ffffff;">
+margin-top:20px;
+font-size:18px;
+color:white;
+font-weight:bold;
+">
 
-<strong>e2 Energía Eficiente</strong>
+e2 Energía Eficiente
 
 </p>
 
 <p style="
-margin-top:8px;
-font-size:14px;
-color:#cbd5e1;">
+font-size:15px;
+color:#cbd5e1;
+">
 
 Sistema de Reservas de Salas
 
 </p>
 
+<hr style="
+margin:25px 0;
+border:none;
+border-top:1px solid rgba(255,255,255,.15);
+">
+
 <p style="
-margin-top:25px;
-font-size:12px;
-color:#94a3b8;">
+font-size:13px;
+color:#94a3b8;
+line-height:1.8;
+">
+
+Este es un correo generado automáticamente.
+
+Por favor no respondas este mensaje.
+
+<br><br>
 
 © ${new Date().getFullYear()} e2 Energía Eficiente
 
@@ -279,6 +384,7 @@ color:#94a3b8;">
 </body>
 
 </html>
+
 `
         },
         {
