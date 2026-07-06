@@ -782,18 +782,15 @@ app.post("/api/chat", async (req, res) => {
 
     } catch (err) {
 
-        console.error("CHAT IA:", err);
+    console.error("CHAT IA ERROR COMPLETO:");
+    console.error(err);
 
-        res.status(500).json({
+    res.status(500).json({
+        success: false,
+        response: err.message
+    });
 
-            success: false,
-
-            response:
-                "Ocurrió un error al consultar el asistente."
-
-        });
-
-    }
+}
 
 });
 
