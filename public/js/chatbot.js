@@ -1,5 +1,5 @@
 /* =========================
-   ELEMENTOS DEL CHAT
+   ELEMENTOS
 ========================= */
 
 const toggle = document.getElementById("chatToggle");
@@ -10,80 +10,221 @@ const chatMessages = document.getElementById("chatMessages");
 const chatInput = document.getElementById("chatInput");
 const sendChat = document.getElementById("sendChat");
 
+document.getElementById("chatUser").innerText =
+localStorage.getItem("userName") || "Usuario";
+
 /* =========================
-   ABRIR / CERRAR CHAT
+   ABRIR CHAT
 ========================= */
 
-toggle.addEventListener("click", () => {
+toggle.addEventListener("click",()=>{
 
     container.classList.add("active");
 
-    // Poner el cursor automáticamente en el input
     chatInput.focus();
 
 });
 
-close.addEventListener("click", () => {
+close.addEventListener("click",()=>{
 
     container.classList.remove("active");
 
 });
 
-document.getElementById("chatUser").innerText =
-    localStorage.getItem("userName") || "Usuario";
+/* =========================
+   HORA
+========================= */
 
-    sendChat.addEventListener("click", async () => {
+function getTime(){
 
-    const text = chatInput.value.trim();
+    const now=new Date();
 
-    if (!text) return;
+    return now.toLocaleTimeString("es-CO",{
 
-    addMessage("user", text);
+        hour:"2-digit",
 
-    chatInput.value = "";
+        minute:"2-digit"
 
-    try {
+    });
 
-        const response = await fetch("/api/chat", {
+}
 
-            method: "POST",
+/* =========================
+   GUARDAR HISTORIAL
+========================= */
 
-            headers: {
-                "Content-Type": "application/json"
-            },
+function saveHistory(){
 
-            body: JSON.stringify({
-                message: text
-            })
+    localStorage.setItem(
 
-        });
+        "chatHistory",
 
-        const result = await response.json();
+        chatMessages.innerHTML
 
-        addMessage("bot", result.response);
+    );
 
-    } catch (err) {
+}
 
-        console.error(err);
+function loadHistory(){
 
-        addMessage(
-            "bot",
-            "⚠️ No fue posible conectarse con el asistente."
-        );
+    const history=
+
+    localStorage.getItem("chatHistory");
+
+    if(history){
+
+        chatMessages.innerHTML=history;
+
+        chatMessages.scrollTop=
+
+        chatMessages.scrollHeight;
 
     }
 
-});
+}
 
-// Permitir enviar con Enter
-chatInput.addEventListener("keydown", (e) => {
+loadHistory();
 
-    if (e.key === "Enter") {
+/* =========================
+   MENSAJES
+========================= */
+
+function addMessage(type,text){
+
+    const div=document.createElement("div");
+
+    div.className=
+
+        type==="user"
+
+        ?"user-message"
+
+        :"bot-message";
+
+    div.innerHTML=`
+
+        <div>${text}</div>
+
+        <span class="chat-time">
+
+            ${getTime()}
+
+        </span>
+
+    `;
+
+    chatMessages.appendChild(div);
+
+    chatMessages.scrollTop=
+
+    chatMessages.scrollHeight;
+
+    saveHistory();
+
+}
+
+/* =========================
+   ENTER
+========================= */
+
+chatInput.addEventListener("keydown",(e)=>{
+
+    if(e.key==="Enter"){
 
         e.preventDefault();
 
         sendChat.click();
 
     }
+
+});
+
+/* =========================
+   ENVIAR
+========================= */
+
+sendChat.addEventListener("click",async()=>{
+
+    const text=
+
+    chatInput.value.trim();
+
+    if(!text)return;
+
+    addMessage("user",text);
+
+    chatInput.value="";
+
+    chatInput.focus();
+
+    sendChat.disabled=true;
+
+    const typing=document.createElement("div");
+
+    typing.className="bot-message";
+
+    typing.id="typing";
+
+    typing.innerHTML="🤖 Escribiendo...";
+
+    chatMessages.appendChild(typing);
+
+    chatMessages.scrollTop=
+
+    chatMessages.scrollHeight;
+
+    try{
+
+        const response=
+
+        await fetch("/api/chat",{
+
+            method:"POST",
+
+            headers:{
+
+                "Content-Type":"application/json"
+
+            },
+
+            body:JSON.stringify({
+
+                message:text
+
+            })
+
+        });
+
+        const result=
+
+        await response.json();
+
+        typing.remove();
+
+        addMessage(
+
+            "bot",
+
+            result.response
+
+        );
+
+    }catch(err){
+
+        console.error(err);
+
+        typing.remove();
+
+        addMessage(
+
+            "bot",
+
+            "⚠️ No fue posible conectarse con el asistente."
+
+        );
+
+    }
+
+    sendChat.disabled=false;
 
 });
