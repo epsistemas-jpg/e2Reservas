@@ -8,7 +8,7 @@ async function askAssistant(question){
 
     const completion = await client.chat.completions.create({
 
-        model: "gpt-4.1-mini",
+        model: "llama-3.3-70b-versatile",
 
         messages: [
 
