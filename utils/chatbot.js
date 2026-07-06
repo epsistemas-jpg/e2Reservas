@@ -1,9 +1,9 @@
 const OpenAI = require("openai");
 
 const client = new OpenAI({
-    apiKey: process.env.OPENAI_API_KEY
+    apiKey: process.env.GROQ_API_KEY,
+    baseURL: "https://api.groq.com/openai/v1"
 });
-
 async function askAssistant(question){
 
     const completion = await client.chat.completions.create({
