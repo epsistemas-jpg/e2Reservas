@@ -8,6 +8,7 @@ const { Pool } = require("pg");
 const path = require("path");
 const { v4: uuidv4 } = require("uuid");
 const { sendResetEmail } = require("./utils/mail");
+const { askAssistant } = require("./utils/chatbot");
 
 const app = express();
 app.set("trust proxy", 1);
@@ -748,6 +749,51 @@ app.post("/reset-password", async (req, res) => {
     });
 
   }
+
+});
+/* =========================
+   CHAT IA
+========================= */
+
+app.post("/api/chat", async (req, res) => {
+
+    try {
+
+        const { message } = req.body;
+
+        if (!message) {
+
+            return res.status(400).json({
+                success: false,
+                message: "Mensaje vacío"
+            });
+
+        }
+
+        const response = await askAssistant(message);
+
+        res.json({
+
+            success: true,
+
+            response
+
+        });
+
+    } catch (err) {
+
+        console.error("CHAT IA:", err);
+
+        res.status(500).json({
+
+            success: false,
+
+            response:
+                "Ocurrió un error al consultar el asistente."
+
+        });
+
+    }
 
 });
 
