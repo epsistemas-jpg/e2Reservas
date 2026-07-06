@@ -17,17 +17,20 @@ const PORT = process.env.PORT || 3001;
 // 🔹 Conexión a PostgreSQL
 // ---------------------------
 const pool = new Pool({
+  connectionString: process.env.DATABASE_URL,
+  ssl: {
+    rejectUnauthorized: false
+  },
 
-  connectionString:
-    process.env.DATABASE_URL
-
+  max: 10,
+  idleTimeoutMillis: 30000,
+  connectionTimeoutMillis: 10000
 });
 
-
 // Ejemplo para probar conexión
-pool.connect()
-  .then(() => console.log("Conectado a PostgreSQL Local 🚀"))
-  .catch(err => console.error("Error de conexión:", err));
+pool.query("SELECT NOW()")
+  .then(() => console.log("PostgreSQL conectado"))
+  .catch(err => console.error("Error PostgreSQL:", err));
 
 // ---------------------------
 // 🔹 Middlewares
